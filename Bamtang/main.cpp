@@ -16,6 +16,8 @@ const unsigned int SCR_HEIGHT = 600;
 
 #include "../Math/Vector.h"
 #include "../Math/Matrix.h"
+#include "../Math/Math.h"
+#include "../Math/transformation.h"
 
 using namespace Math;
 
@@ -122,29 +124,6 @@ int main()
     ourShader.use(); 
     glUniform1i(glGetUniformLocation(ourShader.ID, "texture1"), 0.5);
 
-    Math::Vector a = Math::Vector(5.0f, 2.0f, 9.0f);
-    Math::Vector b = Math:: Vector(1.0f, 2.0f, 3.0f);
-
-
-    Math::Matrix transform = Math::Matrix();
-    transform = Math::Matrix::identity();
-
-    transform = Matrix::translate(transform, a);
-    transform = Matrix::scale(transform, b);
-
-    Vector pos = Matrix::getPosition(transform);
-    Vector sc = Matrix::getScale(transform);
-
-    std::cout << pos.x << " " << pos.y << " " << pos.z << "\n";
-    std::cout << sc.x << " " << sc.y << " " << sc.z << "\n";
-
-    for (unsigned int i = 0; i < 4; i++)
-        for (unsigned int j = 0; j < 4; j++)
-            std::cout << transform.matrix[i][j];
-    std::cout << "\n";
-
-    
-
     // render loop
     // -----------
     while (!glfwWindowShouldClose(window))
@@ -166,16 +145,37 @@ int main()
         //transform = glm::translate(transform, glm::vec3(0.5f, -0.5f, 0.0f));
         //transform = glm::rotate(transform, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
 
-        //ourShader.use();
-        //unsigned int transformLoc = glGetUniformLocation(ourShader.ID, "transform");
-        //glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
+
+        Math::Matrix transform = Math::Matrix();
+        transform = Math::Matrix::identity();
+
+        transform = Matrix::translate(Matrix::identity(), Math::Vector(0.02f, -0.03f, 0.0f)) *
+            Matrix::rotationAroundZ(Matrix::identity(), (float)glfwGetTime()) *
+            Matrix::scale(Matrix::identity(), Math::Vector(1.0f, 1.0f, 0.0f));
+
+       /* transformation transform;
+        transform.identity();
+
+        transformation myTranslationMatrix;  myTranslationMatrix.identity();
+        transformation myRotationMatrix; myRotationMatrix.identity();
+        transformation myScaleMatrix; myScaleMatrix.identity();
+
+        myScaleMatrix = myScaleMatrix.scale(0.1f, 0.1f, 0.1f);
+        myTranslationMatrix = myTranslationMatrix.translate(0.02f, -0.03f, 0.0f);
+        myRotationMatrix = myRotationMatrix.rotate_z((float)glfwGetTime());
+        
+        transform = myTranslationMatrix * myRotationMatrix * myScaleMatrix;*/
+
+        ourShader.use();
+        unsigned int transformLoc = glGetUniformLocation(ourShader.ID, "transform");
+        glUniformMatrix4fv(transformLoc, 1, GL_FALSE,transform.matrix[0]);
+
+        
 
         // render container
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
-        // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
-        // -------------------------------------------------------------------------------
         glfwSwapBuffers(window);
         glfwPollEvents();
     }

@@ -11,6 +11,7 @@
 #include "framework.h"
 
 #include <cmath>
+#include "Math.h"
 #include "Vector.h"
 
 #endif //PCH_H

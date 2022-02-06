@@ -6,8 +6,10 @@ namespace Math {
 	Math::Matrix::Matrix()
 	{
 		for (unsigned int i = 0; i < 4; i++)
+		{
 			for (unsigned int j = 0; j < 4; j++)			
 				this->matrix[i][j] = 0;
+		}
 	}
 
 	Matrix Matrix::identity()
@@ -54,6 +56,44 @@ namespace Math {
 
 		return transform;
 	}
+
+	Matrix Matrix::rotationAroundX(Matrix transform, const float& angle)
+	{
+
+		transform.matrix[1][1] = cos(angle);
+		transform.matrix[1][2] = sin(angle);
+		transform.matrix[2][1] = -sin(angle);
+		transform.matrix[2][2] = cos(angle);
+
+		return transform;
+	}
+
+	Matrix Matrix::rotationAroundY(Matrix transform, const float& angle)
+	{
+
+		transform.matrix[0][0] = cos(angle);
+		transform.matrix[0][2] = -sin(angle);
+		transform.matrix[2][0] = sin(angle);
+		transform.matrix[2][2] = cos(angle);
+
+		return transform;
+	}
+
+	Matrix Matrix::rotationAroundZ(Matrix transform, const float& angle)
+	{
+
+		transform.matrix[0][0] = cos(angle);
+		transform.matrix[0][1] = sin(angle);
+		transform.matrix[1][0] = -sin(angle);
+		transform.matrix[1][1] = cos(angle);
+
+		return transform;
+	}
+
+	//Matrix Matrix::rotation(float x, float y, float z)
+	//{
+	//	//return Matrix::rotationAroundZ(z) * Matrix::rotationAroundX(x) * Matrix::rotationAroundY(y);
+	//}
 
 	Vector Matrix::getPosition(Matrix& transform)
 	{
