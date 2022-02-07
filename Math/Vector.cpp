@@ -5,14 +5,12 @@ namespace Math
 {
 	Vector::Vector()
 	{
-		x = y = z = 0.0f;
+		x = y = z = w = 0.0f;
 	}
 
-	Vector::Vector(float x, float y, float z)
+	Vector::Vector(float x)
 	{
-		this->x = x;
-		this->y = y;
-		this->z = z;
+		this->x = this->y = this->z = this->w = x;
 	}
 
 	Vector::Vector(float x, float y)
@@ -20,6 +18,23 @@ namespace Math
 		this->x = x;
 		this->y = y;
 		this->z = 0.0f;
+		this->w = 0.0f;
+	}
+
+	Vector::Vector(float x, float y, float z)
+	{
+		this->x = x;
+		this->y = y;
+		this->z = z;
+		this->w = 0.0f;
+	}
+
+	Vector::Vector(float x, float y, float z, float w)
+	{
+		this->x = x;
+		this->y = y;
+		this->z = z;
+		this->w = w;
 	}
 
 	/*Vector operator+(Vector v1, Vector v2)

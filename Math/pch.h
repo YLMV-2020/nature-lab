@@ -11,6 +11,7 @@
 #include "framework.h"
 
 #include <cmath>
+#include <queue>  
 #include "Math.h"
 #include "Vector.h"
 

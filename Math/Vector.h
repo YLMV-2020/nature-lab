@@ -6,11 +6,13 @@ namespace Math {
 	{
 	public:
 
-		float x, y, z;
+		float x, y, z, w;
 
 		Vector();
-		Vector(float x, float y, float z);
+		Vector(float x);
 		Vector(float x, float y);
+		Vector(float x, float y, float z);
+		Vector(float x, float y, float z, float w);
 
 		friend Vector operator+(const Vector &v1, const Vector &v2)
 		{
