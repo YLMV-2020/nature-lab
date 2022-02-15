@@ -1,124 +1,131 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Archivos de origen">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Windows">
+      <UniqueIdentifier>{d791a52d-234e-4331-8c7e-668801eb994f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de encabezado">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="Vendors">
+      <UniqueIdentifier>{7d897fc4-719f-4ab5-8ef2-7c7dd38981b3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de recursos">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Archivos de recursos\imGui">
+    <Filter Include="Vendors\imGui">
       <UniqueIdentifier>{f7b4fc0a-f65c-4bc2-aa76-5eb4e0bd6f5e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de recursos\Shaders">
+    <Filter Include="Shaders">
       <UniqueIdentifier>{66ff23d4-d291-40d3-83c8-3cbd447edd77}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Shaders">
-      <UniqueIdentifier>{bfc9ceda-58f4-479d-a220-d460a5bfde6e}</UniqueIdentifier>
+    <Filter Include="API">
+      <UniqueIdentifier>{1fdef873-5349-4a96-a575-f663f17169ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="API\OpenGL">
+      <UniqueIdentifier>{bf704ddf-df80-4804-aab2-cd5333823268}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{06165439-3120-44af-9a96-343c374e0b13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NatureLab">
+      <UniqueIdentifier>{1bf9d3d7-cc42-4839-aae6-18ad399ef2bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Util">
+      <UniqueIdentifier>{8f999e7b-5bfb-4306-b626-0c04ad5e546b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="imgui.cpp">
-      <Filter>Archivos de recursos\imGui</Filter>
+      <Filter>Vendors\imGui</Filter>
     </ClCompile>
     <ClCompile Include="imgui_demo.cpp">
-      <Filter>Archivos de recursos\imGui</Filter>
+      <Filter>Vendors\imGui</Filter>
     </ClCompile>
     <ClCompile Include="imgui_draw.cpp">
-      <Filter>Archivos de recursos\imGui</Filter>
+      <Filter>Vendors\imGui</Filter>
     </ClCompile>
     <ClCompile Include="imgui_impl_glfw.cpp">
-      <Filter>Archivos de recursos\imGui</Filter>
+      <Filter>Vendors\imGui</Filter>
     </ClCompile>
     <ClCompile Include="imgui_impl_opengl3.cpp">
-      <Filter>Archivos de recursos\imGui</Filter>
+      <Filter>Vendors\imGui</Filter>
     </ClCompile>
     <ClCompile Include="imgui_widgets.cpp">
-      <Filter>Archivos de recursos\imGui</Filter>
+      <Filter>Vendors\imGui</Filter>
     </ClCompile>
-    <ClCompile Include="Texture2D.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteRenderer.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceManager.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="SceneAssets.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="Shader.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Util</Filter>
     </ClCompile>
+    <ClCompile Include="Texture2D.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imconfig.h">
-      <Filter>Archivos de recursos\imGui</Filter>
+      <Filter>Vendors\imGui</Filter>
     </ClInclude>
     <ClInclude Include="imgui.h">
-      <Filter>Archivos de recursos\imGui</Filter>
+      <Filter>Vendors\imGui</Filter>
     </ClInclude>
     <ClInclude Include="imgui_impl_glfw.h">
-      <Filter>Archivos de recursos\imGui</Filter>
+      <Filter>Vendors\imGui</Filter>
     </ClInclude>
     <ClInclude Include="imgui_impl_opengl3.h">
-      <Filter>Archivos de recursos\imGui</Filter>
+      <Filter>Vendors\imGui</Filter>
     </ClInclude>
     <ClInclude Include="imgui_internal.h">
-      <Filter>Archivos de recursos\imGui</Filter>
+      <Filter>Vendors\imGui</Filter>
     </ClInclude>
     <ClInclude Include="imstb_rectpack.h">
-      <Filter>Archivos de recursos\imGui</Filter>
+      <Filter>Vendors\imGui</Filter>
     </ClInclude>
     <ClInclude Include="imstb_textedit.h">
-      <Filter>Archivos de recursos\imGui</Filter>
+      <Filter>Vendors\imGui</Filter>
     </ClInclude>
     <ClInclude Include="imstb_truetype.h">
-      <Filter>Archivos de recursos\imGui</Filter>
+      <Filter>Vendors\imGui</Filter>
     </ClInclude>
-    <ClInclude Include="Texture2D.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="IWindow.h">
+      <Filter>Windows</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteRenderer.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="SettingWindow.h">
+      <Filter>Windows</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="GLFrameBuffer.h">
+      <Filter>API\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="WindowController.h">
+      <Filter>Windows</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceManager.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="INature.h">
+      <Filter>NatureLab</Filter>
+    </ClInclude>
+    <ClInclude Include="NatureController.h">
+      <Filter>NatureLab</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorV1Nature.h">
+      <Filter>NatureLab</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneAssets.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>API\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture2D.h">
+      <Filter>Util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\sprite.vert">
-      <Filter>Archivos de recursos\Shaders</Filter>
-    </None>
-    <None Include="Assets\Shaders\sprite.frag">
-      <Filter>Archivos de recursos\Shaders</Filter>
-    </None>
-    <None Include="Assets\Shaders\texture.frag">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="Assets\Shaders\texture.vert">
+    <None Include="Assets\Shaders\sprite.frag">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
