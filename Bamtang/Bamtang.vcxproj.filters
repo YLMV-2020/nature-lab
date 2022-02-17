@@ -124,6 +124,15 @@
     <ClInclude Include="VectorV1Window.h">
       <Filter>Windows</Filter>
     </ClInclude>
+    <ClInclude Include="Line.h">
+      <Filter>API\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorV2Nature.h">
+      <Filter>NatureLab</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorV2Window.h">
+      <Filter>Windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\sprite.vert">

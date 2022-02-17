@@ -2,6 +2,7 @@
 
 #include "SettingWindow.h"
 #include "VectorV1Window.h"
+#include "VectorV2Window.h"
 
 namespace NatureLab
 {
@@ -10,29 +11,35 @@ namespace NatureLab
 
     public:
 
+        static WindowController* Instance(GLFWwindow* window, std::string version) {
+            static WindowController instance(window, version);
+            return &instance;
+        }
+
         inline WindowController(GLFWwindow* window, std::string version)
         {
             this->start(window, version);
-            this->addWindow(new SettingWindow());
-            this->addWindow(new VectorV1Window());
+
+            this->addWindow(new VectorV1Window(), new SettingWindow());
+            this->addWindow(new VectorV2Window(), new SettingWindow());
         }
 
         inline void update()
         {
         }
 
-        inline void newFrame()
+        inline int newFrame()
         {
             ImGui_ImplOpenGL3_NewFrame();
             ImGui_ImplGlfw_NewFrame();
             ImGui::NewFrame();
-            dockSpace();
+            return dockSpace();
         }
 
-        inline void render(const GLuint& texture)
+        inline void render(const GLuint& texture, int indexScene)
         {
             this->show(texture);
-            this->showWindows();
+            this->showWindows(indexScene);
 
             ImGui::Render();
             ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -97,8 +104,16 @@ namespace NatureLab
             ImVec2 scroll = ImVec2(ImGui::GetScrollX(), ImGui::GetScrollY());
 
             _mouse = ImVec2(mousePosition.x - sceenPosition.x - scroll.x, mousePosition.y - sceenPosition.y - scroll.y);
+            _mouse.x = (_mouse.x * SceneAssets::SCREEN_WIDTH) / _displayRender.x;
+            _mouse.y = SceneAssets::SCREEN_HEIGHT - SceneAssets::LIMIT_HEIGHT - (_mouse.y * SceneAssets::SCREEN_HEIGHT) / _displayRender.y;
 
             ImGui::End();
+        }
+
+        inline void addWindow(NatureLab::IWindow* window, NatureLab::IWindow* description)
+        {
+            this->addWindow(window);
+            this->addDescription(description);
         }
 
         inline void addWindow(NatureLab::IWindow* window)
@@ -106,16 +121,28 @@ namespace NatureLab
             this->_windows.push_back(window);
         }
 
+        inline void addDescription(NatureLab::IWindow* window)
+        {
+            this->_descriptions.push_back(window);
+        }
+
         inline void showWindows()
         {
             for (NatureLab::IWindow*& inteface : _windows)
-            {
                 inteface->show();
-            }
+            for (NatureLab::IWindow*& inteface : _descriptions)
+                inteface->show();
         }
 
-        void dockSpace()
+        inline void showWindows(int indexScene)
         {
+            _windows[indexScene]->show();
+            _descriptions[indexScene]->show();
+        }
+
+        int dockSpace()
+        {
+            static int indexScene = 0;
             ImGuiViewport* viewport = ImGui::GetMainViewport();
             ImGui::SetNextWindowPos(viewport->Pos);
             ImGui::SetNextWindowSize(viewport->Size);
@@ -133,7 +160,9 @@ namespace NatureLab
             if (ImGui::BeginMenuBar()) {
                 
                 if (ImGui::BeginMenu("Scenes")) {
-                    if (ImGui::MenuItem("Vector", "V1")) {}
+                    if (ImGui::MenuItem("Vector", "V1")) { indexScene = 0; }
+                    if (ImGui::MenuItem("Vector", "V2")) { indexScene = 1; }
+                    if (ImGui::MenuItem("Vector", "V3")) { indexScene = 2; }
                     ImGui::EndMenu();
                 }
 
@@ -143,18 +172,23 @@ namespace NatureLab
 
             ImGui::End();
             ImGui::PopStyleVar(3);
+
+            return indexScene;
         }
+
+        public:
+
+            ImVec2 _mouse;
 
         private:
 
             ImVec2 _displayRender;
             ImVec2 _display;
-            ImVec2 _mouse;
 
             std::vector<NatureLab::IWindow*> _windows;
+            std::vector<NatureLab::IWindow*> _descriptions;
 
             ImGuiWindowFlags _window_flags;
-
     };
 
 }

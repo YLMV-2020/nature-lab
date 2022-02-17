@@ -10,7 +10,7 @@ namespace NatureLab {
 
 			this->_frame = new GLFrameBuffer(SceneAssets::SCREEN_WIDTH, SceneAssets::SCREEN_HEIGHT);
 			this->nc = NatureController::Instance();
-			this->_wc = new WindowController(_window, "33");
+			this->_wc = WindowController::Instance(_window, "33");
 
 		}
 
@@ -36,6 +36,7 @@ namespace NatureLab {
 			glfwInit();
 			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+			//glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
 			glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 			glfwWindowHint(GLFW_RESIZABLE, false);
@@ -55,18 +56,18 @@ namespace NatureLab {
 		
 		inline void update() {
 
-			_wc->newFrame();
+			this->indexScene = _wc->newFrame();
 
 			glBindFramebuffer(GL_FRAMEBUFFER, _frame->update());
 			{
 				glClearColor(0, 1, 0, 0);
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-				nc->showNature();
+				nc->showNature(this->indexScene);
 			}
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-			_wc->render(_frame->show());
+			_wc->render(_frame->show(), this->indexScene);
 
 			glfwSwapBuffers(_window);
 			glfwPollEvents();
@@ -79,6 +80,8 @@ namespace NatureLab {
 		GLFrameBuffer* _frame = NULL;
 		WindowController* _wc = NULL;
 		NatureController* nc = NULL;
+
+		int indexScene = 0;
 
 	};
 }

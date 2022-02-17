@@ -1,6 +1,7 @@
 #include "INature.h"
 
 #include "VectorV1Nature.h"
+#include "VectorV2Nature.h"
 
 namespace NatureLab
 {
@@ -25,6 +26,7 @@ namespace NatureLab
 
         inline void start() {
             this->addNature(new VectorV1Nature());
+            this->addNature(new VectorV2Nature());
         }
 
         inline void showNature(){
@@ -34,9 +36,13 @@ namespace NatureLab
             }
         }
 
+        inline void showNature(int indexScene) {
+            _natureLab.at(indexScene)->show();
+        }
+
         inline INature*& getNature(int index)
         {
-            return _natureLab[index];
+            return _natureLab.at(index);
         }
 
     private:

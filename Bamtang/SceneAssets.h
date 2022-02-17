@@ -21,6 +21,8 @@ namespace NatureLab {
         const static unsigned int SCREEN_WIDTH = 1080;
         const static unsigned int SCREEN_HEIGHT = 720;
 
+        const static unsigned int LIMIT_WIDTH = 50;
+        const static unsigned int LIMIT_HEIGHT = 50;
     private:
 
         SceneAssets() { }

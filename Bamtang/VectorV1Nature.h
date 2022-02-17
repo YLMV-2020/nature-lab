@@ -16,8 +16,8 @@ namespace NatureLab {
             this->_position = Math::Vector(100, 100);
             this->_velocity = Math::Vector(_velocityX, _velocityY);
 
-            this->_width = SceneAssets::SCREEN_WIDTH - 50;
-            this->_height = SceneAssets::SCREEN_HEIGHT - 50;
+            this->_width = SceneAssets::SCREEN_WIDTH - SceneAssets::LIMIT_WIDTH;
+            this->_height = SceneAssets::SCREEN_HEIGHT - SceneAssets::LIMIT_HEIGHT;
            
         }
 
