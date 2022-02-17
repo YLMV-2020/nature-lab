@@ -3,55 +3,59 @@
 namespace NatureLab {
     class VectorV1Nature : public INature {
     public:
+
         inline VectorV1Nature() {
             this->start();
         }
 
-        inline void start() {
-            SceneAssets::loadShader("Assets/Shaders/sprite.vert", "Assets/Shaders/sprite.frag", nullptr, "sprite");
+        inline void start() override {
+            
+            INature::start();
 
-            Math::Matrix projection = Math::Matrix();
-            projection.identity();
-            projection = Math::Matrix::ortho(Math::Matrix::identity(), 0.0f, static_cast<float>(1080),
-                0.0f, static_cast<float>(720), -1.0f, 1.0f);
+            this->_ballTexture = SceneAssets::getTexture("ball");
+            this->_position = Math::Vector(100, 100);
+            this->_velocity = Math::Vector(_velocityX, _velocityY);
 
-            SceneAssets::getShader("sprite").Use().SetInteger("image", 0);
-            SceneAssets::getShader("sprite").SetMatrix4("projection", projection);
-
-            Shader myShader = SceneAssets::getShader("sprite");
-            this->sprite = new NatureLab::Sprite(myShader);
-
-
-            SceneAssets::loadTexture("Assets/Sprites/background.jpg", false, "background");
-            SceneAssets::loadTexture("Assets/Sprites/ball.png", true, "ball");
-            SceneAssets::loadTexture("Assets/Sprites/paddle.png", true, "paddle");
+            this->_width = SceneAssets::SCREEN_WIDTH - 50;
+            this->_height = SceneAssets::SCREEN_HEIGHT - 50;
+           
         }
 
-        inline void update() {
+        inline void update() override {
 
-            float currentFrame = glfwGetTime();
-            deltaTime = currentFrame - lastFrame;
-            lastFrame = currentFrame;
-            time = currentFrame - startFrame;
+            INature::update();
+
+            _position = _position + _velocity;
+
+            if ((_position.x > _width) || (_position.x < 0)) {               
+                _velocity.x = _velocity.x * -1;
+            }
+            if ((_position.y > _height) || (_position.y < 0)) {
+                _velocity.y = _velocity.y * -1;
+            }
 
         }
 
-        inline void show()
-        {
-            Texture2D myTexture = SceneAssets::getTexture("background");
-            sprite->draw(myTexture, Math::Vector(0.0f, 0.0f), Math::Vector(1080, 720), 0.0f);
+        inline void show() override {
+            
+            INature::show();
+            this->update();
 
-            Texture2D myTexture2 = SceneAssets::getTexture("ball");
-            sprite->draw(myTexture2, Math::Vector(44.0f, 40.0f), Math::Vector(50, 50), 0.0f);
+            sprite->draw(_ballTexture, Math::Vector(_position.x, _position.y), Math::Vector(50, 50), 0.0f);
         }
 
     private:
 
-        NatureLab::Sprite* sprite;
-        float deltaTime = 0.0f;
-        float lastFrame = 0.0f;
-        float time = 0.0f;
-        float startFrame = glfwGetTime();
+        Texture2D _ballTexture;
+        int _width, _height;
+
+    public:
+
+        Math::Vector _position;
+        Math::Vector _velocity;
+
+        float _velocityX = 2;
+        float _velocityY = 5;
 
     };
 }

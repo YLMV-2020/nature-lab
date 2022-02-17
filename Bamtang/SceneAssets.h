@@ -17,6 +17,10 @@ namespace NatureLab {
         static Texture2D loadTexture(const char* file, bool alpha, std::string name);
         static Texture2D getTexture(std::string name);
         static void      clear();
+
+        const static unsigned int SCREEN_WIDTH = 1080;
+        const static unsigned int SCREEN_HEIGHT = 720;
+
     private:
 
         SceneAssets() { }

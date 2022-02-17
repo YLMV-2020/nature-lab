@@ -120,6 +120,10 @@
     <ClInclude Include="Texture2D.h">
       <Filter>Util</Filter>
     </ClInclude>
+    <ClInclude Include="NatureLab.h" />
+    <ClInclude Include="VectorV1Window.h">
+      <Filter>Windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\sprite.vert">

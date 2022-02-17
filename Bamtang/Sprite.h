@@ -26,7 +26,7 @@ namespace NatureLab
             Math::Matrix c = Math::Matrix::rotationAroundZ(Math::Matrix::identity(), Math::radians(rotate)); 
             Math::Matrix d = Math::Matrix::translate(Math::Matrix::identity(), Math::Vector(-0.5f * size.x, -0.5f * size.y, 0.0f)); 
 
-            Math::Matrix e = Math::Matrix::scale(Math::Matrix::identity(), Math::Vector(size)); // last scale
+            Math::Matrix e = Math::Matrix::scale(Math::Matrix::identity(), Math::Vector(size)); 
 
             model = e * d * c * b * a;
 

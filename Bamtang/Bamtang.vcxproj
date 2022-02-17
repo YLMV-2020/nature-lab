@@ -120,6 +120,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -169,6 +170,7 @@
     <ClInclude Include="INature.h" />
     <ClInclude Include="IWindow.h" />
     <ClInclude Include="NatureController.h" />
+    <ClInclude Include="NatureLab.h" />
     <ClInclude Include="SceneAssets.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SettingWindow.h" />
@@ -176,6 +178,7 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture2D.h" />
     <ClInclude Include="VectorV1Nature.h" />
+    <ClInclude Include="VectorV1Window.h" />
     <ClInclude Include="WindowController.h" />
   </ItemGroup>
   <ItemGroup>

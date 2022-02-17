@@ -1,13 +1,12 @@
 #include "IWindow.h"
 
 #include "SettingWindow.h"
+#include "VectorV1Window.h"
 
 namespace NatureLab
 {
     class WindowController
     {
-
-    
 
     public:
 
@@ -15,6 +14,7 @@ namespace NatureLab
         {
             this->start(window, version);
             this->addWindow(new SettingWindow());
+            this->addWindow(new VectorV1Window());
         }
 
         inline void update()
@@ -131,32 +131,12 @@ namespace NatureLab
             }
 
             if (ImGui::BeginMenuBar()) {
-                if (ImGui::BeginMenu("File")) {
-                    if (ImGui::MenuItem("\xef\x85\x9c", "Open Project", "Ctrl + O")) {}
-                    if (ImGui::MenuItem("New", "Ctrl+N")) {}
-                    if (ImGui::MenuItem("Open", "Ctrl+O")) {}
-                    if (ImGui::MenuItem("Save", "Ctrl+S")) {}
-                    if (ImGui::MenuItem("Save As..")) {}
+                
+                if (ImGui::BeginMenu("Scenes")) {
+                    if (ImGui::MenuItem("Vector", "V1")) {}
                     ImGui::EndMenu();
                 }
-                if (ImGui::BeginMenu("Editor")) {
-                    if (ImGui::MenuItem("Undo", "CTRL+Z")) {}
-                    if (ImGui::MenuItem("Redo", "CTRL+Y", false, false)) {}  // Disabled item
-                    ImGui::Separator();
-                    if (ImGui::MenuItem("Cut", "CTRL+X")) {}
-                    if (ImGui::MenuItem("Copy", "CTRL+C")) {}
-                    if (ImGui::MenuItem("Paste", "CTRL+V")) {}
-                    ImGui::EndMenu();
-                }
-                if (ImGui::BeginMenu("Settings")) {
-                    if (ImGui::MenuItem("Customize", "Ctrl+T")) {}
-                    ImGui::EndMenu();
-                }
-                if (ImGui::BeginMenu("Help")) {
-                    if (ImGui::MenuItem("View Help", "Ctrl+H")) {}
-                    if (ImGui::MenuItem("About Soft3D")) {}
-                    ImGui::EndMenu();
-                }
+
 
                 ImGui::EndMenuBar();
             }

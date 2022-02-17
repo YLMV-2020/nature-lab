@@ -8,9 +8,9 @@ namespace NatureLab {
 
 			this->start();
 
-			this->_frame = new GLFrameBuffer(SCREEN_WIDTH, SCREEN_HEIGHT);
+			this->_frame = new GLFrameBuffer(SceneAssets::SCREEN_WIDTH, SceneAssets::SCREEN_HEIGHT);
+			this->nc = NatureController::Instance();
 			this->_wc = new WindowController(_window, "33");
-			this->nc = new NatureController();
 
 		}
 
@@ -20,12 +20,13 @@ namespace NatureLab {
 			spdlog::info("~Scene() destroyed!");
 		}
 
-		inline void run()
+		inline int run()
 		{
 			while (!glfwWindowShouldClose(_window))
 			{
 				this->update();
 			}
+			return 0;
 		}
 
 	private:
@@ -39,14 +40,14 @@ namespace NatureLab {
 
 			glfwWindowHint(GLFW_RESIZABLE, false);
 
-			this->_window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Nature Lab", nullptr, nullptr);
+			this->_window = glfwCreateWindow(SceneAssets::SCREEN_WIDTH, SceneAssets::SCREEN_HEIGHT, "Nature Lab", nullptr, nullptr);
 			glfwMakeContextCurrent(_window);
 
 			if (GLenum err = glewInit()) return;
 
 			//glfwSwapInterval(0);
 
-			glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+			glViewport(0, 0, SceneAssets::SCREEN_WIDTH, SceneAssets::SCREEN_HEIGHT);
 			glEnable(GL_BLEND);
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		}
@@ -70,11 +71,6 @@ namespace NatureLab {
 			glfwSwapBuffers(_window);
 			glfwPollEvents();
 		}
-
-	public:
-
-		const unsigned int SCREEN_WIDTH = 1080;
-		const unsigned int SCREEN_HEIGHT = 720;
 		
 	private:
 

@@ -7,11 +7,11 @@ namespace NatureLab {
     public:
         inline SettingWindow() = default;
 
-        inline void init() {
+        inline void init() override {
 
         }
 
-        inline void show() {
+        inline void show() override {
             this->begin("Settings");
             {
                 const char* items[] = { "Classic", "Light", "Dark" };
