@@ -145,6 +145,21 @@
     <ClInclude Include="VectorV2Window.h">
       <Filter>Windows\Controls</Filter>
     </ClInclude>
+    <ClInclude Include="VectorV3Nature.h">
+      <Filter>NatureLab</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorV3Window.h">
+      <Filter>Windows\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorV3WD.h">
+      <Filter>Windows\Descriptions</Filter>
+    </ClInclude>
+    <ClInclude Include="IMouseEventWindow.h">
+      <Filter>Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="ITimeEvent.h">
+      <Filter>NatureLab</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\sprite.vert">

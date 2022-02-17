@@ -1,7 +1,9 @@
 #include "INature.h"
+#include "ITimeEvent.h"
 
 #include "VectorV1Nature.h"
 #include "VectorV2Nature.h"
+#include "VectorV3Nature.h"
 
 namespace NatureLab
 {
@@ -27,6 +29,7 @@ namespace NatureLab
         inline void start() {
             this->addNature(new VectorV1Nature());
             this->addNature(new VectorV2Nature());
+            this->addNature(new VectorV3Nature());
         }
 
         inline void showNature(){

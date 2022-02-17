@@ -1,11 +1,15 @@
 #include "IWindow.h"
+#include "IMouseEventWindow.h"
 
 #include "SettingWindow.h"
+
 #include "VectorV1Window.h"
 #include "VectorV2Window.h"
+#include "VectorV3Window.h"
 
 #include "VectorV1WD.h"
 #include "VectorV2WD.h"
+#include "VectorV3WD.h"
 
 namespace NatureLab
 {
@@ -23,6 +27,7 @@ namespace NatureLab
         {
             this->addWindow(new VectorV1Window(), new VectorV1WD());
             this->addWindow(new VectorV2Window(), new VectorV2WD());
+            this->addWindow(new VectorV3Window(), new VectorV3WD());
         }
 
         inline void update()
@@ -152,10 +157,21 @@ namespace NatureLab
 
             if (ImGui::BeginMenuBar()) {
                 
-                if (ImGui::BeginMenu("Scenes")) {
-                    if (ImGui::MenuItem("Vector", "V1")) { indexScene = 0; }
-                    if (ImGui::MenuItem("Vector", "V2")) { indexScene = 1; }
-                    if (ImGui::MenuItem("Vector", "V3")) { indexScene = 2; }
+                if (ImGui::BeginMenu("Vectors")) {
+
+                    if (ImGui::MenuItem("V1", "Suma")) { indexScene = 0; }
+                    if (ImGui::MenuItem("V2", "Resta")) { indexScene = 1; }
+                    if (ImGui::MenuItem("V3", "Magnitud")) { indexScene = 2; }
+
+                    ImGui::EndMenu();
+                }
+
+                if (ImGui::BeginMenu("Forces")) {
+
+                    if (ImGui::MenuItem("V1", "Suma")) { indexScene = 0; }
+                    if (ImGui::MenuItem("V2", "Resta")) { indexScene = 1; }
+                    if (ImGui::MenuItem("V3", "Magnitud")) { indexScene = 2; }
+
                     ImGui::EndMenu();
                 }
 

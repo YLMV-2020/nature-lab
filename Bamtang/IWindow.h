@@ -5,7 +5,9 @@ namespace NatureLab
 	public:
 		inline virtual ~IWindow() = default;
 		inline IWindow() = default;
-		virtual void show() = 0;
+		virtual void show() {
+
+		}
 
 	protected:
 		inline void begin(const char* title, ImGuiWindowFlags flags = 0) {

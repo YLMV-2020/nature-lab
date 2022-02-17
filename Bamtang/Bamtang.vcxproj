@@ -164,10 +164,12 @@
     <ClInclude Include="imgui_impl_glfw.h" />
     <ClInclude Include="imgui_impl_opengl3.h" />
     <ClInclude Include="imgui_internal.h" />
+    <ClInclude Include="IMouseEventWindow.h" />
     <ClInclude Include="imstb_rectpack.h" />
     <ClInclude Include="imstb_textedit.h" />
     <ClInclude Include="imstb_truetype.h" />
     <ClInclude Include="INature.h" />
+    <ClInclude Include="ITimeEvent.h" />
     <ClInclude Include="IWindow.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="NatureController.h" />
@@ -184,6 +186,9 @@
     <ClInclude Include="VectorV2Nature.h" />
     <ClInclude Include="VectorV2WD.h" />
     <ClInclude Include="VectorV2Window.h" />
+    <ClInclude Include="VectorV3Nature.h" />
+    <ClInclude Include="VectorV3WD.h" />
+    <ClInclude Include="VectorV3Window.h" />
     <ClInclude Include="WindowController.h" />
   </ItemGroup>
   <ItemGroup>

@@ -31,20 +31,11 @@ namespace NatureLab
 
 		inline virtual void update() {
 
-			float currentFrame = glfwGetTime();
-			deltaTime = currentFrame - lastFrame;
-			lastFrame = currentFrame;
-			time = currentFrame - startFrame;
+			
 		}
 
 	protected:
 
-		float deltaTime = 0.0f;
-		float lastFrame = 0.0f;
-		float time = 0.0f;
-		float startFrame = glfwGetTime();
-
 		NatureLab::Sprite* sprite = NULL;
-
 	};
 }
