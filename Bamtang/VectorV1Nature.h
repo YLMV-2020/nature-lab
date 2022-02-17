@@ -10,7 +10,9 @@ namespace NatureLab {
         inline void start() {
             SceneAssets::loadShader("Assets/Shaders/sprite.vert", "Assets/Shaders/sprite.frag", nullptr, "sprite");
 
-            glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(1080),
+            Math::Matrix projection = Math::Matrix();
+            projection.identity();
+            projection = Math::Matrix::ortho(Math::Matrix::identity(), 0.0f, static_cast<float>(1080),
                 0.0f, static_cast<float>(720), -1.0f, 1.0f);
 
             SceneAssets::getShader("sprite").Use().SetInteger("image", 0);
@@ -37,10 +39,10 @@ namespace NatureLab {
         inline void show()
         {
             Texture2D myTexture = SceneAssets::getTexture("background");
-            sprite->draw(myTexture, glm::vec2(0.0f, 0.0f), glm::vec2(1080, 720), 0.0f);
+            sprite->draw(myTexture, Math::Vector(0.0f, 0.0f), Math::Vector(1080, 720), 0.0f);
 
             Texture2D myTexture2 = SceneAssets::getTexture("ball");
-            sprite->draw(myTexture2, glm::vec2(0.0f, 0.0f), glm::vec2(50, 50), 0.0f);
+            sprite->draw(myTexture2, Math::Vector(44.0f, 40.0f), Math::Vector(50, 50), 0.0f);
         }
 
     private:

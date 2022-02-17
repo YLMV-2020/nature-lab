@@ -5,7 +5,7 @@ namespace NatureLab
     public:
         Sprite(Shader& shader)
         {
-            this->shader = shader;
+            this->_shader = shader;
             this->initRenderData();
         }
 
@@ -14,21 +14,31 @@ namespace NatureLab
             glDeleteVertexArrays(1, &this->quadVAO);
         }
 
-        void draw(Texture2D& texture, glm::vec2 position, glm::vec2 size, float rotate = 0.0f, glm::vec3 color = glm::uvec3(1.0f))
+        void draw(Texture2D& texture, Math::Vector position, Math::Vector size = Math::Vector(10.0f, 10.0f), float rotate = 0.0f, Math::Vector color = Math::Vector(1.0f))
         {
+            this->_shader.Use();
+            Math::Matrix model = Math::Matrix();
+            model.identity();
 
-            this->shader.Use();
-            glm::mat4 model = glm::mat4(1.0f);
-            model = glm::translate(model, glm::vec3(position, 0.0f));
+            Math::Matrix a = Math::Matrix::translate(Math::Matrix::identity(), position);  
+            Math::Matrix b = Math::Matrix::translate(Math::Matrix::identity(), Math::Vector(0.5f * size.x, 0.5f * size.y, 0.0f)); 
+            
+            Math::Matrix c = Math::Matrix::rotationAroundZ(Math::Matrix::identity(), Math::radians(rotate)); 
+            Math::Matrix d = Math::Matrix::translate(Math::Matrix::identity(), Math::Vector(-0.5f * size.x, -0.5f * size.y, 0.0f)); 
 
-            model = glm::translate(model, glm::vec3(0.5f * size.x, 0.5f * size.y, 0.0f));
-            model = glm::rotate(model, glm::radians(rotate), glm::vec3(0.0f, 0.0f, 1.0f));
-            model = glm::translate(model, glm::vec3(-0.5f * size.x, -0.5f * size.y, 0.0f));
+            Math::Matrix e = Math::Matrix::scale(Math::Matrix::identity(), Math::Vector(size)); // last scale
 
-            model = glm::scale(model, glm::vec3(size, 1.0f));
+            model = e * d * c * b * a;
 
-            this->shader.SetMatrix4("model", model);
-            this->shader.SetVector3f("spriteColor", color);
+          /*  model =
+                Math::Matrix::translate(Math::Matrix::identity(), position) *
+                Math::Matrix::translate(Math::Matrix::identity(), Math::Vector(0.5f * size.x, 0.5f * size.y, 0.0f)) *
+                Math::Matrix::rotationAroundZ(Math::Matrix::identity(), Math::radians(rotate)) *
+                Math::Matrix::translate(Math::Matrix::identity(), Math::Vector(-0.5f * size.x, -0.5f * size.y, 0.0f)) *
+                Math::Matrix::scale(Math::Matrix::identity(), Math::Vector(size));*/
+
+            this->_shader.SetMatrix4("model", model);
+            this->_shader.SetVector3f("spriteColor", color);
 
             glActiveTexture(GL_TEXTURE0);
             texture.Bind();
@@ -66,7 +76,7 @@ namespace NatureLab
         }
     private:
 
-        Shader       shader;
+        Shader _shader;
         unsigned int quadVAO;
     };
 }

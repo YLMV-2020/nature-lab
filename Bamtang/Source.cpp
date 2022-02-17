@@ -13,9 +13,9 @@
 #include <sstream>
 #include <fstream>
 
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
+//#include "../Math/Math.h"
+//#include "../Math/Vector.h"
+//#include "../Math/Matrix.h"
 
 #include "Texture2D.h"
 #include "Shader.h"
