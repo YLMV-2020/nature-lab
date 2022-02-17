@@ -10,7 +10,8 @@ namespace NatureLab {
 
 			this->_frame = new GLFrameBuffer(SceneAssets::SCREEN_WIDTH, SceneAssets::SCREEN_HEIGHT);
 			this->nc = NatureController::Instance();
-			this->_wc = WindowController::Instance(_window, "33");
+			this->_wc = WindowController::Instance();
+			this->_wc->start(_window, "33");
 
 		}
 

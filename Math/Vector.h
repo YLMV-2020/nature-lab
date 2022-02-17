@@ -14,12 +14,13 @@ namespace Math {
 		Vector(float x, float y, float z);
 		Vector(float x, float y, float z, float w);
 
-		friend Vector operator+(const Vector& v1, const Vector& v2)
-		{
+		friend Vector operator+(const Vector& v1, const Vector& v2){
 			return Vector(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
 		}
 
-		friend Vector operator-(Vector v1, Vector v2);
+		friend Vector operator-(const Vector& v1, const Vector& v2){
+			return Vector(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
+		}
 		friend Vector operator*(Vector v1, Vector v2);
 		friend Vector operator*(Vector v1, float scale);
 		friend Vector operator*(float scale, Vector v1);

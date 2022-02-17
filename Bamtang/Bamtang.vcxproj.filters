@@ -28,6 +28,12 @@
     <Filter Include="Util">
       <UniqueIdentifier>{8f999e7b-5bfb-4306-b626-0c04ad5e546b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Windows\Descriptions">
+      <UniqueIdentifier>{9ce3882c-e187-4e2e-929f-c3fc51eff1e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Windows\Controls">
+      <UniqueIdentifier>{d1247a48-4181-4837-91a6-5e995b12ea88}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui.cpp">
@@ -121,17 +127,23 @@
       <Filter>Util</Filter>
     </ClInclude>
     <ClInclude Include="NatureLab.h" />
-    <ClInclude Include="VectorV1Window.h">
-      <Filter>Windows</Filter>
-    </ClInclude>
     <ClInclude Include="Line.h">
       <Filter>API\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="VectorV2Nature.h">
       <Filter>NatureLab</Filter>
     </ClInclude>
+    <ClInclude Include="VectorV1WD.h">
+      <Filter>Windows\Descriptions</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorV2WD.h">
+      <Filter>Windows\Descriptions</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorV1Window.h">
+      <Filter>Windows\Controls</Filter>
+    </ClInclude>
     <ClInclude Include="VectorV2Window.h">
-      <Filter>Windows</Filter>
+      <Filter>Windows\Controls</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

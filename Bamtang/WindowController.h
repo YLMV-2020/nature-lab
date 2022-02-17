@@ -4,6 +4,9 @@
 #include "VectorV1Window.h"
 #include "VectorV2Window.h"
 
+#include "VectorV1WD.h"
+#include "VectorV2WD.h"
+
 namespace NatureLab
 {
     class WindowController
@@ -11,17 +14,15 @@ namespace NatureLab
 
     public:
 
-        static WindowController* Instance(GLFWwindow* window, std::string version) {
-            static WindowController instance(window, version);
+        static WindowController* Instance() {
+            static WindowController instance;
             return &instance;
         }
 
-        inline WindowController(GLFWwindow* window, std::string version)
+        inline WindowController()
         {
-            this->start(window, version);
-
-            this->addWindow(new VectorV1Window(), new SettingWindow());
-            this->addWindow(new VectorV2Window(), new SettingWindow());
+            this->addWindow(new VectorV1Window(), new VectorV1WD());
+            this->addWindow(new VectorV2Window(), new VectorV2WD());
         }
 
         inline void update()
@@ -55,8 +56,6 @@ namespace NatureLab
             }
         }
 
-    private:
-
         inline void start(GLFWwindow* window, std::string version)
         {
 
@@ -86,6 +85,8 @@ namespace NatureLab
 
         }
 
+    private:
+
         inline void show(const GLuint& texture)
         {
             ImGui::Begin("Render", NULL);
@@ -99,26 +100,18 @@ namespace NatureLab
                 ImVec2(_display.x + _displayRender.x - 10, _display.y + _displayRender.y - 30), ImVec2(0, 1), ImVec2(1, 0)
             );
 
-            ImVec2 mousePosition = ImGui::GetMousePos();
-            ImVec2 sceenPosition = ImGui::GetCursorScreenPos();
-            ImVec2 scroll = ImVec2(ImGui::GetScrollX(), ImGui::GetScrollY());
-
-            _mouse = ImVec2(mousePosition.x - sceenPosition.x - scroll.x, mousePosition.y - sceenPosition.y - scroll.y);
-            _mouse.x = (_mouse.x * SceneAssets::SCREEN_WIDTH) / _displayRender.x;
-            _mouse.y = SceneAssets::SCREEN_HEIGHT - SceneAssets::LIMIT_HEIGHT - (_mouse.y * SceneAssets::SCREEN_HEIGHT) / _displayRender.y;
-
             ImGui::End();
         }
 
-        inline void addWindow(NatureLab::IWindow* window, NatureLab::IWindow* description)
+        inline void addWindow(NatureLab::IWindow* control, NatureLab::IWindow* description)
         {
-            this->addWindow(window);
+            this->addControl(control);
             this->addDescription(description);
         }
 
-        inline void addWindow(NatureLab::IWindow* window)
+        inline void addControl(NatureLab::IWindow* control)
         {
-            this->_windows.push_back(window);
+            this->_controls.push_back(control);
         }
 
         inline void addDescription(NatureLab::IWindow* window)
@@ -128,7 +121,7 @@ namespace NatureLab
 
         inline void showWindows()
         {
-            for (NatureLab::IWindow*& inteface : _windows)
+            for (NatureLab::IWindow*& inteface : _controls)
                 inteface->show();
             for (NatureLab::IWindow*& inteface : _descriptions)
                 inteface->show();
@@ -136,7 +129,7 @@ namespace NatureLab
 
         inline void showWindows(int indexScene)
         {
-            _windows[indexScene]->show();
+            _controls[indexScene]->show();
             _descriptions[indexScene]->show();
         }
 
@@ -176,16 +169,12 @@ namespace NatureLab
             return indexScene;
         }
 
-        public:
-
-            ImVec2 _mouse;
-
         private:
 
             ImVec2 _displayRender;
             ImVec2 _display;
 
-            std::vector<NatureLab::IWindow*> _windows;
+            std::vector<NatureLab::IWindow*> _controls;
             std::vector<NatureLab::IWindow*> _descriptions;
 
             ImGuiWindowFlags _window_flags;

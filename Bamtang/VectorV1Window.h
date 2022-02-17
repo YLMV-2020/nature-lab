@@ -13,9 +13,9 @@ namespace NatureLab {
 
         inline void show() override {
 
-            this->begin("Vector V1");
+            this->begin("Variables");
             {   
-                ImGui::Text("Variables");
+                //ImGui::Text("Variables");
 
                 if (ImGui::SliderFloat("Velocity X", &this->_nature->_velocityX, 0, 20))
                 {

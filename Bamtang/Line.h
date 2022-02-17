@@ -5,8 +5,23 @@ namespace NatureLab
     {
     public:
 
-        Line(Math::Vector start, Math::Vector end) {
+        inline Line() { }
 
+        inline void draw(Math::Vector start, Math::Vector end, Math::Vector color = Math::Vector(1.0)) {
+
+            this->update(start, end, color);
+
+            glUseProgram(this->shaderProgram);
+            glUniform3fv(glGetUniformLocation(this->shaderProgram, "color"),
+                1, &this->lineColor.x);
+
+            glBindVertexArray(this->VAO);
+            glDrawArrays(GL_LINES, 0, 2);
+        }
+
+    private:
+
+        inline void update(Math::Vector start, Math::Vector end, Math::Vector color = Math::Vector(1.0)) {
             float x1 = start.x;
             float y1 = start.y;
             float x2 = end.x;
@@ -28,7 +43,7 @@ namespace NatureLab
 
             this->startPoint = start;
             this->endPoint = end;
-            this->lineColor = Math::Vector(0.0f, 1.0f, 0.0f);
+            this->lineColor = color;
 
             const char* vertexShaderSource = "#version 330 core\n"
                 "layout (location = 0) in vec3 aPos;\n"
@@ -85,16 +100,6 @@ namespace NatureLab
 
             glBindBuffer(GL_ARRAY_BUFFER, 0);
             glBindVertexArray(0);
-        }
-
-        void draw() {
-
-            glUseProgram(this->shaderProgram);
-            glUniform3fv(glGetUniformLocation(this->shaderProgram, "color"),
-                1, &this->lineColor.x);
-
-            glBindVertexArray(this->VAO);
-            glDrawArrays(GL_LINES, 0, 2);
         }
 
     private:

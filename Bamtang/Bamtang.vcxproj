@@ -179,8 +179,10 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture2D.h" />
     <ClInclude Include="VectorV1Nature.h" />
+    <ClInclude Include="VectorV1WD.h" />
     <ClInclude Include="VectorV1Window.h" />
     <ClInclude Include="VectorV2Nature.h" />
+    <ClInclude Include="VectorV2WD.h" />
     <ClInclude Include="VectorV2Window.h" />
     <ClInclude Include="WindowController.h" />
   </ItemGroup>
