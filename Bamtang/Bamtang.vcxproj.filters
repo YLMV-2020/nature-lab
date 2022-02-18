@@ -34,6 +34,15 @@
     <Filter Include="Windows\Controls">
       <UniqueIdentifier>{d1247a48-4181-4837-91a6-5e995b12ea88}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NatureLab\Vectors">
+      <UniqueIdentifier>{665cca5c-37ba-46ce-9003-4a67e0d8ff19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Windows\Controls\Vectors">
+      <UniqueIdentifier>{934f3e3e-6328-4755-bd0f-79ed55a2f967}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Windows\Descriptions\Vectors">
+      <UniqueIdentifier>{cdfbbf78-df51-40eb-b3d2-15787b082249}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui.cpp">
@@ -111,9 +120,6 @@
     <ClInclude Include="NatureController.h">
       <Filter>NatureLab</Filter>
     </ClInclude>
-    <ClInclude Include="VectorV1Nature.h">
-      <Filter>NatureLab</Filter>
-    </ClInclude>
     <ClInclude Include="SceneAssets.h">
       <Filter>Scene</Filter>
     </ClInclude>
@@ -130,35 +136,38 @@
     <ClInclude Include="Line.h">
       <Filter>API\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="VectorV2Nature.h">
-      <Filter>NatureLab</Filter>
-    </ClInclude>
-    <ClInclude Include="VectorV1WD.h">
-      <Filter>Windows\Descriptions</Filter>
-    </ClInclude>
-    <ClInclude Include="VectorV2WD.h">
-      <Filter>Windows\Descriptions</Filter>
-    </ClInclude>
-    <ClInclude Include="VectorV1Window.h">
-      <Filter>Windows\Controls</Filter>
-    </ClInclude>
-    <ClInclude Include="VectorV2Window.h">
-      <Filter>Windows\Controls</Filter>
-    </ClInclude>
-    <ClInclude Include="VectorV3Nature.h">
-      <Filter>NatureLab</Filter>
-    </ClInclude>
-    <ClInclude Include="VectorV3Window.h">
-      <Filter>Windows\Controls</Filter>
-    </ClInclude>
-    <ClInclude Include="VectorV3WD.h">
-      <Filter>Windows\Descriptions</Filter>
-    </ClInclude>
     <ClInclude Include="IMouseEventWindow.h">
       <Filter>Windows</Filter>
     </ClInclude>
     <ClInclude Include="ITimeEvent.h">
       <Filter>NatureLab</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorV1Nature.h">
+      <Filter>NatureLab\Vectors</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorV2Nature.h">
+      <Filter>NatureLab\Vectors</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorV3Nature.h">
+      <Filter>NatureLab\Vectors</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorV1Window.h">
+      <Filter>Windows\Controls\Vectors</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorV2Window.h">
+      <Filter>Windows\Controls\Vectors</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorV3Window.h">
+      <Filter>Windows\Controls\Vectors</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorV1WD.h">
+      <Filter>Windows\Descriptions\Vectors</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorV2WD.h">
+      <Filter>Windows\Descriptions\Vectors</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorV3WD.h">
+      <Filter>Windows\Descriptions\Vectors</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
