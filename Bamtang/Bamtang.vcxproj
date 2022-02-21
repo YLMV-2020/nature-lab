@@ -24,6 +24,7 @@
     <ProjectGuid>{e02caa68-a8f9-4171-8236-e6683c416f36}</ProjectGuid>
     <RootNamespace>Bamtang</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>NatureLab</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

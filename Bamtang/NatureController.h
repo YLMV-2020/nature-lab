@@ -22,6 +22,8 @@ namespace NatureLab
             SceneAssets::loadTexture("Assets/Sprites/background.jpg", false, "background");
             SceneAssets::loadTexture("Assets/Sprites/ball.png", true, "ball");
             SceneAssets::loadTexture("Assets/Sprites/paddle.png", true, "paddle");
+            SceneAssets::loadTexture("Assets/Sprites/block.png", true, "block");
+            SceneAssets::loadTexture("Assets/Sprites/red.png", true, "red");
 
             this->start();
         }
