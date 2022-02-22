@@ -1,30 +1,28 @@
 #pragma once
 
 namespace NatureLab {
-    class VectorV4Nature : public INature {
-    public:
 
-        inline VectorV4Nature() {
-            this->start();
-        }
+    struct BallData {
+        Math::Vector _position;
+        Math::Vector _velocity;
+        Math::Vector _acceleration;
 
-        inline void start() override {
-            INature::start();
+        int _width, _height;
+        Math::Vector _dir;
 
-            this->_ballTexture = SceneAssets::getTexture("ball");
-
+        inline BallData(){
+            
             this->_width = SceneAssets::SCREEN_WIDTH - SceneAssets::LIMIT_WIDTH;
             this->_height = SceneAssets::SCREEN_HEIGHT - SceneAssets::LIMIT_HEIGHT;
 
-            this->_position = Math::Vector(0.01f, 0.01f);
-            this->_acceleration = Math::Vector(0.0f, 0.0f);
-            this->_velocity = Math::Vector(0.0f, 0.0f);
+            this->_position = Math::Vector(1 + rand() % _width, 1 + rand() % _height);
+            this->_acceleration = Math::Vector(rand() % 4, rand() % 9);
+            this->_velocity = Math::Vector(rand() % 4, rand() % 9);
         }
 
-        inline void update() override {
-            INature::update();
+        inline void update(Math::Vector _mouse, int _limitVelocity) {
             this->_dir = _mouse - _position;
-            this->_dir = Math::Vector::normalized(_dir);
+            this->_dir = Math::Vector::normalized(_dir) * 0.2f;
 
             this->_acceleration = _dir;
             this->_velocity = this->_velocity + _acceleration;
@@ -34,27 +32,7 @@ namespace NatureLab {
             this->checkEdges();
         }
 
-        inline void show() override {
-            INature::show();
-            this->update();
-            sprite->draw(_ballTexture, Math::Vector(_position.x, _position.y), Math::Vector(50, 50), 0.0f);
-        }
-
-        inline void setMouse(float x, float y) {
-            _mouse.x = x;
-            _mouse.y = y;
-        }
-
-        inline void limit(float limit){
-            if (this->_velocity.x > 5) this->_velocity.x = limit;
-            if (this->_velocity.y > 5) this->_velocity.y = limit;
-            if (this->_velocity.x < -5) this->_velocity.x = -limit;
-            if (this->_velocity.y < -5) this->_velocity.y = -limit;
-        }
-
-    private:
-
-        inline void checkEdges(){
+        inline void checkEdges() {
             if (this->_position.x > _width) {
                 this->_position.x = 0;
             }
@@ -70,21 +48,59 @@ namespace NatureLab {
             }
         }
 
+        inline void limit(float limit) {
+            if (this->_velocity.x > 5) this->_velocity.x = limit;
+            if (this->_velocity.y > 5) this->_velocity.y = limit;
+            if (this->_velocity.x < -5) this->_velocity.x = -limit;
+            if (this->_velocity.y < -5) this->_velocity.y = -limit;
+        }
+    };
+
+    class VectorV4Nature : public INature {
+    public:
+
+        inline VectorV4Nature() {
+            this->start();
+        }
+
+        inline void start() override {
+            INature::start();
+            this->_ballTexture = SceneAssets::getTexture("ball");
+
+            for (int i = 0; i < _ballCount; i++)
+                _ballData.push_back(new BallData());
+        }
+
+        inline void update() override {
+            INature::update();
+
+            for (const auto &it : _ballData){
+                it->update(_mouse, _limitVelocity);
+            }
+        }
+
+        inline void show() override {
+            INature::show();
+            this->update();
+            for (const auto& it : _ballData) {
+                sprite->draw(_ballTexture, Math::Vector(it->_position.x, it->_position.y), Math::Vector(30, 30), 0.0f);
+            }
+        }
+
+        inline void setMouse(float x, float y) {
+            _mouse.x = x;
+            _mouse.y = y;
+        }
+
     private:
 
+        std::vector<BallData*> _ballData;
         Texture2D _ballTexture;
-        int _width, _height;
-
-        Math::Vector _position;
-        Math::Vector _velocity;
-        Math::Vector _acceleration;
-
         Math::Vector _mouse;
-        Math::Vector _dir;
 
     public:
 
         float _limitVelocity = 5.0f;
-
+        int _ballCount = 20;
     };
 }
