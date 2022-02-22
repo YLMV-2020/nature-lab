@@ -169,6 +169,15 @@
     <ClInclude Include="VectorV3WD.h">
       <Filter>Windows\Descriptions\Vectors</Filter>
     </ClInclude>
+    <ClInclude Include="VectorV4Nature.h">
+      <Filter>NatureLab\Vectors</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorV4Window.h">
+      <Filter>Windows\Controls\Vectors</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorV4WD.h">
+      <Filter>Windows\Descriptions\Vectors</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\sprite.vert">

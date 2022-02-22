@@ -22,7 +22,9 @@ namespace Math {
 			return Vector(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
 		}
 		friend Vector operator*(Vector v1, Vector v2);
-		friend Vector operator*(Vector v1, float scale);
+		friend Vector operator*(Vector v1, float scale) {
+			return Vector(v1.x * scale, v1.y * scale, v1.z * scale);
+		}
 		friend Vector operator*(float scale, Vector v1);
 		friend bool operator==(Vector v1, Vector v2);
 		friend bool operator!=(Vector v1, Vector v2);
@@ -30,7 +32,7 @@ namespace Math {
 		static float point(Vector v1, Vector v2);
 		static float magnitude(Vector v1);
 		static float magnitudeQuad(Vector v1);
-		static Vector normalized(Vector v1);
+		static Vector normalized(const Vector v1);
 		static float angle(Vector v1, Vector v2);
 
 		void add(const Vector& v1);

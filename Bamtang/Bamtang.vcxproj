@@ -190,6 +190,9 @@
     <ClInclude Include="VectorV3Nature.h" />
     <ClInclude Include="VectorV3WD.h" />
     <ClInclude Include="VectorV3Window.h" />
+    <ClInclude Include="VectorV4Nature.h" />
+    <ClInclude Include="VectorV4WD.h" />
+    <ClInclude Include="VectorV4Window.h" />
     <ClInclude Include="WindowController.h" />
   </ItemGroup>
   <ItemGroup>

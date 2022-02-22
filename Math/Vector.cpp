@@ -83,7 +83,7 @@ namespace Math
 		return v1.x * v1.x + v1.y * v1.y + v1.z * v1.z;
 	}
 
-	Vector Vector::normalized(Vector v1)
+	Vector Vector::normalized(const Vector v1)
 	{
 		float m = sqrt(v1.x * v1.x + v1.y * v1.y + v1.z * v1.z);
 		return Vector(v1.x / m, v1.y / m, v1.z / m);

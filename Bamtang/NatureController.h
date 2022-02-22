@@ -4,6 +4,7 @@
 #include "VectorV1Nature.h"
 #include "VectorV2Nature.h"
 #include "VectorV3Nature.h"
+#include "VectorV4Nature.h"
 
 namespace NatureLab
 {
@@ -22,7 +23,7 @@ namespace NatureLab
             SceneAssets::loadTexture("Assets/Sprites/background.jpg", false, "background");
             SceneAssets::loadTexture("Assets/Sprites/ball.png", true, "ball");
             SceneAssets::loadTexture("Assets/Sprites/paddle.png", true, "paddle");
-            SceneAssets::loadTexture("Assets/Sprites/block.png", true, "block");
+            //SceneAssets::loadTexture("Assets/Sprites/block.png", true, "block");
             SceneAssets::loadTexture("Assets/Sprites/red.png", true, "red");
 
             this->start();
@@ -32,6 +33,7 @@ namespace NatureLab
             this->addNature(new VectorV1Nature());
             this->addNature(new VectorV2Nature());
             this->addNature(new VectorV3Nature());
+            this->addNature(new VectorV4Nature());
         }
 
         inline void showNature(){

@@ -6,10 +6,12 @@
 #include "VectorV1Window.h"
 #include "VectorV2Window.h"
 #include "VectorV3Window.h"
+#include "VectorV4Window.h"
 
 #include "VectorV1WD.h"
 #include "VectorV2WD.h"
 #include "VectorV3WD.h"
+#include "VectorV4WD.h"
 
 namespace NatureLab
 {
@@ -28,6 +30,7 @@ namespace NatureLab
             this->addWindow(new VectorV1Window(), new VectorV1WD());
             this->addWindow(new VectorV2Window(), new VectorV2WD());
             this->addWindow(new VectorV3Window(), new VectorV3WD());
+            this->addWindow(new VectorV4Window(), new VectorV4WD());
         }
 
         inline void update()
@@ -162,6 +165,7 @@ namespace NatureLab
                     if (ImGui::MenuItem("V1", "Suma")) { indexScene = 0; }
                     if (ImGui::MenuItem("V2", "Resta")) { indexScene = 1; }
                     if (ImGui::MenuItem("V3", "Magnitud")) { indexScene = 2; }
+                    if (ImGui::MenuItem("Interactive Motion")) { indexScene = 3; }
 
                     ImGui::EndMenu();
                 }
