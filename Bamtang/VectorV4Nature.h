@@ -2,7 +2,7 @@
 
 namespace NatureLab {
 
-    struct BallData {
+    struct VectorV4System {
         Math::Vector _position;
         Math::Vector _velocity;
         Math::Vector _acceleration;
@@ -10,7 +10,7 @@ namespace NatureLab {
         int _width, _height;
         Math::Vector _dir;
 
-        inline BallData(){
+        inline VectorV4System(){
             
             this->_width = SceneAssets::SCREEN_WIDTH - SceneAssets::LIMIT_WIDTH;
             this->_height = SceneAssets::SCREEN_HEIGHT - SceneAssets::LIMIT_HEIGHT;
@@ -68,13 +68,13 @@ namespace NatureLab {
             this->_ballTexture = SceneAssets::getTexture("ball");
 
             for (int i = 0; i < _ballCount; i++)
-                _ballData.push_back(new BallData());
+                _natureSystem.push_back(new VectorV4System());
         }
 
         inline void update() override {
             INature::update();
 
-            for (const auto &it : _ballData){
+            for (const auto &it : _natureSystem){
                 it->update(_mouse, _limitVelocity);
             }
         }
@@ -82,7 +82,7 @@ namespace NatureLab {
         inline void show() override {
             INature::show();
             this->update();
-            for (const auto& it : _ballData) {
+            for (const auto& it : _natureSystem) {
                 sprite->draw(_ballTexture, Math::Vector(it->_position.x, it->_position.y), Math::Vector(30, 30), 0.0f);
             }
         }
@@ -94,7 +94,7 @@ namespace NatureLab {
 
     private:
 
-        std::vector<BallData*> _ballData;
+        std::vector<VectorV4System*> _natureSystem;
         Texture2D _ballTexture;
         Math::Vector _mouse;
 
