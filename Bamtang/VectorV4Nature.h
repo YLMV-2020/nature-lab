@@ -101,6 +101,6 @@ namespace NatureLab {
     public:
 
         float _limitVelocity = 5.0f;
-        int _ballCount = 1;
+        int _ballCount = 10;
     };
 }

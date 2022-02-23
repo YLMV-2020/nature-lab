@@ -3,47 +3,39 @@
 namespace NatureLab {
 
     struct ForceV1System
-    {
-        int _width, _height;
-
+    { 
         Math::Vector _position;
         Math::Vector _velocity;
         Math::Vector _acceleration;
         float _mass;
 
-        Math::Vector _wind;
-        Math::Vector _gravity;
-
         inline ForceV1System(){
             this->_position = Math::Vector(450, 350);
-            this->_velocity = Math::Vector(0.01f, 0.01f);
-            this->_acceleration = Math::Vector(0.01f, 0.01f);
-
+            this->_velocity = Math::Vector(0.0, 0.0);
+            this->_acceleration = Math::Vector(0.0, 0.0);
             this->_mass = 10.0f;
-
-            this->_wind = Math::Vector(0.01, 0);
-            this->_gravity = Math::Vector(0, -0.1);
-
-            this->_width = SceneAssets::SCREEN_WIDTH - SceneAssets::LIMIT_WIDTH;
-            this->_height = SceneAssets::SCREEN_HEIGHT - SceneAssets::LIMIT_HEIGHT;
         }
 
-        inline void update(){
-            this->applyForce(_wind);
-            this->applyForce(_gravity);
+        inline ForceV1System(float mass, Math::Vector position = Math::Vector(50, 600)) {
+            this->_position = position;
+            this->_velocity = Math::Vector(0.0, 0.0);
+            this->_acceleration = Math::Vector(0.0, 0.0);
+            this->_mass = mass;
+        }
 
+        inline void update(const int& _width, const int& _height){
             _velocity = _velocity + _acceleration;
             _position = _position + _velocity;
             _acceleration = _acceleration * 0.0f;
 
-            this->checkEdges();
+            this->checkEdges(_width, _height);
         }
 
         inline void applyForce(Math::Vector force) {
             _acceleration = _acceleration + (force / _mass);
         }
 
-        inline void checkEdges() {
+        inline void checkEdges(const int& _width, const int& _height) {
 
             if (_position.x > _width) {
                 _position.x = _width;
@@ -75,24 +67,46 @@ namespace NatureLab {
         inline void start() override {
             INature::start();
             this->_ballTexture = SceneAssets::getTexture("ball");
-            this->_natureSystem = new ForceV1System();
+
+            this->_wind = Math::Vector(1.1, 0);
+            this->_gravity = Math::Vector(0, -9.81);
+
+            this->_width = SceneAssets::SCREEN_WIDTH - SceneAssets::LIMIT_WIDTH;
+            this->_height = SceneAssets::SCREEN_HEIGHT - SceneAssets::LIMIT_HEIGHT;
+
+            for (int i = 0; i < _balls; i++)
+                _natureSystem.push_back(new ForceV1System(rand() % 30 + 10/*, 
+                    Math::Vector(1 + rand() % _width, 1 + rand() % _height)*/)
+                );
         }
 
         inline void update() override {
             INature::update();
-            this->_natureSystem->update();
+
+            for (const auto& it : _natureSystem) {
+                it->applyForce(_wind);
+                it->applyForce(_gravity);
+                it->update(this->_width, this->_height);
+            }
         }
 
         inline void show() override {
             INature::show();
             this->update();
-
-            sprite->draw(_ballTexture, Math::Vector(_natureSystem->_position.x, _natureSystem->_position.y), Math::Vector(_natureSystem->_mass * 5, _natureSystem->_mass * 5), 0.0f);
+            for (const auto& it : _natureSystem) {
+                sprite->draw(_ballTexture, Math::Vector(it->_position.x, it->_position.y), Math::Vector(it->_mass * 5.0f, it->_mass * 5.0f), -(float)glfwGetTime() * 50);
+            }
         }
 
     private:
 
-        ForceV1System* _natureSystem;
+        std::vector<ForceV1System*> _natureSystem;
         Texture2D _ballTexture;
+
+        Math::Vector _wind;
+        Math::Vector _gravity;
+
+        int _width, _height;
+        int _balls = 10;
     };
 }
