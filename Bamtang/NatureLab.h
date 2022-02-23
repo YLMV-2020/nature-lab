@@ -15,6 +15,7 @@
 #include "Shader.h"
 #include "Sprite.h"
 
+#include "Debug.h"
 #include "SceneAssets.h"
 
 #include "Line.h"

@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Debug.cpp" />
     <ClCompile Include="imgui.cpp" />
     <ClCompile Include="imgui_demo.cpp" />
     <ClCompile Include="imgui_draw.cpp" />
@@ -159,6 +160,10 @@
     <ClCompile Include="Texture2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Debug.h" />
+    <ClInclude Include="ForceV1Nature.h" />
+    <ClInclude Include="ForceV1WD.h" />
+    <ClInclude Include="ForceV1Window.h" />
     <ClInclude Include="GLFrameBuffer.h" />
     <ClInclude Include="imconfig.h" />
     <ClInclude Include="imgui.h" />

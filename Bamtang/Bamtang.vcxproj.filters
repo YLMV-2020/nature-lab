@@ -43,6 +43,15 @@
     <Filter Include="Windows\Descriptions\Vectors">
       <UniqueIdentifier>{cdfbbf78-df51-40eb-b3d2-15787b082249}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NatureLab\Forces">
+      <UniqueIdentifier>{6ba1f090-1797-4b9d-af12-c6a36bf22feb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Windows\Controls\Forces">
+      <UniqueIdentifier>{ffa47b47-075f-4098-a9dd-c502125fc830}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Windows\Descriptions\Forces">
+      <UniqueIdentifier>{e1c1d363-cfd4-419f-8f64-b7aa4af7d03f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui.cpp">
@@ -73,6 +82,9 @@
       <Filter>Util</Filter>
     </ClCompile>
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Debug.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imconfig.h">
@@ -177,6 +189,18 @@
     </ClInclude>
     <ClInclude Include="VectorV4WD.h">
       <Filter>Windows\Descriptions\Vectors</Filter>
+    </ClInclude>
+    <ClInclude Include="ForceV1Nature.h">
+      <Filter>NatureLab\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="ForceV1Window.h">
+      <Filter>Windows\Controls\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="ForceV1WD.h">
+      <Filter>Windows\Descriptions\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug.h">
+      <Filter>Util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

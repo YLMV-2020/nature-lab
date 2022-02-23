@@ -18,12 +18,20 @@ namespace Math {
 			return Vector(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
 		}
 
+		friend Vector operator+=(const Vector& v1, const Vector& v2) {
+			return Vector(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
+		}
+
 		friend Vector operator-(const Vector& v1, const Vector& v2){
 			return Vector(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
 		}
 		friend Vector operator*(Vector v1, Vector v2);
 		friend Vector operator*(Vector v1, float scale) {
 			return Vector(v1.x * scale, v1.y * scale, v1.z * scale);
+		}
+		friend Vector operator/(Vector v1, Vector v2);
+		friend Vector operator/(const Vector &v1, const float &scale) {
+			return Vector(v1.x / scale, v1.y / scale, v1.z / scale);
 		}
 		friend Vector operator*(float scale, Vector v1);
 		friend bool operator==(Vector v1, Vector v2);
