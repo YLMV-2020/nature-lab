@@ -202,6 +202,15 @@
     <ClInclude Include="Debug.h">
       <Filter>Util</Filter>
     </ClInclude>
+    <ClInclude Include="ForceV2Nature.h">
+      <Filter>NatureLab\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="ForceV2Window.h">
+      <Filter>Windows\Controls\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="ForceV2WD.h">
+      <Filter>Windows\Descriptions\Forces</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\sprite.vert">

@@ -9,6 +9,7 @@
 #include "VectorV4Window.h"
 
 #include "ForceV1Window.h"
+#include "ForceV2Window.h"
 
 
 #include "VectorV1WD.h"
@@ -17,6 +18,7 @@
 #include "VectorV4WD.h"
 
 #include "ForceV1WD.h"
+#include "ForceV2WD.h"
 
 namespace NatureLab
 {
@@ -38,6 +40,7 @@ namespace NatureLab
             this->addWindow(new VectorV4Window(), new VectorV4WD());
 
             this->addWindow(new ForceV1Window(), new ForceV1WD());
+            this->addWindow(new ForceV2Window(), new ForceV2WD());
         }
 
         inline void update()
@@ -179,7 +182,8 @@ namespace NatureLab
 
                 if (ImGui::BeginMenu("Forces")) {
 
-                    if (ImGui::MenuItem("V1", "Accumulation of forces")) { indexScene = 4; }
+                    if (ImGui::MenuItem("V1", "Forces Newton")) { indexScene = 4; }
+                    if (ImGui::MenuItem("V2", "Gravity and Friction")) { indexScene = 5; }
 
                     ImGui::EndMenu();
                 }

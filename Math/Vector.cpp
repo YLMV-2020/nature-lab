@@ -5,7 +5,8 @@ namespace Math
 {
 	Vector::Vector()
 	{
-		x = y = z = w = 0.0f;
+		x = y = 0.0f;
+		z = w = 1.0f;
 	}
 
 	Vector::Vector(float x)
@@ -17,8 +18,8 @@ namespace Math
 	{
 		this->x = x;
 		this->y = y;
-		this->z = 0.0f;
-		this->w = 0.0f;
+		this->z = 1.0f;
+		this->w = 1.0f;
 	}
 
 	Vector::Vector(float x, float y, float z)
@@ -26,7 +27,7 @@ namespace Math
 		this->x = x;
 		this->y = y;
 		this->z = z;
-		this->w = 0.0f;
+		this->w = 1.0f;
 	}
 
 	Vector::Vector(float x, float y, float z, float w)
@@ -83,7 +84,7 @@ namespace Math
 		return v1.x * v1.x + v1.y * v1.y + v1.z * v1.z;
 	}
 
-	Vector Vector::normalized(const Vector v1)
+	Vector Vector::normalized(const Vector& v1)
 	{
 		float m = sqrt(v1.x * v1.x + v1.y * v1.y + v1.z * v1.z);
 		return Vector(v1.x / m, v1.y / m, v1.z / m);

@@ -7,6 +7,7 @@
 #include "VectorV4Nature.h"
 
 #include "ForceV1Nature.h"
+#include "ForceV2Nature.h"
 
 namespace NatureLab
 {
@@ -38,6 +39,7 @@ namespace NatureLab
             this->addNature(new VectorV4Nature());
 
             this->addNature(new ForceV1Nature());
+            this->addNature(new ForceV2Nature());
         }
 
         inline void showNature(){

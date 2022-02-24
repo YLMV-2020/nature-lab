@@ -40,7 +40,7 @@ namespace Math {
 		static float point(Vector v1, Vector v2);
 		static float magnitude(Vector v1);
 		static float magnitudeQuad(Vector v1);
-		static Vector normalized(const Vector v1);
+		static Vector normalized(const Vector& v1);
 		static float angle(Vector v1, Vector v2);
 
 		void add(const Vector& v1);

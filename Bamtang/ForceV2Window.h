@@ -1,28 +1,28 @@
 #pragma once
 
 namespace NatureLab {
-    class ForceV1Window : public IWindow {
+    class ForceV2Window : public IWindow {
     public:
-        inline ForceV1Window() {
+        inline ForceV2Window() {
             this->init();
         }
 
         inline void init() override {
-            this->_nature = (ForceV1Nature*&)NatureController::Instance()->getNature(4);
+            this->_nature = (ForceV2Nature*&)NatureController::Instance()->getNature(5);
         }
 
         inline void show() override {
 
             this->begin("Variables");
             {
-               
+
             }
             this->end();
         }
 
     private:
 
-        ForceV1Nature* _nature;
+        ForceV2Nature* _nature;
 
 
     };
