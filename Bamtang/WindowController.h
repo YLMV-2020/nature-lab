@@ -10,6 +10,7 @@
 
 #include "ForceV1Window.h"
 #include "ForceV2Window.h"
+#include "ForceV3Window.h"
 
 
 #include "VectorV1WD.h"
@@ -19,6 +20,7 @@
 
 #include "ForceV1WD.h"
 #include "ForceV2WD.h"
+#include "ForceV3WD.h"
 
 namespace NatureLab
 {
@@ -41,6 +43,7 @@ namespace NatureLab
 
             this->addWindow(new ForceV1Window(), new ForceV1WD());
             this->addWindow(new ForceV2Window(), new ForceV2WD());
+            this->addWindow(new ForceV3Window(), new ForceV3WD());
         }
 
         inline void update()
@@ -172,9 +175,9 @@ namespace NatureLab
                 
                 if (ImGui::BeginMenu("Vectors")) {
 
-                    if (ImGui::MenuItem("V1", "Suma")) { indexScene = 0; }
-                    if (ImGui::MenuItem("V2", "Resta")) { indexScene = 1; }
-                    if (ImGui::MenuItem("V3", "Magnitud")) { indexScene = 2; }
+                    if (ImGui::MenuItem("Suma")) { indexScene = 0; }
+                    if (ImGui::MenuItem("Resta")) { indexScene = 1; }
+                    if (ImGui::MenuItem("Magnitud")) { indexScene = 2; }
                     if (ImGui::MenuItem("Interactive")) { indexScene = 3; }
 
                     ImGui::EndMenu();
@@ -182,8 +185,9 @@ namespace NatureLab
 
                 if (ImGui::BeginMenu("Forces")) {
 
-                    if (ImGui::MenuItem("V1", "Forces Newton")) { indexScene = 4; }
-                    if (ImGui::MenuItem("V2", "Gravity and Friction")) { indexScene = 5; }
+                    if (ImGui::MenuItem("Forces Newton")) { indexScene = 4; }
+                    if (ImGui::MenuItem("Gravity and Friction")) { indexScene = 5; }
+                    if (ImGui::MenuItem("Air and fluid resistance")) { indexScene = 6; }
 
                     ImGui::EndMenu();
                 }

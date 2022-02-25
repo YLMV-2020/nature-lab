@@ -74,7 +74,7 @@ namespace Math
 		return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
 	}
 
-	float Vector::magnitude(Vector v1)
+	float Vector::magnitude(const Vector &v1)
 	{
 		return sqrt(v1.x * v1.x + v1.y * v1.y + v1.z * v1.z);
 	}

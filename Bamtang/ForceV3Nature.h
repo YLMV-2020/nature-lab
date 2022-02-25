@@ -2,21 +2,21 @@
 
 namespace NatureLab {
 
-    struct ForceV2System
+    struct ForceV3System
     {
         Math::Vector _position;
         Math::Vector _velocity;
         Math::Vector _acceleration;
         float _mass;
 
-        inline ForceV2System() {
+        inline ForceV3System() {
             this->_position = Math::Vector(450, 350);
             this->_velocity = Math::Vector(0.01f, 0.01f);
             this->_acceleration = Math::Vector(0.01f, 0.01f);
             this->_mass = 10.0f;
         }
 
-        inline ForceV2System(float mass, Math::Vector position = Math::Vector(50, 600)) {
+        inline ForceV3System(float mass, Math::Vector position = Math::Vector(50, 600)) {
             this->_position = position;
             this->_velocity = Math::Vector(0.01f, 0.01f);
             this->_acceleration = Math::Vector(0.01f, 0.01f);
@@ -57,30 +57,62 @@ namespace NatureLab {
 
     };
 
-    class ForceV2Nature : public INature {
+    struct LiquidForceV3 {
+        int _x, _y;
+        int _width, _height;
+        float _c;
+
+        LiquidForceV3(int x, int y, int w, int h, float c){
+            this->_x = x;
+            this->_y = y;
+            this->_width = w;
+            this->_height = h;
+            this->_c = c;
+        }
+
+        bool contains(const ForceV3System &v) {
+            return v._position.x > this->_x && v._position.x<this->_x + this->_width
+                && v._position.y > this->_y && v._position.y < this->_y + this->_height;
+        }
+
+        Math::Vector calculateDrag(const ForceV3System& v) {
+            // Magnitude is coefficient * speed squared
+            auto speed = Math::Vector::magnitude(v._velocity);
+            auto dragMagnitude = this->_c * speed * speed;
+
+            // Direction is inverse of velocity
+            auto dragForce = v._velocity;
+            dragForce = dragForce * -1;
+
+            // Scale according to magnitude
+            dragForce.normalized();
+            dragForce = dragForce * dragMagnitude;
+            return dragForce;
+        }
+    };
+
+    class ForceV3Nature : public INature {
     public:
 
-        inline ForceV2Nature() {
+        inline ForceV3Nature() {
             this->start();
         }
 
         inline void start() override {
             INature::start();
-            this->_ballTexture = SceneAssets::getTexture("ball");
 
-            this->_wind = Math::Vector(0.1f, 0);
+            this->_ballTexture = SceneAssets::getTexture("ball");
+            this->_redTexture = SceneAssets::getTexture("red");
             this->_gravity = Math::Vector(0, -9.1f);
 
             this->_width = SceneAssets::SCREEN_WIDTH - SceneAssets::LIMIT_WIDTH;
             this->_height = SceneAssets::SCREEN_HEIGHT - SceneAssets::LIMIT_HEIGHT;
 
-            this->_frictionMag = _c * _normal;
-            this->_friction = Math::Vector(0.01f, 0.01f);
-            
+            this->liquid = new LiquidForceV3(0, 0, SceneAssets::SCREEN_WIDTH, SceneAssets::SCREEN_HEIGHT / 2, 0.1f);
 
             for (int i = 0; i < _balls; i++)
-                _natureSystem.push_back(new ForceV2System(rand() % 30 + 10/*,
-                    Math::Vector(1 + rand() % _width, 1 + rand() % _height)*/)
+                _natureSystem.push_back(new ForceV3System(rand() % 30 + 10,
+                    Math::Vector(20 + i * _width / _balls, 600))
                 );
         }
 
@@ -89,16 +121,14 @@ namespace NatureLab {
 
             for (const auto& it : _natureSystem) {
 
-                this->_friction = it->_velocity;
-                this->_friction = this->_friction * -1.0f;
-                this->_friction.normalized();
-                this->_friction = this->_friction * _frictionMag;
-                this->_friction.y *= -1;
+                if (liquid->contains(*it)) {
+                    // Calculate drag force
+                    auto dragForce = liquid->calculateDrag(*it);
+                    // Apply drag force to Mover
+                    it->applyForce(dragForce);
+                }
 
-
-                it->applyForce(_friction);
-                it->applyForce(_wind);
-                //_gravity.y = -it->_mass * 0.1f; // sea el peso de cualquier objeto caerán a la misma velocidad
+                _gravity.y = -it->_mass * 0.1f; // Gravity is scaled by mass here!
                 it->applyForce(_gravity);
                 it->update(this->_width, this->_height);
             }
@@ -107,26 +137,23 @@ namespace NatureLab {
         inline void show() override {
             INature::show();
             this->update();
+            sprite->draw(_redTexture, Math::Vector(0, 0), Math::Vector(SceneAssets::SCREEN_WIDTH, SceneAssets::SCREEN_HEIGHT / 2), 0);
             for (const auto& it : _natureSystem) {
-                sprite->draw(_ballTexture, Math::Vector(it->_position.x, it->_position.y), Math::Vector(it->_mass * 5.0f, it->_mass * 5.0f), -(float)glfwGetTime() * 50);
+                sprite->draw(_ballTexture, Math::Vector(it->_position.x, it->_position.y), Math::Vector(it->_mass * 5.0f, it->_mass * 5.0f), 0);
             }
         }
 
     private:
 
-        std::vector<ForceV2System*> _natureSystem;
+        std::vector<ForceV3System*> _natureSystem;
         Texture2D _ballTexture;
+        Texture2D _redTexture;
 
-        Math::Vector _wind;
+        LiquidForceV3* liquid;
         Math::Vector _gravity;
 
         int _width, _height;
-        int _balls = 10;
+        int _balls = 9;
 
-        float _c = 0.01f;
-        float _normal = 1.0f;
-
-        float _frictionMag;
-        Math::Vector _friction;
     };
 }
