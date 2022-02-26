@@ -220,6 +220,15 @@
     <ClInclude Include="ForceV3WD.h">
       <Filter>Windows\Descriptions\Forces</Filter>
     </ClInclude>
+    <ClInclude Include="ForceV4Nature.h">
+      <Filter>NatureLab\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="ForceV4Window.h">
+      <Filter>Windows\Controls\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="ForceV4WD.h">
+      <Filter>Windows\Descriptions\Forces</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\sprite.vert">

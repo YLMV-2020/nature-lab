@@ -9,6 +9,7 @@
 #include "ForceV1Nature.h"
 #include "ForceV2Nature.h"
 #include "ForceV3Nature.h"
+#include "ForceV4Nature.h"
 
 namespace NatureLab
 {
@@ -30,6 +31,7 @@ namespace NatureLab
             //SceneAssets::loadTexture("Assets/Sprites/block.png", true, "block");
             SceneAssets::loadTexture("Assets/Sprites/red.png", true, "red");
             SceneAssets::loadTexture("Assets/Sprites/blue.png", true, "blue");
+            SceneAssets::loadTexture("Assets/Sprites/sun.png", true, "sun");
 
             this->start();
         }
@@ -43,6 +45,7 @@ namespace NatureLab
             this->addNature(new ForceV1Nature());
             this->addNature(new ForceV2Nature());
             this->addNature(new ForceV3Nature());
+            this->addNature(new ForceV4Nature());
         }
 
         inline void showNature(){

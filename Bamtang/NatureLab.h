@@ -9,6 +9,7 @@
 #include <string>
 #include <sstream>
 #include <fstream>
+#include <algorithm>
 
 #include "GLFrameBuffer.h"
 #include "Texture2D.h"

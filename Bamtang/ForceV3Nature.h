@@ -102,7 +102,7 @@ namespace NatureLab {
             INature::start();
 
             this->_ballTexture = SceneAssets::getTexture("ball");
-            this->_redTexture = SceneAssets::getTexture("blue");
+            this->_liquidTexture = SceneAssets::getTexture("blue");
             this->_gravity = Math::Vector2(0, -9.81f);
 
             this->_width = SceneAssets::SCREEN_WIDTH - SceneAssets::LIMIT_WIDTH;
@@ -139,7 +139,7 @@ namespace NatureLab {
         inline void show() override {
             INature::show();
             this->update();
-            sprite->draw(_redTexture, Math::Vector2(0, 0), Math::Vector2(SceneAssets::SCREEN_WIDTH, (SceneAssets::SCREEN_HEIGHT - SceneAssets::LIMIT_HEIGHT) / 2), 0);
+            sprite->draw(_liquidTexture, Math::Vector2(0, 0), Math::Vector2(SceneAssets::SCREEN_WIDTH, (SceneAssets::SCREEN_HEIGHT - SceneAssets::LIMIT_HEIGHT) / 2), 0);
             for (const auto& it : _natureSystem) {
                 sprite->draw(_ballTexture, Math::Vector2(it->_position.x, it->_position.y), Math::Vector2(it->_mass * 25.0f, it->_mass * 25.0f), 0);
             }
@@ -149,7 +149,7 @@ namespace NatureLab {
 
         std::vector<ForceV3System*> _natureSystem;
         Texture2D _ballTexture;
-        Texture2D _redTexture;
+        Texture2D _liquidTexture;
 
         LiquidForceV3* liquid;
         Math::Vector2 _gravity;

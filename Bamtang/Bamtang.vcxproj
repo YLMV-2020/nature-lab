@@ -170,6 +170,9 @@
     <ClInclude Include="ForceV3Nature.h" />
     <ClInclude Include="ForceV3WD.h" />
     <ClInclude Include="ForceV3Window.h" />
+    <ClInclude Include="ForceV4Nature.h" />
+    <ClInclude Include="ForceV4WD.h" />
+    <ClInclude Include="ForceV4Window.h" />
     <ClInclude Include="GLFrameBuffer.h" />
     <ClInclude Include="imconfig.h" />
     <ClInclude Include="imgui.h" />
