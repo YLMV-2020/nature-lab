@@ -2,8 +2,8 @@
 
 namespace NatureLab {
 
-	void Debug::Vector(const Math::Vector& v)
+	void Debug::Vector2(const Math::Vector2& v)
 	{
-		spdlog::info("Vector({},{},{},{})", v.x, v.y, v.z, v.w);
+		spdlog::info("Vector({},{})", v.x, v.y);
 	}
 }

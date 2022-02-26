@@ -12,9 +12,9 @@ namespace NatureLab {
 
             INature::start();
             //this->_center = Math::Vector(0, 0);
-            this->_center = Math::Vector(SceneAssets::SCREEN_WIDTH / 2, SceneAssets::SCREEN_HEIGHT / 2);
-            this->_mouse = Math::Vector(0, 0);
-            this->_color = Math::Vector(1, 1, 1);
+            this->_center = Math::Vector2(SceneAssets::SCREEN_WIDTH / 2, SceneAssets::SCREEN_HEIGHT / 2);
+            this->_mouse = Math::Vector2(0, 0);
+            this->_color = Math::Vector3(1, 1, 1);
             this->_line = new Line();
 
             _colorxyz[0] = _colorxyz[1] = _colorxyz[2] = 1;
@@ -47,9 +47,9 @@ namespace NatureLab {
 
     private:
 
-        Math::Vector _mouse;
-        Math::Vector _center;
-        Math::Vector _color;
+        Math::Vector2 _mouse;
+        Math::Vector2 _center;
+        Math::Vector3 _color;
 
         Line* _line = NULL;
 

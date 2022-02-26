@@ -30,11 +30,11 @@ namespace Math {
 		return *temp;
 	}
 
-	Matrix Matrix::translate(Matrix transform, const Vector& v1)
+	Matrix Matrix::translate(Matrix transform, const Vector2& v1)
 	{
 		transform._m[3][0] = v1.x;
 		transform._m[3][1] = v1.y;
-		transform._m[3][2] = v1.z;
+		transform._m[3][2] = 0.0f;
 
 		return transform;
 	}
@@ -48,11 +48,11 @@ namespace Math {
 		return transform;
 	}
 
-	Matrix Matrix::scale(Matrix transform, const Vector& v1)
+	Matrix Matrix::scale(Matrix transform, const Vector2& v1)
 	{
 		transform._m[0][0] = v1.x;
 		transform._m[1][1] = v1.y;
-		transform._m[2][2] = v1.z;
+		transform._m[2][2] = 0.0f;
 
 		return transform;
 	}
@@ -118,14 +118,14 @@ namespace Math {
 
 	}
 
-	Vector Matrix::getPosition(Matrix& transform)
+	Vector2 Matrix::getPosition(Matrix& transform)
 	{
-		return Vector(transform._m[3][0], transform._m[3][1], transform._m[3][2]);
+		return Vector2(transform._m[3][0], transform._m[3][1]);
 	}
 
-	Vector Matrix::getScale(Matrix& transform)
+	Vector2 Matrix::getScale(Matrix& transform)
 	{
-		return Vector(transform._m[0][0], transform._m[1][1], transform._m[2][2]);
+		return Vector2(transform._m[0][0], transform._m[1][1]);
 	}
 
 	/*void Matrix::pushMatrix(const Matrix& transform)

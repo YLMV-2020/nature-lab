@@ -4,22 +4,22 @@ namespace NatureLab {
 
     struct ForceV2System
     {
-        Math::Vector _position;
-        Math::Vector _velocity;
-        Math::Vector _acceleration;
+        Math::Vector2 _position;
+        Math::Vector2 _velocity;
+        Math::Vector2 _acceleration;
         float _mass;
 
         inline ForceV2System() {
-            this->_position = Math::Vector(450, 350);
-            this->_velocity = Math::Vector(0.01f, 0.01f);
-            this->_acceleration = Math::Vector(0.01f, 0.01f);
+            this->_position = Math::Vector2(450, 350);
+            this->_velocity = Math::Vector2(0.01f, 0.01f);
+            this->_acceleration = Math::Vector2(0.01f, 0.01f);
             this->_mass = 10.0f;
         }
 
-        inline ForceV2System(float mass, Math::Vector position = Math::Vector(50, 600)) {
+        inline ForceV2System(float mass, Math::Vector2 position = Math::Vector2(50, 600)) {
             this->_position = position;
-            this->_velocity = Math::Vector(0.01f, 0.01f);
-            this->_acceleration = Math::Vector(0.01f, 0.01f);
+            this->_velocity = Math::Vector2(0.01f, 0.01f);
+            this->_acceleration = Math::Vector2(0.01f, 0.01f);
             this->_mass = mass;
         }
 
@@ -31,7 +31,7 @@ namespace NatureLab {
             this->checkEdges(_width, _height);
         }
 
-        inline void applyForce(Math::Vector force) {
+        inline void applyForce(Math::Vector2 force) {
             _acceleration = _acceleration + (force / _mass);
         }
 
@@ -68,14 +68,14 @@ namespace NatureLab {
             INature::start();
             this->_ballTexture = SceneAssets::getTexture("ball");
 
-            this->_wind = Math::Vector(0.1f, 0);
-            this->_gravity = Math::Vector(0, -9.1f);
+            this->_wind = Math::Vector2(0.1f, 0);
+            this->_gravity = Math::Vector2(0, -9.81f);
 
             this->_width = SceneAssets::SCREEN_WIDTH - SceneAssets::LIMIT_WIDTH;
             this->_height = SceneAssets::SCREEN_HEIGHT - SceneAssets::LIMIT_HEIGHT;
 
             this->_frictionMag = _c * _normal;
-            this->_friction = Math::Vector(0.01f, 0.01f);
+            this->_friction = Math::Vector2(0.01f, 0.01f);
             
 
             for (int i = 0; i < _balls; i++)
@@ -108,7 +108,7 @@ namespace NatureLab {
             INature::show();
             this->update();
             for (const auto& it : _natureSystem) {
-                sprite->draw(_ballTexture, Math::Vector(it->_position.x, it->_position.y), Math::Vector(it->_mass * 5.0f, it->_mass * 5.0f), -(float)glfwGetTime() * 50);
+                sprite->draw(_ballTexture, Math::Vector2(it->_position.x, it->_position.y), Math::Vector2(it->_mass * 5.0f, it->_mass * 5.0f), -(float)glfwGetTime() * 50);
             }
         }
 
@@ -117,8 +117,8 @@ namespace NatureLab {
         std::vector<ForceV2System*> _natureSystem;
         Texture2D _ballTexture;
 
-        Math::Vector _wind;
-        Math::Vector _gravity;
+        Math::Vector2 _wind;
+        Math::Vector2 _gravity;
 
         int _width, _height;
         int _balls = 10;
@@ -127,6 +127,6 @@ namespace NatureLab {
         float _normal = 1.0f;
 
         float _frictionMag;
-        Math::Vector _friction;
+        Math::Vector2 _friction;
     };
 }

@@ -5,7 +5,8 @@
 #include <GL/glew.h>
 
 #include "../Math/Math.h"
-#include "../Math/Vector.h"
+#include "../Math/Vector2.h"
+#include "../Math/Vector3.h"
 #include "../Math/Matrix.h"
 
 
@@ -24,11 +25,11 @@ public:
     void    SetFloat(const char* name, float value, bool useShader = false);
     void    SetInteger(const char* name, int value, bool useShader = false);
     void    SetVector2f(const char* name, float x, float y, bool useShader = false);
-    void    SetVector2f(const char* name, const Math::Vector& value, bool useShader = false);
+    void    SetVector2f(const char* name, const Math::Vector2& value, bool useShader = false);
     void    SetVector3f(const char* name, float x, float y, float z, bool useShader = false);
-    void    SetVector3f(const char* name, const Math::Vector& value, bool useShader = false);
+    void    SetVector3f(const char* name, const Math::Vector3& value, bool useShader = false);
     void    SetVector4f(const char* name, float x, float y, float z, float w, bool useShader = false);
-    void    SetVector4f(const char* name, const Math::Vector& value, bool useShader = false);
+    void    SetVector4f(const char* name, const Math::Vector3& value, bool useShader = false);
     void    SetMatrix4(const char* name, const Math::Matrix& matrix, bool useShader = false);
 private:
     // checks if compilation or linking failed and if so, print the error logs

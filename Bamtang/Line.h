@@ -7,7 +7,7 @@ namespace NatureLab
 
         inline Line() { }
 
-        inline void draw(Math::Vector start, Math::Vector end, Math::Vector color = Math::Vector(1.0)) {
+        inline void draw(Math::Vector2 start, Math::Vector2 end, Math::Vector3 color = Math::Vector3(1.0)) {
 
             this->update(start, end, color);
 
@@ -21,7 +21,7 @@ namespace NatureLab
 
     private:
 
-        inline void update(Math::Vector start, Math::Vector end, Math::Vector color = Math::Vector(1.0)) {
+        inline void update(Math::Vector2 start, Math::Vector2 end, Math::Vector3 color = Math::Vector3(1.0)) {
             float x1 = start.x;
             float y1 = start.y;
             float x2 = end.x;
@@ -107,9 +107,9 @@ namespace NatureLab
         int shaderProgram;
         unsigned int VBO, VAO;
         float* vertices;
-        Math::Vector startPoint;
-        Math::Vector endPoint;
-        Math::Vector lineColor;
+        Math::Vector2 startPoint;
+        Math::Vector2 endPoint;
+        Math::Vector3 lineColor;
     };
 
 }

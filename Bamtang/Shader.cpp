@@ -61,7 +61,7 @@ void Shader::SetVector2f(const char* name, float x, float y, bool useShader)
         this->Use();
     glUniform2f(glGetUniformLocation(this->ID, name), x, y);
 }
-void Shader::SetVector2f(const char* name, const Math::Vector& value, bool useShader)
+void Shader::SetVector2f(const char* name, const Math::Vector2& value, bool useShader)
 {
     if (useShader)
         this->Use();
@@ -73,7 +73,7 @@ void Shader::SetVector3f(const char* name, float x, float y, float z, bool useSh
         this->Use();
     glUniform3f(glGetUniformLocation(this->ID, name), x, y, z);
 }
-void Shader::SetVector3f(const char* name, const Math::Vector& value, bool useShader)
+void Shader::SetVector3f(const char* name, const Math::Vector3& value, bool useShader)
 {
     if (useShader)
         this->Use();
@@ -85,7 +85,7 @@ void Shader::SetVector4f(const char* name, float x, float y, float z, float w, b
         this->Use();
     glUniform4f(glGetUniformLocation(this->ID, name), x, y, z, w);
 }
-void Shader::SetVector4f(const char* name, const Math::Vector& value, bool useShader)
+void Shader::SetVector4f(const char* name, const Math::Vector3& value, bool useShader)
 {
     if (useShader)
         this->Use();

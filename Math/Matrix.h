@@ -16,10 +16,10 @@ namespace Math {
 
 		static Matrix identity();
 
-		static Matrix translate(Matrix transform, const Vector& v1);
+		static Matrix translate(Matrix transform, const Vector2& v1);
 		static Matrix translate(Matrix transform, const int& dx, const int& dy, const int& dz);
 
-		static Matrix scale(Matrix transform, const Vector& v1);
+		static Matrix scale(Matrix transform, const Vector2& v1);
 		static Matrix scale(Matrix transform, const int& px, const int& py, const int& pz);
 
 		static Matrix rotationAroundX(Matrix transform, const float& angle);
@@ -30,8 +30,8 @@ namespace Math {
 
 		static Matrix ortho(Matrix transform, float left, float right, float bottom, float top, float zNear, float zFar);
 
-		static Vector getPosition(Matrix& transform);
-		static Vector getScale(Matrix& transform);
+		static Vector2 getPosition(Matrix& transform);
+		static Vector2 getScale(Matrix& transform);
 
 		/*static void pushMatrix(const Matrix& transform);
 		static Matrix popMatrix();*/

@@ -3,26 +3,26 @@
 namespace NatureLab {
 
     struct VectorV4System {
-        Math::Vector _position;
-        Math::Vector _velocity;
-        Math::Vector _acceleration;
+        Math::Vector2 _position;
+        Math::Vector2 _velocity;
+        Math::Vector2 _acceleration;
 
         int _width, _height;
-        Math::Vector _dir;
+        Math::Vector2 _dir;
 
         inline VectorV4System(){
             
             this->_width = SceneAssets::SCREEN_WIDTH - SceneAssets::LIMIT_WIDTH;
             this->_height = SceneAssets::SCREEN_HEIGHT - SceneAssets::LIMIT_HEIGHT;
 
-            this->_position = Math::Vector(1 + rand() % _width, 1 + rand() % _height);
-            this->_acceleration = Math::Vector(rand() % 4, rand() % 9);
-            this->_velocity = Math::Vector(rand() % 4, rand() % 9);
+            this->_position = Math::Vector2(1 + rand() % _width, 1 + rand() % _height);
+            this->_acceleration = Math::Vector2(rand() % 4, rand() % 9);
+            this->_velocity = Math::Vector2(rand() % 4, rand() % 9);
         }
 
-        inline void update(Math::Vector _mouse, int _limitVelocity) {
+        inline void update(Math::Vector2 _mouse, int _limitVelocity) {
             this->_dir = _mouse - _position;
-            this->_dir = Math::Vector::normalized(_dir) * 0.2f;
+            this->_dir = Math::Vector2::normalized(_dir) * 0.2f;
 
             this->_acceleration = _dir;
             this->_velocity = this->_velocity + _acceleration;
@@ -83,7 +83,7 @@ namespace NatureLab {
             INature::show();
             this->update();
             for (const auto& it : _natureSystem) {
-                sprite->draw(_ballTexture, Math::Vector(it->_position.x, it->_position.y), Math::Vector(30, 30), 0.0f);
+                sprite->draw(_ballTexture, Math::Vector2(it->_position.x, it->_position.y), Math::Vector2(30, 30), 0.0f);
             }
         }
 
@@ -96,7 +96,7 @@ namespace NatureLab {
 
         std::vector<VectorV4System*> _natureSystem;
         Texture2D _ballTexture;
-        Math::Vector _mouse;
+        Math::Vector2 _mouse;
 
     public:
 

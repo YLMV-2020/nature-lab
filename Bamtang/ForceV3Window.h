@@ -15,7 +15,9 @@ namespace NatureLab {
 
             this->begin("Variables");
             {
-
+                if (ImGui::Button("Reset")) {
+                    _nature->start();
+                }
             }
             this->end();
         }

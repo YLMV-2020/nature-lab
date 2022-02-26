@@ -13,8 +13,8 @@ namespace NatureLab {
             INature::start();
 
             this->_ballTexture = SceneAssets::getTexture("ball");
-            this->_position = Math::Vector(100, 100);
-            this->_velocity = Math::Vector(_velocityX, _velocityY);
+            this->_position = Math::Vector2(100, 100);
+            this->_velocity = Math::Vector2(_velocityX, _velocityY);
 
             this->_width = SceneAssets::SCREEN_WIDTH - SceneAssets::LIMIT_WIDTH;
             this->_height = SceneAssets::SCREEN_HEIGHT - SceneAssets::LIMIT_HEIGHT;
@@ -41,7 +41,7 @@ namespace NatureLab {
             INature::show();
             this->update();
 
-            sprite->draw(_ballTexture, Math::Vector(_position.x, _position.y), Math::Vector(50, 50), 0.0f);
+            sprite->draw(_ballTexture, Math::Vector2(_position.x, _position.y), Math::Vector2(50, 50), 0.0f);
         }
 
     private:
@@ -51,8 +51,8 @@ namespace NatureLab {
 
     public:
 
-        Math::Vector _position;
-        Math::Vector _velocity;
+        Math::Vector2 _position;
+        Math::Vector2 _velocity;
 
         float _velocityX = 2;
         float _velocityY = 5;

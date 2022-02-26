@@ -9,7 +9,7 @@ namespace NatureLab
 		virtual void show()
 		{
 			Texture2D backgroundTexture = SceneAssets::getTexture("background");
-			sprite->draw(backgroundTexture, Math::Vector(0.0f, 0.0f), Math::Vector(SceneAssets::SCREEN_WIDTH, SceneAssets::SCREEN_HEIGHT), 0.0f);
+			sprite->draw(backgroundTexture, Math::Vector2(0.0f, 0.0f), Math::Vector2(SceneAssets::SCREEN_WIDTH, SceneAssets::SCREEN_HEIGHT), 0.0f);
 		}
 
 	protected:

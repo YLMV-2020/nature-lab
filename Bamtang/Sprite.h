@@ -14,19 +14,19 @@ namespace NatureLab
             glDeleteVertexArrays(1, &this->quadVAO);
         }
 
-        void draw(Texture2D& texture, Math::Vector position, Math::Vector size = Math::Vector(10.0f, 10.0f), float rotate = 0.0f, Math::Vector color = Math::Vector(1.0f))
+        void draw(Texture2D& texture, Math::Vector2 position, Math::Vector2 size = Math::Vector2(10.0f, 10.0f), float rotate = 0.0f, Math::Vector2 color = Math::Vector2(1.0f))
         {
             this->_shader.Use();
             Math::Matrix model = Math::Matrix();
             model.identity();
 
             Math::Matrix a = Math::Matrix::translate(Math::Matrix::identity(), position);  
-            Math::Matrix b = Math::Matrix::translate(Math::Matrix::identity(), Math::Vector(0.5f * size.x, 0.5f * size.y, 0.0f)); 
+            Math::Matrix b = Math::Matrix::translate(Math::Matrix::identity(), Math::Vector2(0.5f * size.x, 0.5f * size.y)); 
             
             Math::Matrix c = Math::Matrix::rotationAroundZ(Math::Matrix::identity(), Math::radians(rotate)); 
-            Math::Matrix d = Math::Matrix::translate(Math::Matrix::identity(), Math::Vector(-0.5f * size.x, -0.5f * size.y, 0.0f)); 
+            Math::Matrix d = Math::Matrix::translate(Math::Matrix::identity(), Math::Vector2(-0.5f * size.x, -0.5f * size.y)); 
 
-            Math::Matrix e = Math::Matrix::scale(Math::Matrix::identity(), Math::Vector(size)); 
+            Math::Matrix e = Math::Matrix::scale(Math::Matrix::identity(), Math::Vector2(size)); 
 
             model = e * d * c * b * a;
 
@@ -38,7 +38,7 @@ namespace NatureLab
                 Math::Matrix::scale(Math::Matrix::identity(), Math::Vector(size));*/
 
             this->_shader.SetMatrix4("model", model);
-            this->_shader.SetVector3f("spriteColor", color);
+            //this->_shader.SetVector3f("spriteColor", color);
 
             glActiveTexture(GL_TEXTURE0);
             texture.Bind();

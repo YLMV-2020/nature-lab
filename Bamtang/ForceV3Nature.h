@@ -4,22 +4,22 @@ namespace NatureLab {
 
     struct ForceV3System
     {
-        Math::Vector _position;
-        Math::Vector _velocity;
-        Math::Vector _acceleration;
+        Math::Vector2 _position;
+        Math::Vector2 _velocity;
+        Math::Vector2 _acceleration;
         float _mass;
 
         inline ForceV3System() {
-            this->_position = Math::Vector(450, 350);
-            this->_velocity = Math::Vector(0.01f, 0.01f);
-            this->_acceleration = Math::Vector(0.01f, 0.01f);
+            this->_position = Math::Vector2(450, 350);
+            this->_velocity = Math::Vector2(0.01f, 0.01f);
+            this->_acceleration = Math::Vector2(0.01f, 0.01f);
             this->_mass = 10.0f;
         }
 
-        inline ForceV3System(float mass, Math::Vector position = Math::Vector(50, 600)) {
+        inline ForceV3System(float mass, Math::Vector2 position = Math::Vector2(50, 600)) {
             this->_position = position;
-            this->_velocity = Math::Vector(0.01f, 0.01f);
-            this->_acceleration = Math::Vector(0.01f, 0.01f);
+            this->_velocity = Math::Vector2(0.01f, 0.01f);
+            this->_acceleration = Math::Vector2(0.01f, 0.01f);
             this->_mass = mass;
         }
 
@@ -31,7 +31,7 @@ namespace NatureLab {
             this->checkEdges(_width, _height);
         }
 
-        inline void applyForce(Math::Vector force) {
+        inline void applyForce(Math::Vector2 force) {
             _acceleration = _acceleration + (force / _mass);
         }
 
@@ -75,9 +75,9 @@ namespace NatureLab {
                 && v._position.y > this->_y && v._position.y < this->_y + this->_height;
         }
 
-        Math::Vector calculateDrag(const ForceV3System& v) {
+        Math::Vector2 calculateDrag(const ForceV3System& v) {
             // Magnitude is coefficient * speed squared
-            auto speed = Math::Vector::magnitude(v._velocity);
+            auto speed = Math::Vector2::magnitude(v._velocity);
             auto dragMagnitude = this->_c * speed * speed;
 
             // Direction is inverse of velocity
@@ -102,17 +102,19 @@ namespace NatureLab {
             INature::start();
 
             this->_ballTexture = SceneAssets::getTexture("ball");
-            this->_redTexture = SceneAssets::getTexture("red");
-            this->_gravity = Math::Vector(0, -9.1f);
+            this->_redTexture = SceneAssets::getTexture("blue");
+            this->_gravity = Math::Vector2(0, -9.81f);
 
             this->_width = SceneAssets::SCREEN_WIDTH - SceneAssets::LIMIT_WIDTH;
             this->_height = SceneAssets::SCREEN_HEIGHT - SceneAssets::LIMIT_HEIGHT;
 
-            this->liquid = new LiquidForceV3(0, 0, SceneAssets::SCREEN_WIDTH, SceneAssets::SCREEN_HEIGHT / 2, 0.1f);
+            this->liquid = new LiquidForceV3(0, 0, SceneAssets::SCREEN_WIDTH, (SceneAssets::SCREEN_HEIGHT - SceneAssets::LIMIT_HEIGHT) / 2, 0.1f);
+
+            _natureSystem.clear();
 
             for (int i = 0; i < _balls; i++)
-                _natureSystem.push_back(new ForceV3System(rand() % 30 + 10,
-                    Math::Vector(20 + i * _width / _balls, 600))
+                _natureSystem.push_back(new ForceV3System((rand() % 25 + 25) / 10.0f ,
+                    Math::Vector2(20 + i * _width / _balls, 600))
                 );
         }
 
@@ -137,9 +139,9 @@ namespace NatureLab {
         inline void show() override {
             INature::show();
             this->update();
-            sprite->draw(_redTexture, Math::Vector(0, 0), Math::Vector(SceneAssets::SCREEN_WIDTH, SceneAssets::SCREEN_HEIGHT / 2), 0);
+            sprite->draw(_redTexture, Math::Vector2(0, 0), Math::Vector2(SceneAssets::SCREEN_WIDTH, (SceneAssets::SCREEN_HEIGHT - SceneAssets::LIMIT_HEIGHT) / 2), 0);
             for (const auto& it : _natureSystem) {
-                sprite->draw(_ballTexture, Math::Vector(it->_position.x, it->_position.y), Math::Vector(it->_mass * 5.0f, it->_mass * 5.0f), 0);
+                sprite->draw(_ballTexture, Math::Vector2(it->_position.x, it->_position.y), Math::Vector2(it->_mass * 25.0f, it->_mass * 25.0f), 0);
             }
         }
 
@@ -150,7 +152,7 @@ namespace NatureLab {
         Texture2D _redTexture;
 
         LiquidForceV3* liquid;
-        Math::Vector _gravity;
+        Math::Vector2 _gravity;
 
         int _width, _height;
         int _balls = 9;
