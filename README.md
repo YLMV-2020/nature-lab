@@ -8,10 +8,12 @@ Labsxdev has a single dependency: [cmake](http://www.cmake.org/download/), which
 
 ```bash
 git clone --recursive https://github.com/devgrids/labsxdev
+cd labsxdev
 ```
 or
 ```bash
 git clone https://github.com/devgrids/labsxdev
+cd labsxdev
 git submodule update --init --recursive
 ```
 Now configure vcpkg, a Microsoft library that allows you to add external library dependencies in a very simple way.
