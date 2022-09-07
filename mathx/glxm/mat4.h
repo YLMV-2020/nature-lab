@@ -37,7 +37,7 @@ namespace glxm
 
         static void printf(const mat4& value);
 
-    private:
+    //private:
         float val[4][4];
     };
 }
