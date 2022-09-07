@@ -1,8 +1,8 @@
-#include "glxm/mat4.h"
-#include "Scene.h"
+#include "NatureLab.h"
 
 int main(int argc, char* argv[])
-{
+{ 
+    srand(time(NULL));
     NatureLab::Scene* scene = new NatureLab::Scene();
     return scene->run();
 }

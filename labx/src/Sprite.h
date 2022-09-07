@@ -1,8 +1,5 @@
-#include "Shader.h"
-#include "Texture2D.h"
-#include <glxm\vec2.h>
-#include <glxm\mat4.h>
-#include <glxm\Math.h>
+#include "glxm/Math.h"
+
 namespace NatureLab
 {
 	class Sprite

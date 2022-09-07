@@ -1,4 +1,3 @@
-#include <imgui.h>
 
 namespace NatureLab
 {

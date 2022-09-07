@@ -1,8 +1,4 @@
-#include <glxm\vec2.h>
-#include <glxm\vec3.h>
-#include <gl\glew.h>
 
-#include "SceneAssets.h"
 
 namespace NatureLab
 {

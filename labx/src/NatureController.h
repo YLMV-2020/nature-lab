@@ -1,9 +1,6 @@
 #include "INature.h"
-#include "ITimeEvent.h"
 
 #include "VectorV1Nature.h"
-#include <vector>
-
 
 namespace NatureLab
 {

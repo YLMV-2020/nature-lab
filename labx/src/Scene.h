@@ -1,9 +1,4 @@
 #pragma once
-#include "GLFrameBuffer.h"
-#include "SceneAssets.h"
-#include "NatureController.h"
-#include "WindowController.h"
-#include <spdlog\spdlog.h>
 
 namespace NatureLab {
 

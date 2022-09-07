@@ -1,7 +1,6 @@
 #include "Shader.h"
+
 #include <iostream>
-#include <glxm\mat4.h>
-#include <glxm\vec2.h>
 
 Shader& Shader::Use()
 {

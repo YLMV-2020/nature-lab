@@ -1,6 +1,3 @@
-#include "Texture2D.h"
-#include "SceneAssets.h"
-#include "Sprite.h"
 
 namespace NatureLab
 {

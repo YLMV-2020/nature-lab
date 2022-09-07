@@ -1,4 +1,3 @@
-#include <gl\glew.h>
 
 namespace NatureLab
 {
