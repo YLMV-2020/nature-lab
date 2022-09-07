@@ -1,5 +1,4 @@
 #include "glxm/mat4.h"
-#include "glxm/debug/mat4_debug.h"
 
 int main(int argc, char* argv[])
 {
@@ -11,6 +10,6 @@ int main(int argc, char* argv[])
 
     model = glxm::mat4::scale(model, 2.0f, 2.0f, 3.0f);
 
-    glxm::mat4::printf(model*model2);
+    glxm::mat4::printf(model * model2);
     return 0;
 }

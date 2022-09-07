@@ -42,6 +42,24 @@ namespace glxm
         return transform;
     }
 
+    mat4 mat4::translate(mat4& transform, const vec2& v1)
+    {
+        transform.val[3][0] = v1.x;
+        transform.val[3][1] = v1.y;
+        transform.val[3][2] = 0.0f;
+
+        return transform;
+    }
+
+    mat4 mat4::scale(mat4 transform, const vec2& v1)
+    {
+        transform.val[0][0] = v1.x;
+        transform.val[1][1] = v1.y;
+        transform.val[2][2] = 0.0f;
+
+        return transform;
+    }
+
     mat4 mat4::scale(mat4& transform, const float& px, const float& py, const float& pz)
     {
         transform.val[0][0] = px;
