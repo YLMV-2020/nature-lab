@@ -11,7 +11,7 @@ namespace glxm
                 val[i][j] = 0.0f;
     }
 
-    mat4::mat4(float value)
+    mat4::mat4(const float value)
     {
         for (unsigned int i = 0; i < 4; i++)
         {
@@ -51,7 +51,7 @@ namespace glxm
         return transform;
     }
 
-    mat4 mat4::scale(mat4 transform, const vec2& v1)
+    mat4 mat4::scale(mat4& transform, const vec2& v1)
     {
         transform.val[0][0] = v1.x;
         transform.val[1][1] = v1.y;
@@ -69,7 +69,7 @@ namespace glxm
         return transform;
     }
 
-    mat4 mat4::rotation_around_x(mat4 transform, const float& angle)
+    mat4 mat4::rotation_around_x(mat4& transform, const float& angle)
     {
         transform.val[1][1] = cos(angle);
         transform.val[1][2] = sin(angle);
@@ -79,7 +79,7 @@ namespace glxm
         return transform;
     }
 
-    mat4 mat4::rotation_around_y(mat4 transform, const float& angle)
+    mat4 mat4::rotation_around_y(mat4& transform, const float& angle)
     {
         transform.val[0][0] = cos(angle);
         transform.val[0][2] = -sin(angle);
@@ -89,7 +89,7 @@ namespace glxm
         return transform;
     }
 
-    mat4 mat4::rotation_around_z(mat4 transform, const float& angle)
+    mat4 mat4::rotation_around_z(mat4& transform, const float& angle)
     {
         transform.val[0][0] = cos(angle);
         transform.val[0][1] = sin(angle);
@@ -99,7 +99,7 @@ namespace glxm
         return transform;
     }
 
-    mat4 mat4::ortho(mat4 transform, float left, float right, float bottom, float top, float z_near, float z_far)
+    mat4 mat4::ortho(mat4& transform, float left, float right, float bottom, float top, float z_near, float z_far)
     {
         transform.val[0][0] = 2.0f / (right - left);
         transform.val[1][1] = 2.0f / (top - bottom);

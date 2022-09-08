@@ -4,13 +4,25 @@
 #include "SettingWindow.h"
 
 #include "VectorV1Window.h"
+#include "VectorV2Window.h"
+#include "VectorV3Window.h"
+#include "VectorV4Window.h"
 
+#include "ForceV1Window.h"
+#include "ForceV2Window.h"
+#include "ForceV3Window.h"
+#include "ForceV4Window.h"
 
 
 #include "VectorV1WD.h"
-#include <imgui_impl_glfw.h>
-#include <imgui_impl_opengl3.h>
+#include "VectorV2WD.h"
+#include "VectorV3WD.h"
+#include "VectorV4WD.h"
 
+#include "ForceV1WD.h"
+#include "ForceV2WD.h"
+#include "ForceV3WD.h"
+#include "ForceV4WD.h"
 
 namespace NatureLab
 {
@@ -27,7 +39,14 @@ namespace NatureLab
         inline WindowController()
         {
             this->addWindow(new VectorV1Window(), new VectorV1WD());
+            this->addWindow(new VectorV2Window(), new VectorV2WD());
+            this->addWindow(new VectorV3Window(), new VectorV3WD());
+            this->addWindow(new VectorV4Window(), new VectorV4WD());
 
+            this->addWindow(new ForceV1Window(), new ForceV1WD());
+            this->addWindow(new ForceV2Window(), new ForceV2WD());
+            this->addWindow(new ForceV3Window(), new ForceV3WD());
+            this->addWindow(new ForceV4Window(), new ForceV4WD());
         }
 
         inline void update()

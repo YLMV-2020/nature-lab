@@ -8,7 +8,7 @@ namespace NatureLab
 
 		inline Line() { }
 
-		inline void draw(glxm::vec2 start, glxm::vec2 end, glxm::vec3 color = glxm::vec3(1.0)) {
+		inline void draw(glxm::vec2 start, glxm::vec2 end, glxm::vec4 color = glxm::vec4(1.0)) {
 
 			this->update(start, end, color);
 
@@ -22,7 +22,7 @@ namespace NatureLab
 
 	private:
 
-		inline void update(glxm::vec2  start, glxm::vec2  end, glxm::vec3 color = glxm::vec3(1.0)) {
+		inline void update(glxm::vec2  start, glxm::vec2  end, glxm::vec4 color = glxm::vec4(1.0)) {
 			float x1 = start.x;
 			float y1 = start.y;
 			float x2 = end.x;
@@ -110,7 +110,7 @@ namespace NatureLab
 		float* vertices;
 		glxm::vec2 startPoint;
 		glxm::vec2 endPoint;
-		glxm::vec3 lineColor;
+		glxm::vec4 lineColor;
 	};
 
 }

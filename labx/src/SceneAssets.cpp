@@ -12,24 +12,24 @@ namespace NatureLab {
     std::map<std::string, Texture2D>    SceneAssets::_textures;
     std::map<std::string, Shader>       SceneAssets::_shaders;
 
-    Shader SceneAssets::loadShader(const char* vShaderFile, const char* fShaderFile, const char* gShaderFile, std::string name)
+    Shader SceneAssets::load_shader(const char* vShaderFile, const char* fShaderFile, const char* gShaderFile, std::string name)
     {
         _shaders[name] = loadShaderFromFile(vShaderFile, fShaderFile, gShaderFile);
         return _shaders[name];
     }
 
-    Shader SceneAssets::getShader(std::string name)
+    Shader SceneAssets::get_shader(std::string name)
     {
         return _shaders[name];
     }
 
-    Texture2D SceneAssets::loadTexture(const char* file, bool alpha, std::string name)
+    Texture2D SceneAssets::load_texture(const char* file, bool alpha, std::string name)
     {
         _textures[name] = loadTextureFromFile(file, alpha);
         return _textures[name];
     }
 
-    Texture2D SceneAssets::getTexture(std::string name)
+    Texture2D SceneAssets::get_texture(std::string name)
     {
         return _textures[name];
     }

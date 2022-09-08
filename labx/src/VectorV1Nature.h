@@ -1,5 +1,7 @@
 #pragma once
 
+
+
 namespace NatureLab {
     class VectorV1Nature : public INature {
     public:
@@ -12,7 +14,7 @@ namespace NatureLab {
             
             INature::start();
 
-            this->_ballTexture = SceneAssets::getTexture("ball");
+            this->_ballTexture = SceneAssets::get_texture("ball");
             this->_position = glxm::vec2(100, 100);
             this->_velocity = glxm::vec2(_velocityX, _velocityY);
 

@@ -6,7 +6,7 @@ namespace NatureLab {
 	class Debug
 	{
 	public:
-		//static void Vector2(const Math::Vector2& v);
+		//static void Vector2(const glxm::vec2& v);
 	};
 }
 

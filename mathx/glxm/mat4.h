@@ -7,16 +7,16 @@ namespace glxm
     {
     public:
         mat4();
-        mat4(float value);
+        explicit mat4(float value);
         static mat4 identity();
         static mat4 translate(mat4& transform, const float& dx, const float& dy, const float& dz);
         static mat4 translate(mat4& transform, const vec2& v1);
         static mat4 scale(mat4& transform, const float& px, const float& py, const float& pz);
-        static mat4 scale(mat4 transform, const vec2& v1);
-        static mat4 rotation_around_x(mat4 transform, const float& angle);
-        static mat4 rotation_around_y(mat4 transform, const float& angle);
-        static mat4 rotation_around_z(mat4 transform, const float& angle);
-        static mat4 ortho(mat4 transform, float left, float right, float bottom, float top, float z_near, float z_far);
+        static mat4 scale(mat4& transform, const vec2& v1);
+        static mat4 rotation_around_x(mat4& transform, const float& angle);
+        static mat4 rotation_around_y(mat4& transform, const float& angle);
+        static mat4 rotation_around_z(mat4& transform, const float& angle);
+        static mat4 ortho(mat4& transform, float left, float right, float bottom, float top, float z_near, float z_far);
 
         friend mat4 operator*(const mat4& m1, const mat4& m2)
         {
@@ -37,7 +37,7 @@ namespace glxm
 
         static void printf(const mat4& value);
 
-    //private:
-        float val[4][4];
+        //private:
+        float val[4][4]{};
     };
 }

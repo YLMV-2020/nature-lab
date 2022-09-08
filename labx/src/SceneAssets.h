@@ -12,10 +12,10 @@ namespace NatureLab {
         static std::map<std::string, Shader>    _shaders;
         static std::map<std::string, Texture2D> _textures;
 
-        static Shader    loadShader(const char* vShaderFile, const char* fShaderFile, const char* gShaderFile, std::string name);
-        static Shader    getShader(std::string name);
-        static Texture2D loadTexture(const char* file, bool alpha, std::string name);
-        static Texture2D getTexture(std::string name);
+        static Shader    load_shader(const char* vShaderFile, const char* fShaderFile, const char* gShaderFile, std::string name);
+        static Shader    get_shader(std::string name);
+        static Texture2D load_texture(const char* file, bool alpha, std::string name);
+        static Texture2D get_texture(std::string name);
         static void      clear();
 
         const static unsigned int SCREEN_WIDTH = 1080;
