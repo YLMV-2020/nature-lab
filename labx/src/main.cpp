@@ -1,4 +1,4 @@
-#include "NatureLab.h"
+#include "app/NatureLab.h"
 
 int main(int argc, char* argv[])
 { 

@@ -24,8 +24,8 @@ namespace NatureLab
 			ImVec2 scroll = ImVec2(ImGui::GetScrollX(), ImGui::GetScrollY());
 
 			_mouse = ImVec2(mousePosition.x - sceenPosition.x - scroll.x, mousePosition.y - sceenPosition.y - scroll.y);
-			_mouse.x = (_mouse.x * SceneAssets::SCREEN_WIDTH) / _displayRender.x;
-			_mouse.y = SceneAssets::SCREEN_HEIGHT - SceneAssets::LIMIT_HEIGHT - (_mouse.y * SceneAssets::SCREEN_HEIGHT) / _displayRender.y;
+			// _mouse.x = (_mouse.x * SceneAssets::SCREEN_WIDTH) / _displayRender.x;
+			// _mouse.y = SceneAssets::SCREEN_HEIGHT - SceneAssets::LIMIT_HEIGHT - (_mouse.y * SceneAssets::SCREEN_HEIGHT) / _displayRender.y;
 
 			ImGui::End();
 		}

@@ -11,22 +11,15 @@
 #include <fstream>
 #include <algorithm>
 
-#include "GLFrameBuffer.h"
-#include "Texture2D.h"
-#include "Shader.h"
-#include "Sprite.h"
+#include "../opengl/Line.h"
 
-#include "Debug.h"
-#include "SceneAssets.h"
-
-#include "Line.h"
 
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 
 
-#include "NatureController.h"
-#include "WindowController.h"
+#include "../controllers/NatureController.h"
+#include "../controllers/WindowController.h"
 
 #include "Scene.h"

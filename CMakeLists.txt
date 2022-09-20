@@ -17,8 +17,6 @@ source_group("assets" FILES ${ASSETS})
 
 add_subdirectory(mathx)
 
-find_path(STB_INCLUDE_DIRS "stb.h")
-
 find_package(glfw3 CONFIG REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(imgui CONFIG REQUIRED)
