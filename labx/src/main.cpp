@@ -3,6 +3,6 @@
 int main(int argc, char* argv[])
 { 
     srand(time(NULL));
-    NatureLab::Scene* scene = new NatureLab::Scene();
+    labx::Scene* scene = new labx::Scene();
     return scene->run();
 }

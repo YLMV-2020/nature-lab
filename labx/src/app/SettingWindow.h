@@ -2,7 +2,7 @@
 
 //#include "IWindow.h"
 
-namespace NatureLab {
+namespace labx {
     class SettingWindow : public IWindow {
     public:
         inline SettingWindow() = default;

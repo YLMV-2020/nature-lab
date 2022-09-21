@@ -1,28 +1,29 @@
 #pragma once
+#include "../opengl/gl_shader.h"
+#include "../opengl/figures/gl_triangle_2d.h"
 
-namespace NatureLab
+namespace labx
 {
     class Scene
     {
     public:
-        inline Scene()
+        Scene()
         {
             this->start();
-
-            this->nc = NatureController::Instance();
-            this->_wc = WindowController::Instance();
-            this->_wc->start(_window, "33");
+            this->nc_ = NatureController::Instance();
+            this->wc_ = WindowController::Instance();
+            this->wc_->start(window_, version_glsl_);
         }
 
-        inline ~Scene()
+        ~Scene()
         {
             glfwTerminate();
             spdlog::info("~Scene() destroyed!");
         }
 
-        inline int run()
+        int run() const
         {
-            while (!glfwWindowShouldClose(_window))
+            while (!glfwWindowShouldClose(window_))
             {
                 this->update();
             }
@@ -30,48 +31,74 @@ namespace NatureLab
         }
 
     private:
-        inline void start()
+        void start()
         {
+            const int r = atoi(version_glsl_);
+
             glfwInit();
-            glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, r / 10);
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, r % 10);
             //glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
             glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
             glfwWindowHint(GLFW_RESIZABLE, false);
 
-            this->_window = glfwCreateWindow(800, 600, "Nature Lab",
+            this->window_ = glfwCreateWindow(widht, height, "Labsxdev",
                                              nullptr, nullptr);
-            glfwMakeContextCurrent(_window);
-
+            glfwMakeContextCurrent(window_);
             if (GLenum err = glewInit()) return;
 
             //glfwSwapInterval(0);
-
-            glViewport(0, 0, 800, 600);
+            glViewport(0, 0, widht, height);
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+            // triangle = new GLTriangle2D();
+
+            shader = GLShader("assets//shaders//sprite.vert", "assets//shaders//sprite.frag");
         }
 
-
-        inline void update()
+        void update() const
         {
-            _wc->newFrame();
-            
-            glClearColor(0, 1, 0, 0);
+            wc_->new_frame();
+
+            glClearColor(0, 0, 0, 0);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-            nc->showNature();
-            _wc->render(0);
+            //shader.use();
 
-            glfwSwapBuffers(_window);
+            nc_->showNature();
+
+            ImGui::Begin("Init");
+            ImGui::Text("Hello World");
+            ImGui::End();
+
+            glUseProgram(shader.id);
+
+            // shader.use();
+
+
+            // triangle->render();
+
+
+            render_triangle();
+            
+            wc_->render(0);
+
+            glfwSwapBuffers(window_);
             glfwPollEvents();
         }
 
-    private:
-        GLFWwindow* _window = NULL;
-        WindowController* _wc = NULL;
-        NatureController* nc = NULL;
-        
+        GLFWwindow* window_ = nullptr;
+        WindowController* wc_ = nullptr;
+        NatureController* nc_ = nullptr;
+
+        constexpr static int widht = 1080;
+        constexpr static int height = 720;
+
+        char* version_glsl_ = "33";
+
+        GLShader shader;
+        // GLTriangle2D* triangle;
     };
 }

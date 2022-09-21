@@ -4,7 +4,7 @@
 #include "SettingWindow.h"
 
 
-namespace NatureLab
+namespace labx
 {
     class WindowController
     {
@@ -15,22 +15,22 @@ namespace NatureLab
             return &instance;
         }
 
-        inline WindowController()
+        WindowController()
         {
         }
 
-        inline void update()
+        void update()
         {
         }
 
-        inline void newFrame()
+        void new_frame()
         {
             ImGui_ImplOpenGL3_NewFrame();
             ImGui_ImplGlfw_NewFrame();
             ImGui::NewFrame();
         }
 
-         void render(const int indexScene)
+        void render(const int indexScene)
         {
             // this->showWindows(indexScene);
 
@@ -80,12 +80,12 @@ namespace NatureLab
         }
 
     private:
-        inline void addWindow(NatureLab::IWindow* control)
+        inline void addWindow(labx::IWindow* control)
         {
             this->addControl(control);
         }
 
-        inline void addControl(NatureLab::IWindow* control)
+        inline void addControl(labx::IWindow* control)
         {
             this->_controls.push_back(control);
         }
@@ -93,7 +93,7 @@ namespace NatureLab
 
         inline void showWindows()
         {
-            for (NatureLab::IWindow*& inteface : _controls)
+            for (labx::IWindow*& inteface : _controls)
                 inteface->show();
         }
 
@@ -107,7 +107,7 @@ namespace NatureLab
         ImVec2 _displayRender;
         ImVec2 _display;
 
-        std::vector<NatureLab::IWindow*> _controls;
+        std::vector<labx::IWindow*> _controls;
 
         ImGuiWindowFlags _window_flags;
     };

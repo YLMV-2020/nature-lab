@@ -1,5 +1,5 @@
 
-namespace NatureLab
+namespace labx
 {
 	class ITimeEvent {
 	public:

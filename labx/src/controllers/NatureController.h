@@ -1,6 +1,6 @@
 #include "../interfaces/INature.h"
 
-namespace NatureLab
+namespace labx
 {
     class NatureController
     {
@@ -23,7 +23,7 @@ namespace NatureLab
         }
 
         inline void showNature(){
-            for (NatureLab::INature*& inteface : _natureLab)
+            for (labx::INature*& inteface : _natureLab)
             {
                 inteface->show();
             }
@@ -40,13 +40,13 @@ namespace NatureLab
 
     private:
     
-        inline void addNature(NatureLab::INature* nature){
+        inline void addNature(labx::INature* nature){
             this->_natureLab.push_back(nature);
         }
 
     private:
 
-        std::vector<NatureLab::INature*> _natureLab;
+        std::vector<labx::INature*> _natureLab;
 
     };
 
