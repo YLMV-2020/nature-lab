@@ -4,18 +4,18 @@
 
 namespace nature_lab
 {
-    class Scene
+    class scene
     {
     public:
-        Scene()
+        scene()
         {
             this->start();
-            this->nc_ = NatureController::Instance();
-            this->wc_ = WindowController::Instance();
+            this->nc_ = nature_controller::instance();
+            this->wc_ = window_controller::instance();
             this->wc_->start(window_, version_glsl_);
         }
 
-        ~Scene()
+        ~scene()
         {
             glfwTerminate();
             spdlog::info("~Scene() destroyed!");
@@ -38,7 +38,6 @@ namespace nature_lab
             glfwInit();
             glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, r / 10);
             glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, r % 10);
-            //glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
             glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
             glfwWindowHint(GLFW_RESIZABLE, false);
@@ -55,7 +54,7 @@ namespace nature_lab
 
             // triangle = new GLTriangle2D();
 
-            shader = GLShader("assets//shaders//sprite.vert", "assets//shaders//sprite.frag");
+            shader_ = gl_shader("assets//shaders//sprite.vert", "assets//shaders//sprite.frag");
         }
 
         void update() const
@@ -67,17 +66,14 @@ namespace nature_lab
 
             //shader.use();
 
-            nc_->showNature();
+            nc_->show_nature();
 
             ImGui::Begin("Init");
             ImGui::Text("Hello World");
             ImGui::End();
 
-            glUseProgram(shader.id);
-
-            // shader.use();
-
-
+            // glUseProgram(shader.id);
+            shader_.use();
             // triangle->render();
 
 
@@ -90,15 +86,15 @@ namespace nature_lab
         }
 
         GLFWwindow* window_ = nullptr;
-        WindowController* wc_ = nullptr;
-        NatureController* nc_ = nullptr;
+        window_controller* wc_ = nullptr;
+        nature_controller* nc_ = nullptr;
 
         constexpr static int widht = 1080;
         constexpr static int height = 720;
 
         char* version_glsl_ = "33";
 
-        GLShader shader;
+        gl_shader shader_;
         // GLTriangle2D* triangle;
     };
 }

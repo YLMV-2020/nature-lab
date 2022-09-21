@@ -2,16 +2,16 @@
 
 namespace nature_lab
 {
-    class GLShader
+    class gl_shader
     {
     public:
         unsigned int id{};
 
-        GLShader()
+        gl_shader()
         {
         }
 
-        GLShader(const char* vertex_path, const char* fragment_path)
+        gl_shader(const char* vertex_path, const char* fragment_path)
         {
             // 1. retrieve the vertex/fragment source code from filePath
             std::string vertexCode;

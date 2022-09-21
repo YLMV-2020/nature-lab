@@ -29,14 +29,14 @@ target_link_libraries(${PROJECT_NAME} PRIVATE GLEW::GLEW)
 target_link_libraries(${PROJECT_NAME} PRIVATE imgui::imgui)
 target_link_libraries(${PROJECT_NAME} PRIVATE imguizmo::imguizmo)
 
-target_link_libraries(${PROJECT_NAME} PUBLIC mathx)
+#target_link_libraries(${PROJECT_NAME} PUBLIC mathx)
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/mathx)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PROJECT_NAME})
 
-set_target_properties(mathx PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PROJECT_NAME})
+#set_target_properties(mathx PROPERTIES
+#    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PROJECT_NAME})
 
 add_custom_command(
         TARGET ${PROJECT_NAME} POST_BUILD

@@ -1,18 +1,17 @@
 #include "../interfaces/interface_gui.h"
-#include "../interfaces/IMouseEventWindow.h"
 
 namespace nature_lab
 {
-    class WindowController
+    class window_controller
     {
     public:
-        static WindowController* Instance()
+        static window_controller* instance()
         {
-            static WindowController instance;
+            static window_controller instance;
             return &instance;
         }
 
-        WindowController()
+        window_controller()
         {
         }
 
@@ -27,9 +26,9 @@ namespace nature_lab
             ImGui::NewFrame();
         }
 
-        void render(const int indexScene)
+        void render(const int index_scene) const
         {
-            // this->showWindows(indexScene);
+            // this->show_windows(index_scene);
 
             ImGui::Render();
             ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -46,9 +45,9 @@ namespace nature_lab
             }
         }
 
-        void start(GLFWwindow* window, std::string version)
+        void start(GLFWwindow* window, const std::string& version)
         {
-            std::string glsl_version = "#version " + version + "0";
+            const std::string glsl_version = "#version " + version + "0";
 
             IMGUI_CHECKVERSION();
             ImGui::CreateContext();
@@ -77,35 +76,34 @@ namespace nature_lab
         }
 
     private:
-        inline void addWindow(interface_gui* control)
+         void add_window(interface_gui* control)
         {
-            this->addControl(control);
+            this->add_control(control);
         }
 
-        inline void addControl(interface_gui* control)
+         void add_control(interface_gui* control)
         {
-            this->_controls.push_back(control);
+            this->controls_.push_back(control);
         }
-
-
-        inline void showWindows()
+        
+        void show_windows()
         {
-            for (interface_gui*& inteface : _controls)
+            for (interface_gui*& inteface : controls_)
                 inteface->show();
         }
 
-        inline void showWindows(int indexScene)
+        void show_windows(const int index_scene) const
         {
-            _controls[indexScene]->show();
+            controls_[index_scene]->show();
         }
 
 
     private:
-        ImVec2 _displayRender;
-        ImVec2 _display;
+        ImVec2 display_render_;
+        ImVec2 display_;
 
-        std::vector<nature_lab::interface_gui*> _controls;
+        std::vector<interface_gui*> controls_;
 
-        ImGuiWindowFlags _window_flags;
+        ImGuiWindowFlags _window_flags{};
     };
 }

@@ -1,17 +1,18 @@
+#pragma once
 #include "../interfaces/interface_nature.h"
 
 namespace nature_lab
 {
-    class NatureController
+    class nature_controller
     {
     public:
-        static NatureController* Instance()
+        static nature_controller* instance()
         {
-            static NatureController instance;
+            static nature_controller instance;
             return &instance;
         }
 
-        NatureController()
+        nature_controller()
         {
             this->start();
         }
@@ -20,31 +21,31 @@ namespace nature_lab
         {
         }
 
-        void showNature()
+        void show_nature()
         {
-            for (nature_lab::interface_nature*& inteface : _natureLab)
+            for (interface_nature*& inteface : nature_lab_)
             {
                 // inteface->show();
             }
         }
 
-        inline void showNature(int indexScene)
+        void show_nature(int index_scene)
         {
             // _natureLab.at(indexScene)->show();
         }
 
-        inline interface_nature*& getNature(int index)
+        interface_nature*& get_nature(const int index)
         {
-            return _natureLab.at(index);
+            return nature_lab_.at(index);
         }
 
     private:
-        inline void addNature(nature_lab::interface_nature* nature)
+        void add_nature(interface_nature* nature)
         {
-            this->_natureLab.push_back(nature);
+            this->nature_lab_.push_back(nature);
         }
 
     private:
-        std::vector<nature_lab::interface_nature*> _natureLab;
+        std::vector<interface_nature*> nature_lab_;
     };
 }
