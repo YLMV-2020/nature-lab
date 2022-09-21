@@ -1,11 +1,11 @@
 ﻿#pragma once
 
-namespace labx
+namespace figure
 {
-    class IFigure
+    class interface_figure
     {
     protected:
-        ~IFigure() = default;
+        virtual ~interface_figure() = default;
     public:
         virtual void start()
         {

@@ -2,7 +2,7 @@
 #include "../opengl/gl_shader.h"
 #include "../opengl/figures/gl_triangle_2d.h"
 
-namespace labx
+namespace nature_lab
 {
     class Scene
     {
@@ -81,8 +81,8 @@ namespace labx
             // triangle->render();
 
 
-            render_triangle();
-            
+            figure::render_triangle();
+
             wc_->render(0);
 
             glfwSwapBuffers(window_);

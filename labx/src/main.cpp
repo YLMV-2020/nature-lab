@@ -1,8 +1,8 @@
-#include "app/NatureLab.h"
+#include "app/nature_lab.h"
 
 int main(int argc, char* argv[])
 { 
     srand(time(NULL));
-    labx::Scene* scene = new labx::Scene();
+    nature_lab::Scene* scene = new nature_lab::Scene();
     return scene->run();
 }

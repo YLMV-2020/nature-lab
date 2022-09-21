@@ -1,10 +1,7 @@
-#include "../interfaces/IWindow.h"
+#include "../interfaces/interface_gui.h"
 #include "../interfaces/IMouseEventWindow.h"
 
-#include "SettingWindow.h"
-
-
-namespace labx
+namespace nature_lab
 {
     class WindowController
     {
@@ -49,7 +46,7 @@ namespace labx
             }
         }
 
-        inline void start(GLFWwindow* window, std::string version)
+        void start(GLFWwindow* window, std::string version)
         {
             std::string glsl_version = "#version " + version + "0";
 
@@ -80,12 +77,12 @@ namespace labx
         }
 
     private:
-        inline void addWindow(labx::IWindow* control)
+        inline void addWindow(interface_gui* control)
         {
             this->addControl(control);
         }
 
-        inline void addControl(labx::IWindow* control)
+        inline void addControl(interface_gui* control)
         {
             this->_controls.push_back(control);
         }
@@ -93,7 +90,7 @@ namespace labx
 
         inline void showWindows()
         {
-            for (labx::IWindow*& inteface : _controls)
+            for (interface_gui*& inteface : _controls)
                 inteface->show();
         }
 
@@ -107,7 +104,7 @@ namespace labx
         ImVec2 _displayRender;
         ImVec2 _display;
 
-        std::vector<labx::IWindow*> _controls;
+        std::vector<nature_lab::interface_gui*> _controls;
 
         ImGuiWindowFlags _window_flags;
     };

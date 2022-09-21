@@ -1,5 +1,5 @@
 
-namespace labx
+namespace nature_lab
 {
 	class IMouseEventWindow{
 	public:

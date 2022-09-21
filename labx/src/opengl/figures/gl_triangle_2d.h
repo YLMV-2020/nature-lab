@@ -1,20 +1,21 @@
 ﻿#pragma once
-#include <GL/glew.h>
-#include "../../interfaces/IFigure.h"
+#include <gl/glew.h>
+#include "../../interfaces/interface_figure.h"
 
-namespace labx
+namespace figure
 {
-    class GLTriangle2D final : public IFigure
+    class gl_triangle_2d final : public interface_figure
     {
     public:
-        GLTriangle2D()
+        
+        gl_triangle_2d()
         {
             start();
         }
-        
+
         void start() override
         {
-            IFigure::start();
+            interface_figure::start();
 
             constexpr float vertices[] = {
                 -0.5f, -0.5f, 0.0f, // left  
@@ -23,10 +24,9 @@ namespace labx
             };
 
             unsigned int vbo;
-            glGenVertexArrays(1, &vao);
+            glGenVertexArrays(1, &vao_);
             glGenBuffers(1, &vbo);
-            // bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
-            glBindVertexArray(vao);
+            glBindVertexArray(vao_);
 
             glBindBuffer(GL_ARRAY_BUFFER, vbo);
             glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
@@ -34,35 +34,29 @@ namespace labx
             glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
             glEnableVertexAttribArray(0);
 
-            // note that this is allowed, the call to glVertexAttribPointer registered vbo as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
             glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-            // You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
-            // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor vbos) when it's not directly necessary.
             glBindVertexArray(0);
         }
 
         void update() override
         {
-            IFigure::update();
+            interface_figure::update();
         }
 
         void render() override
         {
-            IFigure::render();
-            glBindVertexArray(vao);
-            // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+            interface_figure::render();
+            glBindVertexArray(vao_);
             glDrawArrays(GL_TRIANGLES, 0, 3);
-            // glBindVertexArray(0); // no need to unbind it every time 
         }
 
     private:
-        GLuint vao{};
+        GLuint vao_{};
     };
 
     static void render_triangle()
     {
-        static GLTriangle2D triangle;
+        static gl_triangle_2d triangle;
         triangle.render();
     }
 }

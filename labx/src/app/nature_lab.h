@@ -19,7 +19,7 @@
 #include "imgui_impl_opengl3.h"
 
 
-#include "../controllers/NatureController.h"
-#include "../controllers/WindowController.h"
+#include "../controllers/nature_controller.h"
+#include "../controllers/window_controller.h"
 
 #include "Scene.h"

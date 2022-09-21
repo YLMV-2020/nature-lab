@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-namespace labx
+namespace nature_lab
 {
     class GLShader
     {
