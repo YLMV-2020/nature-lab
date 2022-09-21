@@ -21,25 +21,24 @@ namespace nature_lab
         {
         }
 
-        void show_nature()
+        void render()
         {
             for (interface_nature*& inteface : nature_lab_)
             {
-                // inteface->show();
+                inteface->render();
             }
         }
 
-        void show_nature(int index_scene)
+        void render(const int index) const
         {
-            // _natureLab.at(indexScene)->show();
+            nature_lab_.at(index)->render();
         }
 
         interface_nature*& get_nature(const int index)
         {
             return nature_lab_.at(index);
         }
-
-    private:
+        
         void add_nature(interface_nature* nature)
         {
             this->nature_lab_.push_back(nature);

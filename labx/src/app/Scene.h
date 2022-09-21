@@ -1,6 +1,6 @@
 #pragma once
+#include "../lab/vector/vector_n1.h"
 #include "../opengl/gl_shader.h"
-#include "../opengl/figures/gl_triangle_2d.h"
 
 namespace nature_lab
 {
@@ -13,6 +13,11 @@ namespace nature_lab
             this->nc_ = nature_controller::instance();
             this->wc_ = window_controller::instance();
             this->wc_->start(window_, version_glsl_);
+
+            vector_n1* vector = new vector_n1();
+
+            nc_->add_nature(vector);
+
         }
 
         ~scene()
@@ -53,8 +58,9 @@ namespace nature_lab
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
             // triangle = new GLTriangle2D();
+            
 
-            shader_ = gl_shader("assets//shaders//sprite.vert", "assets//shaders//sprite.frag");
+            shader_ = asset_controller::instance()->get_shader("figure");
         }
 
         void update() const
@@ -64,21 +70,13 @@ namespace nature_lab
             glClearColor(0, 0, 0, 0);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-            //shader.use();
-
-            nc_->show_nature();
-
             ImGui::Begin("Init");
             ImGui::Text("Hello World");
             ImGui::End();
 
-            // glUseProgram(shader.id);
             shader_.use();
-            // triangle->render();
 
-
-            figure::render_triangle();
-
+            nc_->render();
             wc_->render(0);
 
             glfwSwapBuffers(window_);
@@ -95,6 +93,5 @@ namespace nature_lab
         char* version_glsl_ = "33";
 
         gl_shader shader_;
-        // GLTriangle2D* triangle;
     };
 }

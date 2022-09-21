@@ -13,12 +13,11 @@
 
 #include "opengl/Line.h"
 
-
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 
-
+#include "controllers/asset_controller.h"
 #include "controllers/nature_controller.h"
 #include "controllers/window_controller.h"
 

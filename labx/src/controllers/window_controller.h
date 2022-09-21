@@ -15,36 +15,6 @@ namespace nature_lab
         {
         }
 
-        void update()
-        {
-        }
-
-        void new_frame()
-        {
-            ImGui_ImplOpenGL3_NewFrame();
-            ImGui_ImplGlfw_NewFrame();
-            ImGui::NewFrame();
-        }
-
-        void render(const int index_scene) const
-        {
-            // this->show_windows(index_scene);
-
-            ImGui::Render();
-            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
-            ImGuiIO& io = ImGui::GetIO();
-            (void)io;
-
-            if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-            {
-                GLFWwindow* backup_current_context = glfwGetCurrentContext();
-                ImGui::UpdatePlatformWindows();
-                ImGui::RenderPlatformWindowsDefault();
-                glfwMakeContextCurrent(backup_current_context);
-            }
-        }
-
         void start(GLFWwindow* window, const std::string& version)
         {
             const std::string glsl_version = "#version " + version + "0";
@@ -75,17 +45,47 @@ namespace nature_lab
             ImGui_ImplOpenGL3_Init(glsl_version.c_str());
         }
 
+        void update()
+        {
+        }
+
+        void render(const int index_scene) const
+        {
+            this->show_windows(index_scene);
+
+            ImGui::Render();
+            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+            ImGuiIO& io = ImGui::GetIO();
+            (void)io;
+
+            if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+            {
+                GLFWwindow* backup_current_context = glfwGetCurrentContext();
+                ImGui::UpdatePlatformWindows();
+                ImGui::RenderPlatformWindowsDefault();
+                glfwMakeContextCurrent(backup_current_context);
+            }
+        }
+
+        void new_frame()
+        {
+            ImGui_ImplOpenGL3_NewFrame();
+            ImGui_ImplGlfw_NewFrame();
+            ImGui::NewFrame();
+        }
+
     private:
-         void add_window(interface_gui* control)
+        void add_window(interface_gui* control)
         {
             this->add_control(control);
         }
 
-         void add_control(interface_gui* control)
+        void add_control(interface_gui* control)
         {
             this->controls_.push_back(control);
         }
-        
+
         void show_windows()
         {
             for (interface_gui*& inteface : controls_)
@@ -94,6 +94,8 @@ namespace nature_lab
 
         void show_windows(const int index_scene) const
         {
+            if (controls_.empty())
+                return;
             controls_[index_scene]->show();
         }
 

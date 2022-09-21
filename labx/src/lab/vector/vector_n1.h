@@ -1,12 +1,13 @@
 #pragma once
 #include "../../interfaces/interface_nature.h"
+#include "opengl/figures/gl_triangle_2d.h"
 
 namespace nature_lab
 {
-    class vector_v1 final : public interface_nature
+    class vector_n1 final : public interface_nature
     {
     public:
-        vector_v1()
+        vector_n1()
         {
             this->start();
         }
@@ -39,7 +40,7 @@ namespace nature_lab
         void render() override
         {
             interface_nature::render();
-            this->update();
+            figure::render_triangle();
         }
 
     private:

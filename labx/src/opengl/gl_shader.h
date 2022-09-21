@@ -11,7 +11,14 @@ namespace nature_lab
         {
         }
 
-        gl_shader(const char* vertex_path, const char* fragment_path)
+        gl_shader(const std::string& name)
+        {
+            const std::string vert_path = "assets/shaders/" + name + ".vert";
+            const std::string frag_path = "assets/shaders/" + name + ".frag";
+            load(vert_path.c_str(), frag_path.c_str());
+        }
+
+        void load(const char* vertex_path, const char* fragment_path)
         {
             // 1. retrieve the vertex/fragment source code from filePath
             std::string vertexCode;
