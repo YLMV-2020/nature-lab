@@ -15,42 +15,44 @@ namespace nature_lab
         void start() override
         {
             interface_nature::start();
+            triangle_ = new figure::gl_triangle_2d();
 
-            // this->_position = Math::Vector(100, 100);
-            // this->_velocity = Math::Vector(velocity_x, velocity_y);
+            this->position = glxm::vec2(100, 100);
+            this->velocity = glxm::vec2(velocity_x, velocity_y);
 
-            // this->width_ = scene::widht;
-            // this->height_ = scene::height;
+            this->width_ = asset_controller::screen_width;
+            this->height_ = asset_controller::screen_height;
         }
 
         void update() override
         {
             interface_nature::update();
+            position = position + velocity;
 
-            // _position = _position + _velocity;
-            //
-            // if ((_position.x > width_) || (_position.x < 0)) {               
-            //     _velocity.x = _velocity.x * -1;
-            // }
-            // if ((_position.y > height_) || (_position.y < 0)) {
-            //     _velocity.y = _velocity.y * -1;
-            // }
+            if ((position.x > width_) || (position.x < 0))
+            {
+                velocity.x = velocity.x * -1;
+            }
+            if ((position.y > height_) || (position.y < 0))
+            {
+                velocity.y = velocity.y * -1;
+            }
         }
 
         void render() override
         {
             interface_nature::render();
-            figure::render_triangle();
+            triangle_->render();
         }
-
-    private:
-        int width_{}, height_{};
-
-    public:
-        // Math::Vector _position;
-        // Math::Vector _velocity;
+        
+        glxm::vec2 position;
+        glxm::vec2 velocity;
 
         float velocity_x = 2;
         float velocity_y = 5;
+
+    private:
+        int width_{}, height_{};
+        figure::gl_triangle_2d* triangle_;
     };
 }

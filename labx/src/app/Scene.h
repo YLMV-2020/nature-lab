@@ -1,6 +1,7 @@
 #pragma once
 #include "../lab/vector/vector_n1.h"
 #include "../opengl/gl_shader.h"
+#include "glxm/mat4.h"
 
 namespace nature_lab
 {
@@ -12,12 +13,12 @@ namespace nature_lab
             this->start();
             this->nc_ = nature_controller::instance();
             this->wc_ = window_controller::instance();
+            this->ac_ = asset_controller::instance();
             this->wc_->start(window_, version_glsl_);
 
             vector_n1* vector = new vector_n1();
 
             nc_->add_nature(vector);
-
         }
 
         ~scene()
@@ -47,18 +48,15 @@ namespace nature_lab
 
             glfwWindowHint(GLFW_RESIZABLE, false);
 
-            this->window_ = glfwCreateWindow(widht, height, "Labsxdev",
+            this->window_ = glfwCreateWindow(ac_->screen_width, ac_->screen_height, "Labsxdev",
                                              nullptr, nullptr);
             glfwMakeContextCurrent(window_);
             if (GLenum err = glewInit()) return;
 
             //glfwSwapInterval(0);
-            glViewport(0, 0, widht, height);
+            glViewport(0, 0, ac_->screen_width, ac_->screen_height);
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-            // triangle = new GLTriangle2D();
-            
 
             shader_ = asset_controller::instance()->get_shader("figure");
         }
@@ -76,6 +74,35 @@ namespace nature_lab
 
             shader_.use();
 
+            glxm::mat4 model = glxm::mat4(1.0f);
+            glxm::mat4 view = glxm::mat4(1.0f);
+            glxm::mat4 projection = glxm::mat4(1.0f);
+
+            //glxm::printf(model);
+
+   /*         model = glxm::translate(model, glxm::vec2(5.0f, 0.0f));
+            glxm::printf(model);
+            view = glxm::translate(view, glxm::vec2(0.0f, 0.0f));
+
+
+           
+
+            */
+
+           /* projection = glxm::ortho(glxm::mat4::identity(), 0.0f, 2,
+                0, 0.5, -1.0f, 1.0f);*/
+
+            model = glxm::translate(model, glxm::vec2(1.0f, 0.0f));
+
+            // retrieve the matrix uniform locations
+            unsigned int modelLoc = glGetUniformLocation(shader_.id, "model");
+            unsigned int viewLoc = glGetUniformLocation(shader_.id, "view");
+            // pass them to the shaders (3 different ways)
+            glUniformMatrix4fv(modelLoc, 1, GL_FALSE,model.val[0]);
+            glUniformMatrix4fv(viewLoc, 1, GL_FALSE, view.val[0]);
+            // note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
+            shader_.setMat4("projection", projection);
+
             nc_->render();
             wc_->render(0);
 
@@ -86,9 +113,7 @@ namespace nature_lab
         GLFWwindow* window_ = nullptr;
         window_controller* wc_ = nullptr;
         nature_controller* nc_ = nullptr;
-
-        constexpr static int widht = 1080;
-        constexpr static int height = 720;
+        asset_controller* ac_ = nullptr;
 
         char* version_glsl_ = "33";
 

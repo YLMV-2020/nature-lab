@@ -17,6 +17,10 @@
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 
+#include "glxm/math.h"
+#include "glxm/vec2.h"
+#include "glxm/mat4.h"
+
 #include "controllers/asset_controller.h"
 #include "controllers/nature_controller.h"
 #include "controllers/window_controller.h"

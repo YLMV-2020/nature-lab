@@ -1,5 +1,4 @@
 #pragma once
-#include "interface_figure.h"
 
 namespace nature_lab
 {
@@ -25,6 +24,6 @@ namespace nature_lab
         }
 
     protected:
-        figure::interface_figure* figure_ = nullptr;
+        // figure::interface_figure* figure_ = nullptr;
     };
 }

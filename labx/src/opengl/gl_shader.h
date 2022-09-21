@@ -100,6 +100,11 @@ namespace nature_lab
             glUniform1f(glGetUniformLocation(id, name.c_str()), value);
         }
 
+        void setMat4(const std::string& name, const glxm::mat4& mat4) const
+        {
+            glUniformMatrix4fv(glGetUniformLocation(id, name.c_str()), 1, GL_FALSE, mat4.val[0]);
+        }
+
     private:
         // utility function for checking shader compilation/linking errors.
         // ------------------------------------------------------------------------

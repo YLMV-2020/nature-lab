@@ -30,8 +30,8 @@ namespace nature_lab
                 glDeleteProgram(iter.second.id);
         }
 
-        constexpr static unsigned int screen_width = 800;
-        constexpr static unsigned int screen_height = 600;
+        constexpr static unsigned int screen_width = 1080;
+        constexpr static unsigned int screen_height = 720;
 
         std::map<std::string, gl_shader> shaders;
     };
