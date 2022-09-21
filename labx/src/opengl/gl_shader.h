@@ -57,18 +57,18 @@ namespace nature_lab
             vertex = glCreateShader(GL_VERTEX_SHADER);
             glShaderSource(vertex, 1, &vShaderCode, NULL);
             glCompileShader(vertex);
-            checkCompileErrors(vertex, "VERTEX");
+            check_compile_errors(vertex, "VERTEX");
             // fragment Shader
             fragment = glCreateShader(GL_FRAGMENT_SHADER);
             glShaderSource(fragment, 1, &fShaderCode, NULL);
             glCompileShader(fragment);
-            checkCompileErrors(fragment, "FRAGMENT");
+            check_compile_errors(fragment, "FRAGMENT");
             // shader Program
             id = glCreateProgram();
             glAttachShader(id, vertex);
             glAttachShader(id, fragment);
             glLinkProgram(id);
-            checkCompileErrors(id, "PROGRAM");
+            check_compile_errors(id, "PROGRAM");
             // delete the shaders as they're linked into our program now and no longer necessary
             glDeleteShader(vertex);
             glDeleteShader(fragment);
@@ -83,24 +83,24 @@ namespace nature_lab
 
         // utility uniform functions
         // ------------------------------------------------------------------------
-        void set_bool(const std::string& name, bool value) const
+        void set_bool(const std::string& name, const bool value) const
         {
-            glUniform1i(glGetUniformLocation(id, name.c_str()), (int)value);
+            glUniform1i(glGetUniformLocation(id, name.c_str()), static_cast<int>(value));
         }
 
         // ------------------------------------------------------------------------
-        void setInt(const std::string& name, int value) const
+        void set_int(const std::string& name, const int value) const
         {
             glUniform1i(glGetUniformLocation(id, name.c_str()), value);
         }
 
         // ------------------------------------------------------------------------
-        void setFloat(const std::string& name, float value) const
+        void set_float(const std::string& name, const float value) const
         {
             glUniform1f(glGetUniformLocation(id, name.c_str()), value);
         }
 
-        void setMat4(const std::string& name, const glxm::mat4& mat4) const
+        void set_mat4(const std::string& name, const glxm::mat4& mat4) const
         {
             glUniformMatrix4fv(glGetUniformLocation(id, name.c_str()), 1, GL_FALSE, mat4.val[0]);
         }
@@ -108,7 +108,7 @@ namespace nature_lab
     private:
         // utility function for checking shader compilation/linking errors.
         // ------------------------------------------------------------------------
-        void checkCompileErrors(unsigned int shader, std::string type)
+        void check_compile_errors(unsigned int shader, std::string type)
         {
             int success;
             char infoLog[1024];
