@@ -16,6 +16,7 @@ file(GLOB_RECURSE ASSETS
 source_group("assets" FILES ${ASSETS})
 
 add_subdirectory(mathx)
+add_subdirectory(physx)
 
 find_package(glfw3 CONFIG REQUIRED)
 find_package(GLEW REQUIRED)
@@ -31,6 +32,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE imguizmo::imguizmo)
 
 #target_link_libraries(${PROJECT_NAME} PUBLIC mathx)
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/mathx)
+target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/physx)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PROJECT_NAME})

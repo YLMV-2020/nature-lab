@@ -49,10 +49,8 @@ namespace nature_lab
         {
         }
 
-        void render(const int index_scene) const
+        void render() const
         {
-            this->show_windows(index_scene);
-
             ImGui::Render();
             ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 

@@ -21,6 +21,14 @@ namespace nature_lab
         {
         }
 
+        void update()
+        {
+            for (interface_nature*& inteface : nature_lab_)
+            {
+                inteface->update();
+            }
+        }
+
         void render()
         {
             for (interface_nature*& inteface : nature_lab_)

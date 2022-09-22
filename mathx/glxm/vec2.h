@@ -3,7 +3,7 @@
 
 namespace glxm
 {
-    class __declspec(dllexport) vec2
+    class vec2
     {
     public:
         float x, y;

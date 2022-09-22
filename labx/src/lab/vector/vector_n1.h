@@ -27,6 +27,8 @@ namespace nature_lab
         void update() override
         {
             interface_nature::update();
+            triangle_->update();
+            // position = glxm::vec2(540,360);
             position = position + velocity;
 
             if ((position.x > width_) || (position.x < 0))
@@ -37,6 +39,7 @@ namespace nature_lab
             {
                 velocity.y = velocity.y * -1;
             }
+            triangle_->set_position(position);
         }
 
         void render() override
@@ -44,7 +47,7 @@ namespace nature_lab
             interface_nature::render();
             triangle_->render();
         }
-        
+
         glxm::vec2 position;
         glxm::vec2 velocity;
 

@@ -2,10 +2,11 @@
 #include <cmath>
 #include "spdlog/spdlog.h"
 #include "vec2.h"
+#include "vec3.h"
 
 namespace glxm
 {
-    class __declspec(dllexport) mat4
+    class mat4
     {
     public:
         mat4()
@@ -50,7 +51,6 @@ namespace glxm
             return result;
         }
 
-
         //private:
         float val[4][4]{};
     };
@@ -74,6 +74,15 @@ namespace glxm
         return transform;
     }
 
+    static mat4 translate(mat4& transform, const vec3& v1)
+    {
+        transform.val[3][0] = v1.x;
+        transform.val[3][1] = v1.y;
+        transform.val[3][2] = v1.z;
+
+        return transform;
+    }
+
     static mat4 scale(mat4& transform, const float& px, const float& py, const float& pz)
     {
         transform.val[0][0] = px;
@@ -88,6 +97,15 @@ namespace glxm
         transform.val[0][0] = v1.x;
         transform.val[1][1] = v1.y;
         transform.val[2][2] = 0.0f;
+
+        return transform;
+    }
+
+    static mat4 scale(mat4& transform, const vec3& v1)
+    {
+        transform.val[0][0] = v1.x;
+        transform.val[1][1] = v1.y;
+        transform.val[2][2] = v1.z;
 
         return transform;
     }
@@ -122,7 +140,7 @@ namespace glxm
         return transform;
     }
 
-    static mat4 ortho(mat4& transform, float left, float right, float bottom, float top, float z_near, float z_far)
+    static mat4 ortho(mat4& transform, const float left, const float right, const float bottom, const float top, const float z_near, const float z_far)
     {
         transform.val[0][0] = 2.0f / (right - left);
         transform.val[1][1] = 2.0f / (top - bottom);
@@ -138,9 +156,13 @@ namespace glxm
     static void printf(const mat4& value)
     {
         std::cout << "mat4\n";
-        std::cout << "[" << value.val[0][0] << "][" << value.val[0][1] << "][" << value.val[0][2] << "][" << value.val[0][3] << "]\n";
-        std::cout << "[" << value.val[1][0] << "][" << value.val[1][1] << "][" << value.val[1][2] << "][" << value.val[1][3] << "]\n";
-        std::cout << "[" << value.val[2][0] << "][" << value.val[2][1] << "][" << value.val[2][2] << "][" << value.val[2][3] << "]\n";
-        std::cout << "[" << value.val[3][0] << "][" << value.val[3][1] << "][" << value.val[3][2] << "][" << value.val[3][3] << "]\n";
+        std::cout << "[" << value.val[0][0] << "][" << value.val[0][1] << "][" << value.val[0][2] << "][" << value.val[
+            0][3] << "]\n";
+        std::cout << "[" << value.val[1][0] << "][" << value.val[1][1] << "][" << value.val[1][2] << "][" << value.val[
+            1][3] << "]\n";
+        std::cout << "[" << value.val[2][0] << "][" << value.val[2][1] << "][" << value.val[2][2] << "][" << value.val[
+            2][3] << "]\n";
+        std::cout << "[" << value.val[3][0] << "][" << value.val[3][1] << "][" << value.val[3][2] << "][" << value.val[
+            3][3] << "]\n";
     }
 }
