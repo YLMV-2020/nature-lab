@@ -1,7 +1,5 @@
 #pragma once
 #include "../lab/vector/vector_n1.h"
-#include "../opengl/gl_shader.h"
-#include "glxm/mat4.h"
 
 namespace nature_lab
 {
@@ -10,15 +8,12 @@ namespace nature_lab
     public:
         scene()
         {
-            this->start();
             this->resource = resource::instance();
             this->nc_ = nature_controller::instance();
             this->wc_ = window_controller::instance();
-            this->wc_->start(window_, version_glsl_);
+            this->gc_ = gui_controller::instance();
 
-            vector_n1* vector = new vector_n1();
-
-            nc_->add_nature(vector);
+            this->start();
         }
 
         ~scene()
@@ -27,64 +22,41 @@ namespace nature_lab
             spdlog::info("~Scene() destroyed!");
         }
 
+        void start()
+        {
+            this->nc_->start();
+            this->wc_->start();
+            this->gc_->start();
+
+            gc_->set_window(wc_->get_window());
+
+            nc_->add_nature(new vector_n1());
+        }
+
         int run() const
         {
-            while (!glfwWindowShouldClose(window_))
+            while (wc_->is_run())
             {
-                this->update();
+                glClearColor(0, 0, 0, 0);
+                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+                wc_->update();
+                gc_->update();
+                nc_->update();
+
+                nc_->render();
+                gc_->render();
+                wc_->render();
             }
             return 0;
         }
 
     private:
-        void start()
-        {
-            const int r = atoi(version_glsl_);
-
-            glfwInit();
-            glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, r / 10);
-            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, r % 10);
-            glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-            glfwWindowHint(GLFW_RESIZABLE, false);
-
-            this->window_ = glfwCreateWindow(resource->screen_width, resource->screen_height, "Labsxdev",
-                                             nullptr, nullptr);
-            glfwMakeContextCurrent(window_);
-            if (GLenum err = glewInit()) return;
-
-            //glfwSwapInterval(0);
-            glViewport(0, 0, resource->screen_width, resource->screen_height);
-            glEnable(GL_BLEND);
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        }
-
-        void update() const
-        {
-            wc_->new_frame();
-
-            glClearColor(0, 0, 0, 0);
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-            nc_->update();
-            wc_->update();
-
-            nc_->render();
-            wc_->render();
-
-            wc_->end_frame();
-
-            glfwSwapBuffers(window_);
-            glfwPollEvents();
-        }
-
-        GLFWwindow* window_ = nullptr;
         window_controller* wc_ = nullptr;
         nature_controller* nc_ = nullptr;
+        gui_controller* gc_ = nullptr;
         resource* resource = nullptr;
 
         std::vector<interface_controller*> controllers_;
-
-        char* version_glsl_ = "33";
     };
 }

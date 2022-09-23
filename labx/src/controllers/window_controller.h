@@ -2,7 +2,7 @@
 
 namespace nature_lab
 {
-    class window_controller : public interface_controller
+    class window_controller final : public interface_controller
     {
     public:
         static window_controller* instance()
@@ -15,94 +15,52 @@ namespace nature_lab
         {
         }
 
-        void start(GLFWwindow* window, const std::string& version)
+        void start() override
         {
-            const std::string glsl_version = "#version " + version + "0";
+            interface_controller::start();
 
-            IMGUI_CHECKVERSION();
-            ImGui::CreateContext();
-            ImGuiIO& io = ImGui::GetIO();
-            (void)io;
-            io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-            io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
-            io.ConfigFlags |= ImGuiWindowFlags_AlwaysHorizontalScrollbar;
+            glfwInit();
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+            glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-            ImGui::StyleColorsDark();
+            glfwWindowHint(GLFW_RESIZABLE, false);
 
-            _window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoTitleBar |
-                ImGuiWindowFlags_NoCollapse |
-                ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBringToFrontOnFocus |
-                ImGuiWindowFlags_NoNavFocus | ImGuiWindowFlags_NoBackground;
+            this->window_ = glfwCreateWindow(resource::instance()->screen_width, resource::instance()->screen_height,
+                                             "Labsxdev",
+                                             nullptr, nullptr);
+            glfwMakeContextCurrent(window_);
+            if (GLenum err = glewInit()) return;
 
-            ImGuiStyle& style = ImGui::GetStyle();
-            if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-            {
-                style.WindowRounding = 0.0f;
-                style.Colors[ImGuiCol_WindowBg].w = 1.0f;
-            }
-
-            ImGui_ImplGlfw_InitForOpenGL(window, true);
-            ImGui_ImplOpenGL3_Init(glsl_version.c_str());
+            //glfwSwapInterval(0);
+            glViewport(0, 0, resource::instance()->screen_width, resource::instance()->screen_height);
+            glEnable(GL_BLEND);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         }
 
-        void update()
+        void update() override
         {
+            interface_controller::update();
         }
 
-        void render()
+        void render() override
         {
-            for (interface_gui*& inteface : controls_)
-                inteface->render();
+            interface_controller::render();
+            glfwSwapBuffers(window_);
+            glfwPollEvents();
         }
 
-        void render(const int index) const
+        bool is_run() const
         {
-            if (controls_.empty())
-                return;
-            controls_[index]->render();
+            return !glfwWindowShouldClose(window_);
         }
 
-        void new_frame()
+        GLFWwindow* get_window() const
         {
-            ImGui_ImplOpenGL3_NewFrame();
-            ImGui_ImplGlfw_NewFrame();
-            ImGui::NewFrame();
+            return window_;
         }
-
-        void end_frame() const
-        {
-            ImGui::Render();
-            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
-            ImGuiIO& io = ImGui::GetIO();
-            (void)io;
-
-            if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-            {
-                GLFWwindow* backup_current_context = glfwGetCurrentContext();
-                ImGui::UpdatePlatformWindows();
-                ImGui::RenderPlatformWindowsDefault();
-                glfwMakeContextCurrent(backup_current_context);
-            }
-        }
-
-
-        void add_window(interface_gui* control)
-        {
-            this->add_control(control);
-        }
-
-        void add_control(interface_gui* control)
-        {
-            this->controls_.push_back(control);
-        }
-
 
     private:
-        ImVec2 display_render_;
-        ImVec2 display_;
-
-        std::vector<interface_gui*> controls_;
-        ImGuiWindowFlags _window_flags{};
+        GLFWwindow* window_ = nullptr;
     };
 }
