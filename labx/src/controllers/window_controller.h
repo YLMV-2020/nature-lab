@@ -2,7 +2,7 @@
 
 namespace nature_lab
 {
-    class window_controller
+    class window_controller : public interface_controller
     {
     public:
         static window_controller* instance()
@@ -49,7 +49,27 @@ namespace nature_lab
         {
         }
 
-        void render() const
+        void render()
+        {
+            for (interface_gui*& inteface : controls_)
+                inteface->render();
+        }
+
+        void render(const int index) const
+        {
+            if (controls_.empty())
+                return;
+            controls_[index]->render();
+        }
+
+        void new_frame()
+        {
+            ImGui_ImplOpenGL3_NewFrame();
+            ImGui_ImplGlfw_NewFrame();
+            ImGui::NewFrame();
+        }
+
+        void end_frame() const
         {
             ImGui::Render();
             ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -66,14 +86,7 @@ namespace nature_lab
             }
         }
 
-        void new_frame()
-        {
-            ImGui_ImplOpenGL3_NewFrame();
-            ImGui_ImplGlfw_NewFrame();
-            ImGui::NewFrame();
-        }
 
-    private:
         void add_window(interface_gui* control)
         {
             this->add_control(control);
@@ -84,26 +97,12 @@ namespace nature_lab
             this->controls_.push_back(control);
         }
 
-        void show_windows()
-        {
-            for (interface_gui*& inteface : controls_)
-                inteface->show();
-        }
-
-        void show_windows(const int index_scene) const
-        {
-            if (controls_.empty())
-                return;
-            controls_[index_scene]->show();
-        }
-
 
     private:
         ImVec2 display_render_;
         ImVec2 display_;
 
         std::vector<interface_gui*> controls_;
-
         ImGuiWindowFlags _window_flags{};
     };
 }

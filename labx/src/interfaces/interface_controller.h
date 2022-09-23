@@ -1,15 +1,11 @@
-#pragma once
-
+﻿#pragma once
 namespace nature_lab
 {
-    class interface_nature
+    class interface_controller
     {
     public:
-        virtual ~interface_nature() = default;
-
-        interface_nature()
-        {
-        }
+        virtual ~interface_controller() = default;
+        interface_controller() = default;
 
         virtual void start()
         {
@@ -22,6 +18,5 @@ namespace nature_lab
         virtual void render()
         {
         }
-        
     };
 }

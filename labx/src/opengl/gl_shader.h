@@ -100,9 +100,14 @@ namespace nature_lab
             glUniform1f(glGetUniformLocation(id, name.c_str()), value);
         }
 
-        void set_mat4(const std::string& name, const glxm::mat4& mat4) const
+        void set_vec3(const std::string& name, const glxm::vec3& value) const
         {
-            glUniformMatrix4fv(glGetUniformLocation(id, name.c_str()), 1, GL_FALSE, mat4.val[0]);
+            glUniform3f(glGetUniformLocation(id, name.c_str()), value.x, value.y, value.z);
+        }
+
+        void set_mat4(const std::string& name, const glxm::mat4& value) const
+        {
+            glUniformMatrix4fv(glGetUniformLocation(id, name.c_str()), 1, GL_FALSE, value.val[0]);
         }
 
     private:

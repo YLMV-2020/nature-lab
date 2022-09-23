@@ -14,7 +14,7 @@ namespace nature_lab
 
         nature_controller()
         {
-            this->start();
+            
         }
 
         void start()

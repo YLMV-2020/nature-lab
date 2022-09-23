@@ -1,14 +1,17 @@
 ﻿#pragma once
-#include "../opengl/gl_shader.h"
+#include <string>
+#include <GL/glew.h>
+
+#include "opengl/gl_shader.h"
 
 namespace nature_lab
 {
-    class asset_controller
+    class resource
     {
     public:
-        static asset_controller* instance()
+        static resource* instance()
         {
-            static asset_controller instance;
+            static resource instance;
             return &instance;
         }
 

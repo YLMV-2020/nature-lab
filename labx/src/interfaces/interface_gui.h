@@ -1,28 +1,33 @@
+#pragma once
 namespace nature_lab
 {
     class interface_gui
     {
     public:
-        inline virtual ~interface_gui() = default;
-        inline interface_gui() = default;
+        virtual ~interface_gui() = default;
+        interface_gui() = default;
 
-        virtual void show()
+        virtual void start()
         {
         }
 
+        virtual void update()
+        {
+        }
+
+        virtual void render()
+        {
+        }
+        
     protected:
         void begin(const char* title, const ImGuiWindowFlags flags = 0)
         {
             ImGui::Begin(title, NULL, flags);
         }
-
+        
         void end()
         {
             ImGui::End();
-        }
-
-        virtual void init()
-        {
         }
     };
 }

@@ -21,8 +21,10 @@
 #include "glxm/vec2.h"
 #include "glxm/mat4.h"
 
-#include "controllers/asset_controller.h"
+#include "interfaces/interface_controller.h"
 #include "controllers/nature_controller.h"
+#include "controllers/gui_controller.h"
 #include "controllers/window_controller.h"
 
+#include "resource.h"
 #include "app/Scene.h"

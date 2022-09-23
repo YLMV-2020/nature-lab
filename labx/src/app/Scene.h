@@ -11,9 +11,9 @@ namespace nature_lab
         scene()
         {
             this->start();
+            this->resource = resource::instance();
             this->nc_ = nature_controller::instance();
             this->wc_ = window_controller::instance();
-            this->ac_ = asset_controller::instance();
             this->wc_->start(window_, version_glsl_);
 
             vector_n1* vector = new vector_n1();
@@ -48,16 +48,15 @@ namespace nature_lab
 
             glfwWindowHint(GLFW_RESIZABLE, false);
 
-            this->window_ = glfwCreateWindow(ac_->screen_width, ac_->screen_height, "Labsxdev",
+            this->window_ = glfwCreateWindow(resource->screen_width, resource->screen_height, "Labsxdev",
                                              nullptr, nullptr);
             glfwMakeContextCurrent(window_);
             if (GLenum err = glewInit()) return;
 
             //glfwSwapInterval(0);
-            glViewport(0, 0, ac_->screen_width, ac_->screen_height);
+            glViewport(0, 0, resource->screen_width, resource->screen_height);
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-           
         }
 
         void update() const
@@ -68,13 +67,12 @@ namespace nature_lab
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             nc_->update();
-
-            ImGui::Begin("Init");
-            ImGui::Text("Hello World");
-            ImGui::End();
+            wc_->update();
 
             nc_->render();
             wc_->render();
+
+            wc_->end_frame();
 
             glfwSwapBuffers(window_);
             glfwPollEvents();
@@ -83,11 +81,10 @@ namespace nature_lab
         GLFWwindow* window_ = nullptr;
         window_controller* wc_ = nullptr;
         nature_controller* nc_ = nullptr;
-        asset_controller* ac_ = nullptr;
+        resource* resource = nullptr;
+
+        std::vector<interface_controller*> controllers_;
 
         char* version_glsl_ = "33";
-
-        
-        
     };
 }

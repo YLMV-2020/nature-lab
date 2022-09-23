@@ -20,8 +20,8 @@ namespace nature_lab
             this->position = glxm::vec2(100, 100);
             this->velocity = glxm::vec2(velocity_x, velocity_y);
 
-            this->width_ = asset_controller::screen_width;
-            this->height_ = asset_controller::screen_height;
+            this->width_ = resource::screen_width;
+            this->height_ = resource::screen_height;
         }
 
         void update() override
@@ -31,14 +31,7 @@ namespace nature_lab
             // position = glxm::vec2(540,360);
             position = position + velocity;
 
-            if ((position.x > width_) || (position.x < 0))
-            {
-                velocity.x = velocity.x * -1;
-            }
-            if ((position.y > height_) || (position.y < 0))
-            {
-                velocity.y = velocity.y * -1;
-            }
+            check_screen();
             triangle_->set_position(position);
 
             // float rot = 90.0f;
@@ -57,6 +50,20 @@ namespace nature_lab
             triangle_->render();
         }
 
+    private:
+        void check_screen()
+        {
+            if (position.x > width_ || position.x < 0)
+            {
+                velocity.x = velocity.x * -1;
+            }
+            if (position.y > height_ || position.y < 0)
+            {
+                velocity.y = velocity.y * -1;
+            }
+        }
+
+    public:
         glxm::vec2 position;
         glxm::vec2 velocity;
 
