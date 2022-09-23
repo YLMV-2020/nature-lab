@@ -40,6 +40,15 @@ namespace nature_lab
                 velocity.y = velocity.y * -1;
             }
             triangle_->set_position(position);
+
+            // float rot = 90.0f;
+            const float rotation = 10.0f * glfwGetTime();
+            triangle_->set_rotation(rotation);
+
+            ImGui::Begin("vector n1");
+            ImGui::Text("position: (%f,%f)", position.x, position.y);
+            ImGui::Text("rotation: %f", rotation);
+            ImGui::End();
         }
 
         void render() override

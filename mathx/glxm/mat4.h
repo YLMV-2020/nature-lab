@@ -1,6 +1,5 @@
 #pragma once
 #include <cmath>
-#include "spdlog/spdlog.h"
 #include "vec2.h"
 #include "vec3.h"
 
@@ -41,20 +40,40 @@ namespace glxm
 
         friend mat4 operator*(const mat4& m1, const mat4& m2)
         {
-            mat4 result = identity();
+            mat4 result = mat4(1.0f);
             for (int i = 0; i < 4; i++)
                 for (int j = 0; j < 4; j++)
                     for (int k = 0; k < 4; k++)
                     {
-                        result.val[i][j] += m1.val[i][k] * m2.val[k][j];
+                        result(i, j) += m1.val[i][k] * m2.val[k][j];
                     }
+
+            result(2, 2) = result(3, 3) = 1;
             return result;
+        }
+
+        float& mat4::operator()(const int r, const int c)
+        {
+            return val[r][c];
         }
 
         //private:
         float val[4][4]{};
     };
 
+
+    static void printf(const mat4& value)
+    {
+        std::cout << "mat4\n";
+        std::cout << "[" << value.val[0][0] << "][" << value.val[0][1] << "][" << value.val[0][2] << "][" << value.val[
+            0][3] << "]\n";
+        std::cout << "[" << value.val[1][0] << "][" << value.val[1][1] << "][" << value.val[1][2] << "][" << value.val[
+            1][3] << "]\n";
+        std::cout << "[" << value.val[2][0] << "][" << value.val[2][1] << "][" << value.val[2][2] << "][" << value.val[
+            2][3] << "]\n";
+        std::cout << "[" << value.val[3][0] << "][" << value.val[3][1] << "][" << value.val[3][2] << "][" << value.val[
+            3][3] << "]\n";
+    }
 
     static mat4 translate(mat4& transform, const float& dx, const float& dy, const float& dz)
     {
@@ -67,9 +86,9 @@ namespace glxm
 
     static mat4 translate(mat4& transform, const vec2& v1)
     {
-        transform.val[3][0] = v1.x;
-        transform.val[3][1] = v1.y;
-        transform.val[3][2] = 0.0f;
+        transform(3, 0) = v1.x;
+        transform(3, 1) = v1.y;
+        transform(3, 2) = 0.0f;
 
         return transform;
     }
@@ -94,9 +113,9 @@ namespace glxm
 
     static mat4 scale(mat4& transform, const vec2& v1)
     {
-        transform.val[0][0] = v1.x;
-        transform.val[1][1] = v1.y;
-        transform.val[2][2] = 0.0f;
+        transform(0, 0) = v1.x;
+        transform(1, 1) = v1.y;
+        transform(2, 2) = 1.0f;
 
         return transform;
     }
@@ -110,7 +129,7 @@ namespace glxm
         return transform;
     }
 
-    static mat4 rotation_around_x(mat4& transform, const float& angle)
+    static mat4 rotate_x(mat4& transform, const float& angle)
     {
         transform.val[1][1] = cos(angle);
         transform.val[1][2] = sin(angle);
@@ -120,7 +139,7 @@ namespace glxm
         return transform;
     }
 
-    static mat4 rotation_around_y(mat4& transform, const float& angle)
+    static mat4 rotate_y(mat4& transform, const float& angle)
     {
         transform.val[0][0] = cos(angle);
         transform.val[0][2] = -sin(angle);
@@ -130,17 +149,18 @@ namespace glxm
         return transform;
     }
 
-    static mat4 rotation_around_z(mat4& transform, const float& angle)
+    static mat4 rotate_z(mat4& transform, const float& angle)
     {
         transform.val[0][0] = cos(angle);
         transform.val[0][1] = sin(angle);
         transform.val[1][0] = -sin(angle);
         transform.val[1][1] = cos(angle);
-
+        
         return transform;
     }
 
-    static mat4 ortho(mat4& transform, const float left, const float right, const float bottom, const float top, const float z_near, const float z_far)
+    static mat4 ortho(mat4& transform, const float left, const float right, const float bottom, const float top,
+                      const float z_near, const float z_far)
     {
         transform.val[0][0] = 2.0f / (right - left);
         transform.val[1][1] = 2.0f / (top - bottom);
@@ -151,18 +171,5 @@ namespace glxm
         transform.val[3][2] = -(z_far + z_near) / (z_far - z_near);
 
         return transform;
-    }
-
-    static void printf(const mat4& value)
-    {
-        std::cout << "mat4\n";
-        std::cout << "[" << value.val[0][0] << "][" << value.val[0][1] << "][" << value.val[0][2] << "][" << value.val[
-            0][3] << "]\n";
-        std::cout << "[" << value.val[1][0] << "][" << value.val[1][1] << "][" << value.val[1][2] << "][" << value.val[
-            1][3] << "]\n";
-        std::cout << "[" << value.val[2][0] << "][" << value.val[2][1] << "][" << value.val[2][2] << "][" << value.val[
-            2][3] << "]\n";
-        std::cout << "[" << value.val[3][0] << "][" << value.val[3][1] << "][" << value.val[3][2] << "][" << value.val[
-            3][3] << "]\n";
     }
 }

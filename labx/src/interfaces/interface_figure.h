@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include "glxm/mat4.h"
+
 namespace figure
 {
     class interface_figure
@@ -20,11 +22,11 @@ namespace figure
             shader.use();
             model = glxm::mat4(1.0f);
 
-            // auto m1 = glxm::rotation_around_z(glxm::mat4(1.0f), glxm::radians(rotation));
-            model = glxm::scale(model, scale);
             model = glxm::translate(model, position);
+            model = glxm::scale(model, scale);
 
-            // glxm::printf(model);
+            // recomend use product dot -> investigation (operator *)?
+            model = glxm::rotate_z(glxm::mat4(1.0f), glxm::radians(rotation)) * model;
 
             shader.set_mat4("model", model);
             shader.set_mat4("projection", projection);
@@ -54,8 +56,8 @@ namespace figure
         glxm::mat4 model = glxm::mat4(1.0f);
 
         glxm::vec2 position = glxm::vec2(0.0f, 0.0f);
-        glxm::vec2 scale = glxm::vec2(100.50f, 100.50f);
-        float rotation = 40.0f;
+        glxm::vec2 scale = glxm::vec2(100.0f, 100.0f);
+        float rotation = 90.0f;
 
         nature_lab::gl_shader shader;
     };
