@@ -28,20 +28,14 @@ namespace nature_lab
         {
             interface_nature::update();
             triangle_->update();
-            // position = glxm::vec2(540,360);
+            
             position = position + velocity;
+            rotation = 10.0f * glfwGetTime();
 
             check_screen();
+            
             triangle_->set_position(position);
-
-            // float rot = 90.0f;
-            const float rotation = 10.0f * glfwGetTime();
             triangle_->set_rotation(rotation);
-
-            ImGui::Begin("vector n1");
-            ImGui::Text("position: (%f,%f)", position.x, position.y);
-            ImGui::Text("rotation: %f", rotation);
-            ImGui::End();
         }
 
         void render() override
@@ -69,6 +63,8 @@ namespace nature_lab
 
         float velocity_x = 2;
         float velocity_y = 5;
+
+        float rotation = 0.0f;
 
     private:
         int width_{}, height_{};

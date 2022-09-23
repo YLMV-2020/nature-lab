@@ -1,4 +1,5 @@
 #pragma once
+#include "../controls/vector/vector_u1.h"
 #include "../lab/vector/vector_n1.h"
 
 namespace nature_lab
@@ -22,15 +23,24 @@ namespace nature_lab
             spdlog::info("~Scene() destroyed!");
         }
 
-        void start()
+        void start() const
         {
             this->nc_->start();
             this->wc_->start();
             this->gc_->start();
 
             gc_->set_window(wc_->get_window());
+            load_gui();
+        }
 
+        void load_gui() const
+        {
+            // vector n1
             nc_->add_nature(new vector_n1());
+            gc_->add_control(new vector_u1());
+            // vector n2
+
+            gc_->load_gui();
         }
 
         int run() const
