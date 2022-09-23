@@ -26,10 +26,8 @@ Install the following libraries with vcpkg:
 ```bash
 .\vcpkg\vcpkg install glew:x64-windows
 .\vcpkg\vcpkg install glfw3:x64-windows
-.\vcpkg\vcpkg install stb:x64-windows
 .\vcpkg\vcpkg install imgui[core,glfw-binding,opengl3-binding,docking-experimental]:x64-windows
 .\vcpkg\vcpkg install imguizmo:x64-windows
-.\vcpkg\vcpkg install spdlog:x64-windows
 ```
 
 ## Dependencies
@@ -38,10 +36,8 @@ Install the following libraries with vcpkg:
  ------------------------------------------------------ |----------------------- |
  [glew](https://github.com/nigels-com/glew)             |OpenGL Function Loader  |
  [glfw](https://github.com/glfw/glfw)                   |Windowing and Input     |
- [stb](https://github.com/nothings/stb)                 |Texture Loading         |
  [imgui](https://github.com/ocornut/imgui)              |Graphical User Interface|
  [imguizmo](https://github.com/CedricGuillemet/ImGuizmo)|Gizmo Manipulate        |
- [spdlog](https://github.com/gabime/spdlog)             | Logging                |
 
 ## Build
 
