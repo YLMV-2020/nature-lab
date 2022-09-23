@@ -29,7 +29,7 @@ namespace nature_lab
             this->wc_->start();
             this->gc_->start();
 
-            gc_->set_window(wc_->get_window());
+            gc_->link_window(wc_->get_window());
             load_gui();
         }
 

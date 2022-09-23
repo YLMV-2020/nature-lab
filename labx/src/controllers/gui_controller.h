@@ -48,7 +48,7 @@ namespace nature_lab
             this->controls_.push_back(control);
         }
 
-        void set_window(GLFWwindow* window_)
+        void link_window(GLFWwindow* window_)
         {
             ImGui_ImplGlfw_InitForOpenGL(window_, true);
         }
