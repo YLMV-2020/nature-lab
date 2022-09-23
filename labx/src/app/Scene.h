@@ -20,7 +20,7 @@ namespace nature_lab
         ~scene()
         {
             glfwTerminate();
-            spdlog::info("~Scene() destroyed!");
+            std::cout << ("~Scene() destroyed!");
         }
 
         void start() const
