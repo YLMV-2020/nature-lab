@@ -18,9 +18,9 @@ namespace figure
             interface_figure::start();
 
             constexpr float vertices[] = {
-                -0.5f, -0.5f, 0.0f, // left  
-                0.5f, -0.5f, 0.0f, // right 
-                0.0f, 0.5f, 0.0f // top   
+                -50.5f, -50.5f, 0.0f, // left  
+                50.5f, -50.5f, 0.0f, // right 
+                0.0f, 50.5f, 0.0f // top   
             };
 
             unsigned int vbo;

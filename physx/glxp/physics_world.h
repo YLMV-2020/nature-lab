@@ -1,4 +1,5 @@
-﻿#include <vector>
+﻿#pragma once
+#include <vector>
 #include "object.h"
 
 namespace glxp

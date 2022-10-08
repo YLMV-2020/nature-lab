@@ -3,7 +3,7 @@
 
 namespace nature_lab
 {
-    class nature_controller
+    class nature_controller final : public interface_controller
     {
     public:
         static nature_controller* instance()
@@ -12,16 +12,11 @@ namespace nature_lab
             return &instance;
         }
 
-        nature_controller()
-        {
-            
-        }
-
-        void start()
+        void start() override
         {
         }
 
-        void update()
+        void update() override
         {
             for (interface_nature*& inteface : nature_lab_)
             {
@@ -29,7 +24,7 @@ namespace nature_lab
             }
         }
 
-        void render()
+        void render() override
         {
             for (interface_nature*& inteface : nature_lab_)
             {
@@ -37,10 +32,10 @@ namespace nature_lab
             }
         }
 
-        void render(const int index) const
-        {
-            nature_lab_.at(index)->render();
-        }
+        // void render(const int index) const
+        // {
+        //     nature_lab_.at(index)->render();
+        // }
 
         interface_nature*& get_nature(const int index)
         {
@@ -51,8 +46,10 @@ namespace nature_lab
         {
             this->nature_lab_.push_back(nature);
         }
-
+    
     private:
         std::vector<interface_nature*> nature_lab_;
     };
+
+    
 }

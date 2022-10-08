@@ -40,7 +40,7 @@ namespace glxm
 
         friend mat4 operator*(const mat4& m1, const mat4& m2)
         {
-            mat4 result = mat4(1.0f);
+            mat4 result = mat4();
             for (int i = 0; i < 4; i++)
                 for (int j = 0; j < 4; j++)
                     for (int k = 0; k < 4; k++)
@@ -48,7 +48,6 @@ namespace glxm
                         result(i, j) += m1.val[i][k] * m2.val[k][j];
                     }
 
-            result(2, 2) = result(3, 3) = 1;
             return result;
         }
 
@@ -155,7 +154,7 @@ namespace glxm
         transform.val[0][1] = sin(angle);
         transform.val[1][0] = -sin(angle);
         transform.val[1][1] = cos(angle);
-        
+
         return transform;
     }
 
