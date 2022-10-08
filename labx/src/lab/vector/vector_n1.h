@@ -1,8 +1,8 @@
 #pragma once
 #include "../../interfaces/interface_nature.h"
-#include "../../opengl/figures/gl_square_2d.h"
-#include "opengl/figures/gl_triangle_2d.h"
-#include "opengl/figures/gl_circle_2d.h"
+#include "../../opengl/shapes//gl_square_2d.h"
+#include "opengl/shapes/gl_triangle_2d.h"
+#include "opengl/shapes/gl_circle_2d.h"
 
 namespace nature_lab
 {
@@ -17,7 +17,7 @@ namespace nature_lab
         void start() override
         {
             interface_nature::start();
-            shape = new shape::gl_square_2d();
+            shape = new shape::gl_circle_2d();
 
             this->position = glxm::vec2(100, 100);
             this->velocity = glxm::vec2(velocity_x, velocity_y);
@@ -33,13 +33,12 @@ namespace nature_lab
 
             position = position + velocity;
             rotation = glfwGetTime() * 10.0f;
-
+            
             // if (rotation > 360.0f) rotation = 0.0f;
             check_screen();
 
             shape->set_position(position);
             shape->set_rotation(rotation);
-            shape->set_scale(glxm::vec2(1, 1));
         }
 
         void render() override

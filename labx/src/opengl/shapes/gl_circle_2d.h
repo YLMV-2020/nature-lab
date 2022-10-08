@@ -4,10 +4,10 @@
 
 namespace shape
 {
-    class gl_square_2d final : public interface_shape
+    class gl_circle_2d final : public interface_shape
     {
     public:
-        gl_square_2d()
+        gl_circle_2d()
         {
             start();
         }
@@ -17,16 +17,35 @@ namespace shape
             interface_shape::start();
 
             constexpr float vertices[] = {
-                50.5f, 50.5f, 0.0f, // top right
-                50.5f, -50.5f, 0.0f, // bottom right
-                -50.5f, -50.5f, 0.0f, // bottom left
-                -50.5f, 50.5f, 0.0f // top left 
+                0, 0, 0,
+                0, 50, 0,
+                20, 40, 0,
+                40, 20, 0,
+                50, 0, 0,
+                40, -20, 0,
+                20, -40, 0,
+                0, -50, 0,
+                -20, -40, 0,
+                -40, -20, 0,
+                -50, 0, 0,
+                -40, 20, 0,
+                -20, 40, 0
             };
             const unsigned int indices[] = {
-                // note that we start from 0!
-                0, 1, 3, // first Triangle
-                1, 2, 3 // second Triangle
+                0, 1, 2,
+                0, 2, 3,
+                0, 3, 4,
+                0, 4, 5,
+                0, 5, 6,
+                0, 6, 7,
+                0, 7, 8,
+                0, 8, 9,
+                0, 9, 10,
+                0, 10, 11,
+                0, 11, 12,
+                0, 1, 12
             };
+            
             unsigned int vbo, ebo;
             glGenVertexArrays(1, &vao_);
             glGenBuffers(1, &vbo);
@@ -56,16 +75,10 @@ namespace shape
         {
             interface_shape::render();
             glBindVertexArray(vao_);
-            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+            glDrawElements(GL_TRIANGLES, 3 * 12, GL_UNSIGNED_INT, 0);
         }
 
     private:
-        GLfloat* all_circle_vertices_;
-        int number_of_vertices_;
-
-        GLfloat x_ = 10, y_ = 10, z_ = 0, radius_ = 120;
-        GLint number_of_sides_ = 10;
-
         GLuint vao_{};
     };
 }

@@ -4,10 +4,10 @@
 
 namespace shape
 {
-    class gl_circle_2d final : public interface_shape
+    class gl_square_2d final : public interface_shape
     {
     public:
-        gl_circle_2d()
+        gl_square_2d()
         {
             start();
         }
@@ -60,12 +60,6 @@ namespace shape
         }
 
     private:
-        GLfloat* all_circle_vertices_;
-        int number_of_vertices_;
-
-        GLfloat x_ = 10, y_ = 10, z_ = 0, radius_ = 120;
-        GLint number_of_sides_ = 10;
-
         GLuint vao_{};
     };
 }
