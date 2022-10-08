@@ -1,7 +1,7 @@
 # [Labsxdev](https://github.com/devgrids/labsxdev)
 
 ## Summary
-World physics simulator from scratch, applying the formulas and laws of physics
+Physics Engine , applying the formulas and laws of physics
 
 ## Getting Started
 Labsxdev has a single dependency: [cmake](http://www.cmake.org/download/), which is used to generate platform-specific makefiles or project files. Start by cloning this repository, making sure to pass the `--recursive` flag to grab all the dependencies. 
@@ -44,12 +44,5 @@ Install the following libraries with vcpkg:
 Now generate a project file or makefile for your platform. If you want to use a particular IDE, make sure it is installed; don't forget to set the Start-Up Project in Visual Studio or the Target in Xcode.
 
 ```bash
-# UNIX Makefile
-cmake ..
-
-# Mac OSX
-cmake -G "Xcode" ..
-
-# Microsoft Windows
 cmake -G "Visual Studio 17 2022" -B "build"
 ```
