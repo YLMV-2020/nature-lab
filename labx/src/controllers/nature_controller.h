@@ -20,39 +20,39 @@ namespace nature_lab
         void update(const float& delta_time) override
         {
             interface_controller::update(delta_time);
-            for (interface_nature*& inteface : nature_lab_)
-            {
-                inteface->update(delta_time);
-            }
+            // for (const auto& it : nature_lab_)
+            //     it.second->update(delta_time);
+            nature_current->update(delta_time);
         }
 
         void render() override
         {
             interface_controller::render();
-            for (interface_nature*& inteface : nature_lab_)
-            {
-                inteface->render();
-            }
+            // for (const auto& it : nature_lab_)
+            //     it.second->render();
+            nature_current->render();
         }
 
-        // void render(const int index) const
-        // {
-        //     nature_lab_.at(index)->render();
-        // }
+        interface_nature* get_nature(laboratory name_nature)
+        {
+            const auto it = nature_lab_.find(name_nature);
+            if (it != nature_lab_.end())
+                return it->second;
+            return nullptr;
+        }
 
-        interface_nature*& get_nature(const int index)
+        void add_nature(laboratory& name_nature, interface_nature* nature)
         {
-            return nature_lab_.at(index);
+            nature_lab_.insert(std::pair<laboratory, interface_nature*>(name_nature, nature));
         }
-        
-        void add_nature(interface_nature* nature)
+
+        void bind_nature(laboratory name_nature)
         {
-            this->nature_lab_.push_back(nature);
+            nature_current = get_nature(name_nature);
         }
-    
+
     private:
-        std::vector<interface_nature*> nature_lab_;
+        std::map<laboratory, interface_nature*> nature_lab_;
+        interface_nature* nature_current = nullptr;
     };
-
-    
 }

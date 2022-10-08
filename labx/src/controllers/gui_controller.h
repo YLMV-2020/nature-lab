@@ -24,33 +24,50 @@ namespace nature_lab
         void update(const float& delta_time) override
         {
             interface_controller::update(delta_time);
-            for (interface_gui*& inteface : controls_)
-                inteface->update();
+            // for (const auto& it : controls_)
+            //     it.second->update();
+            control_current->update();
             new_frame();
         }
 
         void render() override
         {
             interface_controller::render();
-            for (interface_gui*& inteface : controls_)
-                inteface->render();
+            // for (const auto& it : controls_)
+            //     it.second->render();
+            control_current->render();
             end_frame();
         }
 
-        void load_gui()
+        void load_gui() const
         {
-            for (interface_gui*& inteface : controls_)
-                inteface->start();
+            for (const auto& it : controls_)
+                it.second->start();
         }
 
-        void add_control(interface_gui* control)
+        interface_gui* get_control(laboratory name_control)
         {
-            this->controls_.push_back(control);
+            const auto it = controls_.find(name_control);
+            if (it != controls_.end())
+                return it->second;
+            return nullptr;
+        }
+
+        void add_control(laboratory name_control, interface_gui* control)
+        {
+            controls_.insert(std::pair<laboratory, interface_gui*>(name_control, control));
+
         }
 
         void link_window(GLFWwindow* window_)
         {
             ImGui_ImplGlfw_InitForOpenGL(window_, true);
+        }
+
+        void bind_control(laboratory name_lab)
+        {
+            control_current = get_control(name_lab);
+            control_current->start();
         }
 
     private:
@@ -107,7 +124,8 @@ namespace nature_lab
             }
         }
 
-        std::vector<interface_gui*> controls_;
+        std::map<laboratory, interface_gui*> controls_;
+        interface_gui* control_current = nullptr;
         ImGuiWindowFlags _window_flags{};
     };
 }
