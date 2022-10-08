@@ -2,12 +2,12 @@
 
 #include "glxm/mat4.h"
 
-namespace figure
+namespace shape
 {
-    class interface_figure
+    class interface_shape
     {
     protected:
-        virtual ~interface_figure() = default;
+        virtual ~interface_shape() = default;
     public:
         virtual void start()
         {
@@ -24,9 +24,6 @@ namespace figure
 
             model = glxm::translate(model, position);
             model = glxm::scale(model, scale);
-
-            // recomend use product dot -> investigation (operator *)
-            // https://stackoverflow.com/questions/59222806/how-does-glm-handle-translation?
             model = glxm::rotate_z(glxm::mat4(1.0f), glxm::radians(rotation)) * model;
 
             shader.set_vec3("color", color);
@@ -64,7 +61,7 @@ namespace figure
 
         glxm::vec2 position = glxm::vec2(0.0f, 0.0f);
         glxm::vec2 scale = glxm::vec2(1.0f, 1.0f);
-        float rotation = 90.0f;
+        float rotation = 0.0f;
 
         glxm::vec3 color = glxm::vec3(0.0f, 1.0f, 0.0f);
         nature_lab::gl_shader shader;

@@ -1,4 +1,5 @@
 #pragma once
+#include "time.h"
 #include "../controls/vector/vector_u1.h"
 #include "../lab/vector/vector_n1.h"
 
@@ -9,8 +10,9 @@ namespace nature_lab
     public:
         scene()
         {
-            this->resource = resource::instance();
-            
+            this->resource_ = resource::instance();
+            this->time_ = time::instance();
+
             this->nc_ = nature_controller::instance();
             this->wc_ = window_controller::instance();
             this->gc_ = gui_controller::instance();
@@ -34,6 +36,22 @@ namespace nature_lab
             load_gui();
         }
 
+        void update() const
+        {
+            time_->update();
+
+            wc_->update(time_->get_delta_time());
+            gc_->update(time_->get_delta_time());
+            nc_->update(time_->get_delta_time());
+        }
+
+        void render() const
+        {
+            nc_->render();
+            gc_->render();
+            wc_->render();
+        }
+
         void load_gui() const
         {
             // vector n1
@@ -50,14 +68,8 @@ namespace nature_lab
             {
                 glClearColor(0, 0, 0, 0);
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-                wc_->update();
-                gc_->update();
-                nc_->update();
-
-                nc_->render();
-                gc_->render();
-                wc_->render();
+                update();
+                render();
             }
             return 0;
         }
@@ -66,6 +78,8 @@ namespace nature_lab
         window_controller* wc_ = nullptr;
         nature_controller* nc_ = nullptr;
         gui_controller* gc_ = nullptr;
-        resource* resource = nullptr;
+        
+        resource* resource_ = nullptr;
+        time* time_ = nullptr;
     };
 }

@@ -21,9 +21,9 @@ namespace nature_lab
             init();
         }
 
-        void update() override
+        void update(const float& delta_time) override
         {
-            interface_controller::update();
+            interface_controller::update(delta_time);
             for (interface_gui*& inteface : controls_)
                 inteface->update();
             new_frame();

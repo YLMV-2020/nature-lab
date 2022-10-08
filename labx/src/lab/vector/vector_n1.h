@@ -1,6 +1,8 @@
 #pragma once
 #include "../../interfaces/interface_nature.h"
+#include "../../opengl/figures/gl_square_2d.h"
 #include "opengl/figures/gl_triangle_2d.h"
+#include "opengl/figures/gl_circle_2d.h"
 
 namespace nature_lab
 {
@@ -15,7 +17,7 @@ namespace nature_lab
         void start() override
         {
             interface_nature::start();
-            triangle_ = new figure::gl_triangle_2d();
+            shape = new shape::gl_square_2d();
 
             this->position = glxm::vec2(100, 100);
             this->velocity = glxm::vec2(velocity_x, velocity_y);
@@ -24,24 +26,26 @@ namespace nature_lab
             this->height_ = resource::screen_height;
         }
 
-        void update() override
+        void update(const float& delta_time) override
         {
-            interface_nature::update();
-            triangle_->update();
-            
-            position = position + velocity;
-            rotation = 10.0f * glfwGetTime();
+            interface_nature::update(delta_time);
+            shape->update();
 
+            position = position + velocity;
+            rotation = glfwGetTime() * 10.0f;
+
+            // if (rotation > 360.0f) rotation = 0.0f;
             check_screen();
-            
-            triangle_->set_position(position);
-            triangle_->set_rotation(rotation);
+
+            shape->set_position(position);
+            shape->set_rotation(rotation);
+            shape->set_scale(glxm::vec2(1, 1));
         }
 
         void render() override
         {
             interface_nature::render();
-            triangle_->render();
+            shape->render();
         }
 
     private:
@@ -68,6 +72,5 @@ namespace nature_lab
 
     private:
         int width_{}, height_{};
-        figure::gl_triangle_2d* triangle_;
     };
 }

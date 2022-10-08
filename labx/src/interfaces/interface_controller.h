@@ -11,7 +11,7 @@ namespace nature_lab
         {
         }
 
-        virtual void update()
+        virtual void update(const float& delta_time)
         {
         }
 

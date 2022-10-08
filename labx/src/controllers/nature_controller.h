@@ -14,18 +14,21 @@ namespace nature_lab
 
         void start() override
         {
+            interface_controller::start();
         }
 
-        void update() override
+        void update(const float& delta_time) override
         {
+            interface_controller::update(delta_time);
             for (interface_nature*& inteface : nature_lab_)
             {
-                inteface->update();
+                inteface->update(delta_time);
             }
         }
 
         void render() override
         {
+            interface_controller::render();
             for (interface_nature*& inteface : nature_lab_)
             {
                 inteface->render();

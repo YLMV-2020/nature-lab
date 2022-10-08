@@ -27,7 +27,7 @@ namespace nature_lab
             glfwWindowHint(GLFW_RESIZABLE, false);
 
             this->window_ = glfwCreateWindow(resource::instance()->screen_width, resource::instance()->screen_height,
-                                             "Labsxdev",
+                                             "labsxdev",
                                              nullptr, nullptr);
             glfwMakeContextCurrent(window_);
             if (GLenum err = glewInit()) return;
@@ -38,9 +38,9 @@ namespace nature_lab
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         }
 
-        void update() override
+        void update(const float& delta_time) override
         {
-            interface_controller::update();
+            interface_controller::update(delta_time);
         }
 
         void render() override
